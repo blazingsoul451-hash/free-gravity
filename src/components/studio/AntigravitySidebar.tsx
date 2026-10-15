@@ -15,6 +15,7 @@ interface AntigravitySidebarProps {
   activeId: string;
   onSelect: (id: string) => void;
   onNewConversation: () => void;
+  onDeleteConversation?: (id: string) => void;
   onOpenSettings: () => void;
   onOpenAutomations: () => void;
   onOpenCustomizations: () => void;
@@ -25,10 +26,14 @@ export const AntigravitySidebar: React.FC<AntigravitySidebarProps> = ({
   activeId,
   onSelect,
   onNewConversation,
+  onDeleteConversation,
   onOpenSettings,
   onOpenAutomations,
   onOpenCustomizations,
 }) => {
+  // Dynamically extract unique projects from conversations
+  const projects = Array.from(new Set(conversations.map((c) => c.project || 'WORKSPACE')));
+
   return (
     <aside className="w-64 bg-[#131314] border-r border-[#282a2c] flex flex-col justify-between h-full select-none text-xs text-[#c4c7c5] font-sans">
       
@@ -39,10 +44,15 @@ export const AntigravitySidebar: React.FC<AntigravitySidebarProps> = ({
         <button
           type="button"
           onClick={onNewConversation}
-          className="w-full flex items-center gap-2 px-3 py-2 rounded-xl bg-[#282a2c]/60 hover:bg-[#282a2c] text-[#e3e3e3] border border-[#444746]/40 transition-colors cursor-pointer text-xs font-medium"
+          className="w-full flex items-center justify-between px-3 py-2 rounded-xl bg-[#282a2c]/60 hover:bg-[#282a2c] text-[#e3e3e3] border border-[#444746]/40 transition-colors cursor-pointer text-xs font-medium group"
         >
-          <span className="text-sm font-semibold">+</span>
-          <span>New Conversation</span>
+          <span className="flex items-center gap-2">
+            <span className="text-sm font-semibold text-[#a8c7fa]">+</span>
+            <span>New Conversation</span>
+          </span>
+          <kbd className="text-[10px] bg-[#1e1f20] px-1.5 py-0.5 rounded text-[#8e918f] border border-[#282a2c]">
+            Ctrl+N
+          </kbd>
         </button>
 
         {/* Top Navigation Items */}
@@ -83,102 +93,68 @@ export const AntigravitySidebar: React.FC<AntigravitySidebarProps> = ({
         {/* Section Header: Projects */}
         <div className="pt-2">
           <div className="flex items-center justify-between text-[11px] font-medium text-[#8e918f] uppercase tracking-wider px-2 mb-1.5">
-            <span>Projects</span>
+            <span>Workspaces</span>
             <div className="flex items-center gap-1.5">
-              <svg viewBox="0 -960 960 960" className="w-3.5 h-3.5 cursor-pointer hover:text-white" fill="currentColor">
-                <path d="M440-160q-17 0-28.5-11.5T400-200v-240L168-736q-15-20-4.5-42t36.5-22h560q26 0 36.5 22t-4.5 42L560-440v240q0 17-11.5 28.5T520-160h-80Zm40-308 198-252H282l198 252Zm0 0Z"/>
-              </svg>
-              <svg viewBox="0 -960 960 960" className="w-3.5 h-3.5 cursor-pointer hover:text-white" fill="currentColor">
-                <path d="M120-120v-720h720v720H120Zm80-80h560v-560H200v560Zm400-80v-400h80v400h-80Z"/>
-              </svg>
+              <span className="text-[10px] px-1.5 py-0.2 rounded bg-[#1e1f20] text-[#a8c7fa] font-mono">
+                {conversations.length}
+              </span>
             </div>
           </div>
 
-          {/* Project 1: FREE GRAVITY PROJECT */}
-          <div className="space-y-0.5 mb-2.5">
-            <div className="flex items-center gap-1.5 px-2 py-1 text-[#8e918f] font-mono text-[11px]">
-              <svg viewBox="0 -960 960 960" className="w-3.5 h-3.5 text-[#8e918f]" fill="currentColor">
-                <path d="M160-160q-33 0-56.5-23.5T80-240v-480q0-33 23.5-56.5T160-800h240l80 80h320q33 0 56.5 23.5T880-640v400q0 33-23.5 56.5T800-160H160Zm0-80h640v-400H457l-80-80H160v480Zm0 0v-480 480Z"/>
-              </svg>
-              <span>FREE GRAVITY PROJECT</span>
+          {/* Dynamic Projects & Conversations List */}
+          {projects.map((proj) => (
+            <div key={proj} className="space-y-0.5 mb-2.5">
+              <div className="flex items-center gap-1.5 px-2 py-1 text-[#8e918f] font-mono text-[11px]">
+                <svg viewBox="0 -960 960 960" className="w-3.5 h-3.5 text-[#8e918f]" fill="currentColor">
+                  <path d="M160-160q-33 0-56.5-23.5T80-240v-480q0-33 23.5-56.5T160-800h240l80 80h320q33 0 56.5 23.5T880-640v400q0 33-23.5 56.5T800-160H160Zm0-80h640v-400H457l-80-80H160v480Zm0 0v-480 480Z"/>
+                </svg>
+                <span className="truncate uppercase">{proj}</span>
+              </div>
+
+              {conversations
+                .filter((c) => (c.project || 'WORKSPACE') === proj)
+                .map((conv) => {
+                  const isSelected = conv.id === activeId;
+                  return (
+                    <div
+                      key={conv.id}
+                      className={`group/conv w-full flex items-center justify-between px-2.5 py-1.5 rounded-lg text-left transition-colors cursor-pointer ${
+                        isSelected
+                          ? 'bg-[#282a2c] text-[#e3e3e3]'
+                          : 'text-[#c4c7c5] hover:text-[#e3e3e3] hover:bg-[#1e1f20]'
+                      }`}
+                      onClick={() => onSelect(conv.id)}
+                    >
+                      <span className="truncate pr-2">{conv.title}</span>
+                      
+                      <div className="flex items-center gap-1 flex-shrink-0">
+                        {conv.isLoading ? (
+                          <span className="w-3.5 h-3.5 border-2 border-[#a8c7fa] border-t-transparent rounded-full animate-spin" />
+                        ) : (
+                          <span className="text-[10px] text-[#8e918f] font-mono group-hover/conv:hidden">
+                            {conv.time}
+                          </span>
+                        )}
+
+                        {onDeleteConversation && conversations.length > 1 && (
+                          <button
+                            type="button"
+                            onClick={(e) => {
+                              e.stopPropagation();
+                              onDeleteConversation(conv.id);
+                            }}
+                            className="hidden group-hover/conv:block p-0.5 text-[#8e918f] hover:text-rose-400"
+                            title="Delete conversation"
+                          >
+                            ✕
+                          </button>
+                        )}
+                      </div>
+                    </div>
+                  );
+                })}
             </div>
-
-            {conversations
-              .filter((c) => c.project === 'FREE GRAVITY PROJECT')
-              .map((conv) => {
-                const isSelected = conv.id === activeId;
-                return (
-                  <button
-                    key={conv.id}
-                    type="button"
-                    onClick={() => onSelect(conv.id)}
-                    className={`w-full flex items-center justify-between px-2.5 py-1.5 rounded-lg text-left transition-colors cursor-pointer ${
-                      isSelected
-                        ? 'bg-[#282a2c] text-[#e3e3e3]'
-                        : 'text-[#c4c7c5] hover:text-[#e3e3e3] hover:bg-[#1e1f20]'
-                    }`}
-                  >
-                    <span className="truncate pr-2">{conv.title}</span>
-                    {conv.isLoading ? (
-                      <span className="w-3.5 h-3.5 border-2 border-[#a8c7fa] border-t-transparent rounded-full animate-spin flex-shrink-0" />
-                    ) : conv.hasDot ? (
-                      <span className="w-2 h-2 rounded-full bg-[#3b82f6] flex-shrink-0" />
-                    ) : (
-                      <span className="text-[10px] text-[#8e918f] font-mono flex-shrink-0">
-                        {conv.time}
-                      </span>
-                    )}
-                  </button>
-                );
-              })}
-          </div>
-
-          {/* Project 2: friendly-bell */}
-          <div className="space-y-0.5 mb-2.5">
-            <div className="flex items-center gap-1.5 px-2 py-1 text-[#8e918f] font-mono text-[11px]">
-              <svg viewBox="0 -960 960 960" className="w-3.5 h-3.5 text-[#8e918f]" fill="currentColor">
-                <path d="M160-160q-33 0-56.5-23.5T80-240v-480q0-33 23.5-56.5T160-800h240l80 80h320q33 0 56.5 23.5T880-640v400q0 33-23.5 56.5T800-160H160Zm0-80h640v-400H457l-80-80H160v480Zm0 0v-480 480Z"/>
-              </svg>
-              <span>friendly-bell</span>
-            </div>
-          </div>
-
-          {/* Project 3: OCTAL DIALER PROJECT */}
-          <div className="space-y-0.5">
-            <div className="flex items-center gap-1.5 px-2 py-1 text-[#8e918f] font-mono text-[11px]">
-              <svg viewBox="0 -960 960 960" className="w-3.5 h-3.5 text-[#8e918f]" fill="currentColor">
-                <path d="M160-160q-33 0-56.5-23.5T80-240v-480q0-33 23.5-56.5T160-800h240l80 80h320q33 0 56.5 23.5T880-640v400q0 33-23.5 56.5T800-160H160Zm0-80h640v-400H457l-80-80H160v480Zm0 0v-480 480Z"/>
-              </svg>
-              <span>OCTAL DIALER PROJECT</span>
-            </div>
-
-            {conversations
-              .filter((c) => c.project === 'OCTAL DIALER PROJECT')
-              .map((conv) => {
-                const isSelected = conv.id === activeId;
-                return (
-                  <button
-                    key={conv.id}
-                    type="button"
-                    onClick={() => onSelect(conv.id)}
-                    className={`w-full flex items-center justify-between px-2.5 py-1.5 rounded-lg text-left transition-colors cursor-pointer ${
-                      isSelected
-                        ? 'bg-[#282a2c] text-[#e3e3e3]'
-                        : 'text-[#c4c7c5] hover:text-[#e3e3e3] hover:bg-[#1e1f20]'
-                    }`}
-                  >
-                    <span className="truncate pr-2">{conv.title}</span>
-                    {conv.hasDot ? (
-                      <span className="w-2 h-2 rounded-full bg-[#3b82f6] flex-shrink-0" />
-                    ) : (
-                      <span className="text-[10px] text-[#8e918f] font-mono flex-shrink-0">
-                        {conv.time}
-                      </span>
-                    )}
-                  </button>
-                );
-              })}
-          </div>
+          ))}
 
         </div>
 

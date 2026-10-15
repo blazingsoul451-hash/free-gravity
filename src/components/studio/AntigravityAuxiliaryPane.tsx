@@ -30,32 +30,37 @@ export const AntigravityAuxiliaryPane: React.FC<AntigravityAuxiliaryPaneProps> =
     setInternalTab(tab);
   };
 
-  const subagents = [
-    {
-      id: 'sub-8f92',
-      name: 'Security Auditor',
-      role: 'OWASP ASI02 Interceptor & Sandbox Guard',
-      status: 'Running',
-      progress: 92,
-      color: 'bg-emerald-400',
-    },
-    {
-      id: 'sub-3a1b',
-      name: 'UI Renderer & Styler',
-      role: 'Pixel-perfect CSS & Google Sans Flex synthesis',
-      status: 'Active',
-      progress: 85,
-      color: 'bg-purple-400',
-    },
-    {
-      id: 'sub-5c4d',
-      name: 'Playwright CDP Runner',
-      role: 'Automated headless browser inspector',
-      status: 'Idle',
-      progress: 100,
-      color: 'bg-blue-400',
-    },
-  ];
+  const [subagents, setSubagents] = useState<Array<{
+    id: string;
+    name: string;
+    role: string;
+    status: string;
+    uptime?: number;
+    color?: string;
+  }>>([]);
+
+  React.useEffect(() => {
+    fetch('http://localhost:4200/api/system/subagents')
+      .then((r) => r.json())
+      .then((data) => {
+        if (data.subagents && data.subagents.length > 0) {
+          setSubagents(
+            data.subagents.map((s: any, idx: number) => ({
+              ...s,
+              color:
+                idx === 0
+                  ? 'bg-emerald-400'
+                  : idx === 1
+                  ? 'bg-blue-400'
+                  : idx === 2
+                  ? 'bg-purple-400'
+                  : 'bg-amber-400',
+            }))
+          );
+        }
+      })
+      .catch(() => {});
+  }, []);
 
   return (
     <aside
@@ -259,9 +264,9 @@ export const AntigravityAuxiliaryPane: React.FC<AntigravityAuxiliaryPaneProps> =
                   </div>
                   <span className="text-[10px] font-mono text-[#8e918f]">{sub.id}</span>
                 </div>
-                <p className="text-[11px] text-[#8e918f] leading-normal">{sub.role}</p>
-                <div className="w-full bg-[#131314] h-1.5 rounded-full overflow-hidden">
-                  <div className={`h-full ${sub.color}`} style={{ width: `${sub.progress}%` }} />
+                <div className="flex items-center justify-between text-[10px] text-[#8e918f] font-mono pt-1">
+                  <span>Status: <span className={sub.status === 'Running' || sub.status === 'Active' ? 'text-emerald-400' : 'text-blue-400'}>{sub.status}</span></span>
+                  <span>Uptime: {sub.uptime || 0}s</span>
                 </div>
               </div>
             ))}

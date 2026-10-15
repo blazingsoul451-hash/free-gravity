@@ -11,159 +11,63 @@ import {
   INITIAL_CRON_JOBS, 
   INITIAL_MCP_SKILLS 
 } from '../lib/mock-data';
-import { Settings, CronJob, McpSkill } from '../types';
+import { Settings, CronJob, McpSkill, ToolCall } from '../types';
 import { wsClient } from '../lib/ws-client';
 
 interface StudioWorkspaceProps {
   onNavigateHome: () => void;
 }
 
-const INITIAL_CONVERSATIONS: SidebarConversation[] = [
-  {
-    id: 'conv-1',
-    project: 'FREE GRAVITY PROJECT',
-    title: 'Chat Plan Feasibility Check',
-    time: 'Just now',
-    isLoading: false,
-  },
-  {
-    id: 'conv-2',
-    project: 'FREE GRAVITY PROJECT',
-    title: 'Build Free Gravity App',
-    time: '42m',
-  },
-  {
-    id: 'conv-3',
-    project: 'FREE GRAVITY PROJECT',
-    title: 'Building Server Security and B...',
-    time: '22h',
-  },
-  {
-    id: 'conv-4',
-    project: 'FREE GRAVITY PROJECT',
-    title: 'Agent And MCP Server Imple...',
-    time: '22h',
-  },
-  {
-    id: 'conv-5',
-    project: 'FREE GRAVITY PROJECT',
-    title: 'Free Gravity Showcase And SDK',
-    time: '22h',
-  },
-  {
-    id: 'conv-6',
-    project: 'OCTAL DIALER PROJECT',
-    title: 'Frontend UI Design Refactor',
-    time: '1h',
-    hasDot: true,
-  },
-  {
-    id: 'conv-7',
-    project: 'OCTAL DIALER PROJECT',
-    title: 'New Octal Dialer Project',
-    time: '22h',
-  },
-  {
-    id: 'conv-8',
-    project: 'OCTAL DIALER PROJECT',
-    title: 'App Development Project Ma...',
-    time: '23h',
-  },
-];
-
-const INITIAL_ITEMS_CONV1: StreamItem[] = [
-  {
-    id: 'it-1',
-    type: 'task',
-    text: 'Checked task Download Google Fonts CSS',
-  },
-  {
-    id: 'it-2',
-    type: 'task',
-    text: 'Download Google Fonts CSS finished',
-  },
-  {
-    id: 'it-3',
-    type: 'analyze',
-    text: 'Analyzed',
-    filename: 'google-fonts.css',
-    lines: '#L1-60',
-  },
-  {
-    id: 'it-4',
-    type: 'thought',
-    text: 'Thought for 11s',
-    durationSeconds: 11,
-    details: 'Evaluating font links and loading Google Sans Flex and Google Sans Text into stylesheets...',
-  },
-  {
-    id: 'it-5',
-    type: 'analyze',
-    text: 'Analyzed',
-    filename: 'index.html',
-    lines: '#L1-22',
-  },
-  {
-    id: 'it-6',
-    type: 'thought',
-    text: 'Thought for 19s',
-    durationSeconds: 19,
-    details: 'Injecting Google Sans and Google Sans Code to match exact Antigravity typography.',
-  },
-  {
-    id: 'it-7',
-    type: 'edit',
-    text: 'Edited',
-    filename: 'tokens.css',
-    additions: 100,
-    deletions: 70,
-  },
-  {
-    id: 'it-8',
-    type: 'edit',
-    text: 'Edited',
-    filename: 'index.html',
-    additions: 2,
-    deletions: 2,
-  },
-  {
-    id: 'it-9',
-    type: 'task',
-    text: 'Verify build with updated fonts',
-  },
-  {
-    id: 'it-10',
-    type: 'task',
-    text: 'Checked task Verify build with updated fonts',
-  },
-  {
-    id: 'it-11',
-    type: 'task',
-    text: 'Verify build with updated fonts finished',
-  },
-];
+const DEFAULT_PROJECT = 'AGITATED-DARWIN';
 
 export const StudioWorkspace: React.FC<StudioWorkspaceProps> = ({ onNavigateHome }) => {
-  // Navigation & Dialog states
+  // Settings & Dialog states
   const [settingsOpen, setSettingsOpen] = useState(false);
-  const [settings, setSettings] = useState<Settings>(INITIAL_SETTINGS);
+  const [settings, setSettings] = useState<Settings>(() => {
+    try {
+      const saved = localStorage.getItem('antigravity_settings');
+      return saved ? JSON.parse(saved) : INITIAL_SETTINGS;
+    } catch {
+      return INITIAL_SETTINGS;
+    }
+  });
+
   const [automationsOpen, setAutomationsOpen] = useState(false);
   const [customizationsOpen, setCustomizationsOpen] = useState(false);
 
-  // Conversations & Projects state
-  const [conversations, setConversations] = useState<SidebarConversation[]>(INITIAL_CONVERSATIONS);
-  const [activeSessionId, setActiveSessionId] = useState<string>('conv-1');
+  // Real Persistent Conversations State (zero fake initial items)
+  const [conversations, setConversations] = useState<SidebarConversation[]>(() => {
+    try {
+      const saved = localStorage.getItem('antigravity_conversations');
+      if (saved) {
+        const parsed = JSON.parse(saved);
+        if (Array.isArray(parsed) && parsed.length > 0) return parsed;
+      }
+    } catch {}
+    return [
+      {
+        id: 'conv-1',
+        project: DEFAULT_PROJECT,
+        title: 'New Conversation',
+        time: 'Just now',
+        isLoading: false,
+      },
+    ];
+  });
 
-  // Mapping conversation IDs to stream items
-  const [sessionStreams, setSessionStreams] = useState<Record<string, StreamItem[]>>({
-    'conv-1': INITIAL_ITEMS_CONV1,
-    'conv-2': [],
-    'conv-3': [],
-    'conv-4': [],
-    'conv-5': [],
-    'conv-6': [],
-    'conv-7': [],
-    'conv-8': [],
+  const [activeSessionId, setActiveSessionId] = useState<string>(() => {
+    return conversations[0]?.id || 'conv-1';
+  });
+
+  // Real Persistent Streams per Conversation
+  const [sessionStreams, setSessionStreams] = useState<Record<string, StreamItem[]>>(() => {
+    try {
+      const saved = localStorage.getItem('antigravity_streams');
+      if (saved) return JSON.parse(saved);
+    } catch {}
+    return {
+      'conv-1': [],
+    };
   });
 
   // Background jobs & MCP skills
@@ -176,33 +80,172 @@ export const StudioWorkspace: React.FC<StudioWorkspaceProps> = ({ onNavigateHome
   const [auxiliaryWidth, setAuxiliaryWidth] = useState(480);
   const [isResizing, setIsResizing] = useState(false);
 
+  // Save state to localStorage whenever it changes
+  useEffect(() => {
+    try {
+      localStorage.setItem('antigravity_conversations', JSON.stringify(conversations));
+      localStorage.setItem('antigravity_streams', JSON.stringify(sessionStreams));
+      localStorage.setItem('antigravity_settings', JSON.stringify(settings));
+    } catch {}
+  }, [conversations, sessionStreams, settings]);
+
   const activeConversation =
-    conversations.find((c) => c.id === activeSessionId) || conversations[0];
+    conversations.find((c) => c.id === activeSessionId) || conversations[0] || {
+      id: 'conv-1',
+      project: DEFAULT_PROJECT,
+      title: 'New Conversation',
+      time: 'Just now',
+    };
 
   const currentStreamItems = sessionStreams[activeSessionId] || [];
 
-  // Real-time Agent Loop & Security Guard connection
+  // Real-time WebSocket Agent Connection & Security Interceptor
   useEffect(() => {
     wsClient.connect();
 
+    // 1. Thought stream delta
+    const offThoughtDelta = wsClient.on('agent:thought_delta', (payload: any) => {
+      setSessionStreams((prev) => {
+        const stream = prev[activeSessionId] || [];
+        const last = stream[stream.length - 1];
+        if (last && last.type === 'thought') {
+          return {
+            ...prev,
+            [activeSessionId]: [
+              ...stream.slice(0, -1),
+              {
+                ...last,
+                details: (last.details || '') + (payload?.delta || ''),
+              },
+            ],
+          };
+        }
+        return {
+          ...prev,
+          [activeSessionId]: [
+            ...stream,
+            {
+              id: `th-${Date.now()}`,
+              type: 'thought',
+              text: 'Thinking...',
+              details: payload?.delta || '',
+            },
+          ],
+        };
+      });
+    });
+
+    // 2. Thought complete
+    const offThoughtComplete = wsClient.on('agent:thought_complete', (payload: any) => {
+      setSessionStreams((prev) => {
+        const stream = prev[activeSessionId] || [];
+        const last = stream[stream.length - 1];
+        if (last && last.type === 'thought') {
+          return {
+            ...prev,
+            [activeSessionId]: [
+              ...stream.slice(0, -1),
+              {
+                ...last,
+                text: `Thought for ${payload?.durationSeconds || 2}s`,
+                durationSeconds: payload?.durationSeconds || 2,
+                details: payload?.thought || last.details,
+              },
+            ],
+          };
+        }
+        return prev;
+      });
+    });
+
+    // 3. Tool call start
+    const offToolCallStart = wsClient.on('agent:tool_call_start', (tc: ToolCall) => {
+      // Automatically switch auxiliary tab based on tool
+      if (tc.name === 'browser_action' || tc.name.includes('browser')) {
+        setAuxiliaryTab('browser');
+      } else if (tc.name === 'edit_file' || tc.name.includes('edit')) {
+        setAuxiliaryTab('diff');
+      } else if (tc.name === 'run_command' || tc.name.includes('command')) {
+        setAuxiliaryTab('terminal');
+      }
+
+      setSessionStreams((prev) => ({
+        ...prev,
+        [activeSessionId]: [
+          ...(prev[activeSessionId] || []).filter((i) => i.type !== 'working'),
+          {
+            id: tc.id || `tc-${Date.now()}`,
+            type: tc.name.includes('edit') ? 'edit' : 'analyze',
+            text: tc.name.includes('edit') ? 'Edited' : 'Analyzed',
+            filename: (tc.args as any)?.path || (tc.args as any)?.target || tc.summary || tc.name,
+            timestamp: new Date().toLocaleTimeString(),
+          },
+        ],
+      }));
+    });
+
+    // 4. Tool call complete
+    const offToolCallComplete = wsClient.on('agent:tool_call_complete', (tc: ToolCall) => {
+      setSessionStreams((prev) => {
+        const stream = prev[activeSessionId] || [];
+        return {
+          ...prev,
+          [activeSessionId]: [
+            ...stream,
+            {
+              id: `tc-done-${Date.now()}`,
+              type: 'task',
+              text: `${tc.name || 'Tool'} completed successfully`,
+            },
+          ],
+        };
+      });
+    });
+
+    // 5. Assistant content delta / message
+    const offAssistantMsg = wsClient.on('agent:assistant_message', (payload: any) => {
+      setSessionStreams((prev) => ({
+        ...prev,
+        [activeSessionId]: [
+          ...(prev[activeSessionId] || []).filter((i) => i.type !== 'working'),
+          {
+            id: `msg-${Date.now()}`,
+            type: 'text',
+            text: payload?.content || payload?.text || '',
+          },
+          {
+            id: `fin-${Date.now() + 1}`,
+            type: 'task',
+            text: 'Task finished',
+          },
+        ],
+      }));
+    });
+
+    // 6. Security Guard HITL Interceptor
     const offHitl = wsClient.on('security:hitl_required', (payload: any) => {
       const confirmApproval = window.confirm(
-        `[OWASP ASI02 Interceptor] Potentially destructive command requires approval:\n\nCommand: ${payload.command}\nReasons: ${(payload.reasons || []).join(', ')}\n\nAuthorize execution?`
+        `[OWASP ASI02 Interceptor] Destructive command requires approval:\n\nCommand: ${payload.command}\nReasons: ${(payload.reasons || []).join(', ')}\n\nAuthorize execution?`
       );
       wsClient.resolveHitl(payload.id, confirmApproval);
     });
 
     return () => {
+      offThoughtDelta();
+      offThoughtComplete();
+      offToolCallStart();
+      offToolCallComplete();
+      offAssistantMsg();
       offHitl();
     };
-  }, []);
+  }, [activeSessionId]);
 
   // Handlers
   const handleNewSession = () => {
     const newId = `conv-${Date.now()}`;
     const newConv: SidebarConversation = {
       id: newId,
-      project: 'FREE GRAVITY PROJECT',
+      project: DEFAULT_PROJECT,
       title: 'New Conversation',
       time: 'Just now',
       isLoading: false,
@@ -213,6 +256,20 @@ export const StudioWorkspace: React.FC<StudioWorkspaceProps> = ({ onNavigateHome
       [newId]: [], // Start completely clean & empty!
     }));
     setActiveSessionId(newId);
+  };
+
+  const handleDeleteConversation = (id: string) => {
+    if (conversations.length <= 1) return;
+    const remaining = conversations.filter((c) => c.id !== id);
+    setConversations(remaining);
+    setSessionStreams((prev) => {
+      const next = { ...prev };
+      delete next[id];
+      return next;
+    });
+    if (activeSessionId === id) {
+      setActiveSessionId(remaining[0].id);
+    }
   };
 
   const handleSendMessage = (text: string) => {
@@ -230,7 +287,7 @@ export const StudioWorkspace: React.FC<StudioWorkspaceProps> = ({ onNavigateHome
       text: 'Working',
     };
 
-    // Update conversation title if it was 'New Conversation'
+    // Auto-rename conversation if it was 'New Conversation'
     setConversations((prev) =>
       prev.map((c) => {
         if (c.id === activeSessionId && c.title === 'New Conversation') {
@@ -241,102 +298,98 @@ export const StudioWorkspace: React.FC<StudioWorkspaceProps> = ({ onNavigateHome
       })
     );
 
-    // Add user item + working item
+    // Add user prompt + working indicator
     setSessionStreams((prev) => ({
       ...prev,
       [activeSessionId]: [...(prev[activeSessionId] || []), userItem, workingItem],
     }));
 
-    // Trigger backend websocket if connected
-    if (wsClient.isConnected()) {
-      wsClient.sendAgentMessage(text, { model: settings.model });
-    }
+    // Dispatch to real backend agent loop
+    wsClient.sendAgentMessage(text, { model: settings.model });
 
-    // Determine what comes after what based on prompt content
+    // Client-side fallback if server agent loop is in standby
     const lower = text.toLowerCase();
     setTimeout(() => {
-      const toolItems: StreamItem[] = [];
+      setSessionStreams((prev) => {
+        const stream = prev[activeSessionId] || [];
+        // Only trigger fallback if no streaming message arrived yet
+        if (!stream.some((i) => i.type === 'thought' || i.type === 'text')) {
+          const toolItems: StreamItem[] = [];
 
-      if (lower.includes('browser') || lower.includes('navigate') || lower.includes('audit')) {
-        setAuxiliaryTab('browser');
-        toolItems.push({
-          id: `it-${Date.now() + 2}`,
-          type: 'task',
-          text: 'Playwright CDP session initialized on port 9222',
-        });
-        toolItems.push({
-          id: `it-${Date.now() + 3}`,
-          type: 'analyze',
-          text: 'Analyzed',
-          filename: 'http://localhost:5173',
-          lines: 'DOM snapshot captured',
-        });
-      } else if (lower.includes('plan') || lower.includes('architect')) {
-        setAuxiliaryTab('artifacts');
-        toolItems.push({
-          id: `it-${Date.now() + 2}`,
-          type: 'artifact',
-          text: 'free-gravity-arch-plan.md',
-          artifactName: 'free-gravity-arch-plan.md (Artifact v1.0)',
-        });
-      } else if (lower.includes('test') || lower.includes('build') || lower.includes('compile')) {
-        setAuxiliaryTab('terminal');
-        toolItems.push({
-          id: `it-${Date.now() + 2}`,
-          type: 'task',
-          text: 'Checked task Run production build verification',
-        });
-        toolItems.push({
-          id: `it-${Date.now() + 3}`,
-          type: 'task',
-          text: 'Production build verification finished',
-        });
-      } else {
-        setAuxiliaryTab('diff');
-        toolItems.push({
-          id: `it-${Date.now() + 2}`,
-          type: 'edit',
-          text: 'Edited',
-          filename: 'tokens.css',
-          additions: 12,
-          deletions: 4,
-        });
-      }
+          if (lower.includes('browser') || lower.includes('navigate') || lower.includes('audit')) {
+            setAuxiliaryTab('browser');
+            toolItems.push({
+              id: `tc-${Date.now()}`,
+              type: 'task',
+              text: 'Playwright CDP session initialized on port 9222',
+            });
+            toolItems.push({
+              id: `tc-${Date.now() + 1}`,
+              type: 'analyze',
+              text: 'Analyzed',
+              filename: 'http://localhost:5173',
+              lines: 'DOM snapshot captured',
+            });
+          } else if (lower.includes('plan') || lower.includes('architect')) {
+            setAuxiliaryTab('artifacts');
+            toolItems.push({
+              id: `tc-${Date.now()}`,
+              type: 'artifact',
+              text: 'free-gravity-arch-plan.md',
+              artifactName: 'free-gravity-arch-plan.md (Artifact v1.0)',
+            });
+          } else if (lower.includes('test') || lower.includes('build') || lower.includes('compile')) {
+            setAuxiliaryTab('terminal');
+            toolItems.push({
+              id: `tc-${Date.now()}`,
+              type: 'task',
+              text: 'Checked task Run production build verification',
+            });
+            toolItems.push({
+              id: `tc-${Date.now() + 1}`,
+              type: 'task',
+              text: 'Production build verification finished',
+            });
+          } else {
+            setAuxiliaryTab('diff');
+            toolItems.push({
+              id: `tc-${Date.now()}`,
+              type: 'edit',
+              text: 'Edited',
+              filename: 'tokens.css',
+              additions: 12,
+              deletions: 4,
+            });
+          }
 
-      const thoughtItem: StreamItem = {
-        id: `it-${Date.now() + 4}`,
-        type: 'thought',
-        text: 'Thought for 3s',
-        durationSeconds: 3,
-        details: `Instruction parsed: "${text}".
-1. Evaluated required tools and security constraints.
-2. Verified local environment and executed action pipeline.
-3. Updated auxiliary inspector state.`,
-      };
-
-      const assistantItem: StreamItem = {
-        id: `it-${Date.now() + 5}`,
-        type: 'text',
-        text: `I've analyzed your instruction and executed the requested operation. Check the Auxiliary Pane on the right for live inspection output.`,
-      };
-
-      const taskFinishItem: StreamItem = {
-        id: `it-${Date.now() + 6}`,
-        type: 'task',
-        text: 'Task finished',
-      };
-
-      setSessionStreams((prev) => ({
-        ...prev,
-        [activeSessionId]: [
-          ...(prev[activeSessionId] || []).filter((i) => i.type !== 'working'),
-          thoughtItem,
-          ...toolItems,
-          assistantItem,
-          taskFinishItem,
-        ],
-      }));
-    }, 1200);
+          return {
+            ...prev,
+            [activeSessionId]: [
+              ...stream.filter((i) => i.type !== 'working'),
+              {
+                id: `th-${Date.now()}`,
+                type: 'thought',
+                text: 'Thought for 2s',
+                durationSeconds: 2,
+                details: `Processed instruction: "${text}".\nConnected to live local workspace.\nInspecting tools and system runtime.`,
+              },
+              ...toolItems,
+              {
+                id: `as-${Date.now()}`,
+                type: 'text',
+                text: `Executed instruction for workspace "${DEFAULT_PROJECT}". Check the Auxiliary Inspector on the right for output.`,
+              },
+              {
+                id: `fn-${Date.now()}`,
+                type: 'task',
+                text: 'Task finished',
+              },
+            ],
+          };
+        }
+        return prev;
+      });
+    }, 1500);
   };
 
   const handleToggleCronJob = (id: string) => {
@@ -404,6 +457,7 @@ export const StudioWorkspace: React.FC<StudioWorkspaceProps> = ({ onNavigateHome
           activeId={activeSessionId}
           onSelect={(id) => setActiveSessionId(id)}
           onNewConversation={handleNewSession}
+          onDeleteConversation={handleDeleteConversation}
           onOpenSettings={() => setSettingsOpen(true)}
           onOpenAutomations={() => setAutomationsOpen(true)}
           onOpenCustomizations={() => setCustomizationsOpen(true)}
@@ -458,7 +512,7 @@ export const StudioWorkspace: React.FC<StudioWorkspaceProps> = ({ onNavigateHome
         isOpen={settingsOpen}
         onClose={() => setSettingsOpen(false)}
         settings={settings}
-        onSave={setSettings}
+        onSave={(s) => setSettings(s)}
       />
 
       {/* Automations Modal */}

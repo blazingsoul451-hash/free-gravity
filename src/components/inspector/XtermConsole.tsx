@@ -4,16 +4,7 @@ import { wsClient } from '../../lib/ws-client';
 
 export const XtermConsole: React.FC = () => {
   const [sessionId, setSessionId] = useState<string | null>(null);
-  const [history, setHistory] = useState<Array<{ type: 'input' | 'output' | 'error'; text: string }>>([
-    { type: 'output', text: 'Google Antigravity Jailed Terminal Bridge (OWASP ASI05 active)' },
-    { type: 'output', text: 'Hermes Agent connected • Shell environment: powershell.exe' },
-    { type: 'input', text: 'free-gravity@workspace:~$ npx vite build' },
-    { type: 'output', text: 'vite v6.4.4 building client environment for production...' },
-    { type: 'output', text: '✓ 1955 modules transformed.' },
-    { type: 'output', text: 'dist/index.html    1.13 kB │ gzip: 0.62 kB' },
-    { type: 'output', text: 'dist/assets/index.js  384.70 kB │ gzip: 107.57 kB' },
-    { type: 'output', text: '✓ built in 4.09s with 0 errors.' },
-  ]);
+  const [history, setHistory] = useState<Array<{ type: 'input' | 'output' | 'error'; text: string }>>([]);
   const [inputVal, setInputVal] = useState('');
 
   useEffect(() => {

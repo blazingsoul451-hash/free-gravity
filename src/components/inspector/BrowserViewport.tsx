@@ -16,12 +16,7 @@ export const BrowserViewport: React.FC<BrowserViewportProps> = ({
   const [url, setUrl] = useState(initialUrl);
   const [isLoading, setIsLoading] = useState(false);
   const [frameImage, setFrameImage] = useState<string | null>(null);
-  const [actionLogs, setActionLogs] = useState([
-    { time: '15:42:11', event: 'Launched Playwright Chromium (CDP remote debugging port 9222)' },
-    { time: '15:42:12', event: 'Navigated to http://localhost:5173 (HTTP 200 OK, 142ms)' },
-    { time: '15:42:13', event: 'Extracted DOM tree, 24 interactive elements identified' },
-    { time: '15:42:14', event: 'Streaming screencast viewport frame (1280x800, 30fps)' },
-  ]);
+  const [actionLogs, setActionLogs] = useState<Array<{ time: string; event: string }>>([]);
 
   useEffect(() => {
     wsClient.startBrowserScreencast();
