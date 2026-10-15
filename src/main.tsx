@@ -23,7 +23,7 @@ const AppRouter: React.FC = () => {
   };
 
   return (
-    <div className="w-full h-full min-h-screen bg-[#090a0f]">
+    <div className="w-full h-full min-h-screen bg-[#131314]">
       {currentPath === '/app' ? (
         <StudioWorkspace onNavigateHome={() => navigateTo('/')} />
       ) : (

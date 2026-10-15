@@ -420,13 +420,13 @@ export const DraggableCaseStudies: React.FC<DraggableCaseStudiesProps> = ({ onWa
             </div>
 
             {/* Metrics Grid */}
-            <div className="relative z-10 my-4 grid grid-cols-3 gap-2 py-3 px-3.5 rounded-2xl bg-[#090a0f]/80 border border-white/5">
+            <div className="relative z-10 my-4 grid grid-cols-3 gap-2 py-3 px-3.5 rounded-2xl bg-[#131314] border border-[#444746]">
               {study.stats.map((stat, sIdx) => (
                 <div key={sIdx} className="text-center">
-                  <div className={`text-xs sm:text-sm font-bold font-mono ${stat.highlight ? 'text-cyan-400' : 'text-slate-200'}`}>
+                  <div className={`text-xs sm:text-sm font-bold font-mono ${stat.highlight ? 'text-[#a8c7fa]' : 'text-[#e3e3e3]'}`}>
                     {stat.value}
                   </div>
-                  <div className="text-[9px] text-slate-500 font-sans mt-0.5 uppercase tracking-tight">
+                  <div className="text-[9px] text-[#8e918f] font-sans mt-0.5 uppercase tracking-tight">
                     {stat.label}
                   </div>
                 </div>
@@ -484,53 +484,53 @@ export const DraggableCaseStudies: React.FC<DraggableCaseStudiesProps> = ({ onWa
         </div>
 
         {/* Matrix Container */}
-        <div className="rounded-3xl bg-[#121317]/80 border border-white/10 backdrop-blur-xl overflow-hidden shadow-2xl">
+        <div className="rounded-3xl bg-[#1e1f20] border border-[#444746] overflow-hidden shadow-2xl">
           {COMPARISON_DATA.map((section, sIdx) => (
-            <div key={sIdx} className={sIdx !== 0 ? 'border-t border-white/10' : ''}>
+            <div key={sIdx} className={sIdx !== 0 ? 'border-t border-[#444746]' : ''}>
               {/* Section Header */}
-              <div className="bg-[#18191d]/90 px-6 py-3.5 flex items-center justify-between border-b border-white/5">
-                <span className="text-xs font-mono font-bold tracking-wider text-cyan-300 uppercase flex items-center gap-2">
-                  <span className="w-2 h-2 rounded-full bg-cyan-400" />
+              <div className="bg-[#282a2c] px-6 py-3.5 flex items-center justify-between border-b border-[#444746]">
+                <span className="text-xs font-mono font-bold tracking-wider text-[#a8c7fa] uppercase flex items-center gap-2">
+                  <span className="w-2 h-2 rounded-full bg-[#a8c7fa]" />
                   {section.pillar}
                 </span>
-                <span className="text-[11px] font-mono text-slate-500">Pillar {sIdx + 1} of 4</span>
+                <span className="text-[11px] font-mono text-[#8e918f]">Pillar {sIdx + 1} of 4</span>
               </div>
 
               {/* Rows */}
-              <div className="divide-y divide-white/5">
+              <div className="divide-y divide-[#444746]/60">
                 {section.rows.map((row, rIdx) => (
                   <div
                     key={rIdx}
-                    className="p-5 sm:p-6 grid grid-cols-1 lg:grid-cols-12 gap-4 hover:bg-white/[0.02] transition-colors"
+                    className="p-5 sm:p-6 grid grid-cols-1 lg:grid-cols-12 gap-4 hover:bg-[#282a2c]/50 transition-colors"
                   >
                     {/* Feature name and detail */}
                     <div className="lg:col-span-4 flex flex-col justify-center">
-                      <h4 className="text-sm font-semibold text-white mb-1">{row.feature}</h4>
-                      <p className="text-xs text-slate-400">{row.detail}</p>
+                      <h4 className="text-sm font-semibold text-[#e3e3e3] mb-1">{row.feature}</h4>
+                      <p className="text-xs text-[#8e918f]">{row.detail}</p>
                     </div>
 
                     {/* Google Antigravity Column */}
-                    <div className="lg:col-span-4 p-3 rounded-xl bg-[#090a0f]/60 border border-white/5 flex flex-col justify-center">
-                      <div className="text-[10px] font-mono uppercase text-slate-500 mb-1 flex items-center gap-1.5">
-                        <span className="w-1.5 h-1.5 rounded-full bg-rose-400" /> Google Antigravity
+                    <div className="lg:col-span-4 p-3 rounded-xl bg-[#131314] border border-[#444746] flex flex-col justify-center">
+                      <div className="text-[10px] font-mono uppercase text-[#8e918f] mb-1 flex items-center gap-1.5">
+                        <span className="w-1.5 h-1.5 rounded-full bg-[#ffb3ae]" /> Google Antigravity
                       </div>
-                      <div className="text-xs text-slate-300 font-medium">
+                      <div className="text-xs text-[#c4c7c5] font-medium">
                         {row.googleAntigravity}
                       </div>
                     </div>
 
                     {/* Free Gravity Column (Highlighted) */}
-                    <div className="lg:col-span-4 p-3 rounded-xl bg-violet-950/20 border border-violet-500/30 flex flex-col justify-center shadow-inner">
-                      <div className="text-[10px] font-mono uppercase text-cyan-400 font-semibold mb-1 flex items-center justify-between">
+                    <div className="lg:col-span-4 p-3 rounded-xl bg-[#004a77]/30 border border-[#004a77] flex flex-col justify-center shadow-inner">
+                      <div className="text-[10px] font-mono uppercase text-[#c2e7ff] font-semibold mb-1 flex items-center justify-between">
                         <span className="flex items-center gap-1.5">
-                          <span className="w-1.5 h-1.5 rounded-full bg-cyan-400 animate-pulse" /> Free Gravity
+                          <span className="w-1.5 h-1.5 rounded-full bg-[#80da88]" /> Free Gravity
                         </span>
-                        <span className="text-[9px] px-1.5 py-0.2 rounded bg-cyan-950 text-cyan-300 border border-cyan-800/40">
+                        <span className="text-[9px] px-1.5 py-0.2 rounded bg-[#004a77] text-[#c2e7ff] border border-[#a8c7fa]/30">
                           Winner
                         </span>
                       </div>
                       <div className="text-xs text-white font-semibold flex items-start gap-1.5">
-                        <Check className="w-3.5 h-3.5 text-cyan-400 mt-0.5 shrink-0" />
+                        <Check className="w-3.5 h-3.5 text-[#80da88] mt-0.5 shrink-0" />
                         <span>{row.freeGravity}</span>
                       </div>
                     </div>

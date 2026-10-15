@@ -1,18 +1,16 @@
 import React from 'react';
 import { 
-  MessageSquare, 
-  Clock, 
-  Cpu, 
-  Settings as SettingsIcon, 
-  FolderGit2, 
-  Compass, 
-  Sparkles,
-  Zap
-} from 'lucide-react';
+  AntigravityLogo,
+  IconChat, 
+  IconFolder, 
+  IconSkills, 
+  IconSchedule, 
+  IconSettings 
+} from '../icons/AntigravityIcons';
 
 interface ActivityBarProps {
-  activeTab: 'chat' | 'scheduler' | 'mcp';
-  setActiveTab: (tab: 'chat' | 'scheduler' | 'mcp') => void;
+  activeTab: 'chat' | 'scheduler' | 'mcp' | 'files';
+  setActiveTab: (tab: 'chat' | 'scheduler' | 'mcp' | 'files') => void;
   openSettings: () => void;
   onNavigateHome: () => void;
   cronCount: number;
@@ -28,116 +26,128 @@ export const ActivityBar: React.FC<ActivityBarProps> = ({
   mcpCount,
 }) => {
   return (
-    <aside className="w-14 flex-shrink-0 flex flex-col items-center py-3 bg-[#0d0e14] border-r border-[#e6eaf00f] z-20 select-none justify-between">
+    <aside className="w-12 flex-shrink-0 flex flex-col items-center py-2.5 bg-[#090a0f] border-r border-white/[0.04] z-20 select-none justify-between tracking-tight">
       {/* Top Group: Brand Logo & Navigation */}
-      <div className="flex flex-col items-center gap-4 w-full">
-        {/* Free Gravity Logo */}
+      <div className="flex flex-col items-center gap-2.5 w-full">
+        {/* Antigravity Brand Home Button */}
         <button
           onClick={onNavigateHome}
           title="Return to Free Gravity Showcase"
-          className="relative group p-2.5 rounded-xl hover:bg-white/[0.06] transition-all duration-200"
+          className="relative group p-1.5 rounded-md text-zinc-400 hover:text-zinc-200 hover:bg-white/[0.03] transition-colors"
         >
-          <div className="w-8 h-8 rounded-lg bg-gradient-to-tr from-violet-600 via-indigo-600 to-cyan-400 p-[1.5px] shadow-[0_0_15px_rgba(124,58,237,0.4)] group-hover:shadow-[0_0_20px_rgba(6,182,212,0.6)] transition-all">
-            <div className="w-full h-full bg-[#090a0f] rounded-[7px] flex items-center justify-center">
-              <Zap className="w-4 h-4 text-cyan-400 fill-cyan-400/20 group-hover:rotate-12 transition-transform duration-300" />
-            </div>
+          <div className="w-7 h-7 flex items-center justify-center text-zinc-300">
+            <AntigravityLogo className="w-5 h-5" />
           </div>
-          <span className="absolute left-16 px-2 py-1 bg-[#18191d] border border-white/10 text-xs text-white rounded-md whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none z-50 shadow-xl">
+          <span className="absolute left-14 px-2 py-1 bg-[#14151d] border border-white/[0.06] text-xs text-zinc-300 rounded-md whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none z-50 shadow-xl">
             Free Gravity Showcase
           </span>
         </button>
 
-        <div className="w-7 h-[1px] bg-white/[0.08]" />
+        <div className="w-5 h-[1px] bg-white/[0.04]" />
 
         {/* Tab 1: Chat Sessions */}
         <button
           onClick={() => setActiveTab('chat')}
-          className={`relative group p-2.5 rounded-xl transition-all ${
+          className={`relative group w-9 h-9 rounded-md flex items-center justify-center transition-colors ${
             activeTab === 'chat'
-              ? 'bg-violet-600/20 text-violet-400 shadow-[0_0_12px_rgba(124,58,237,0.3)]'
-              : 'text-[#94a3b8] hover:text-white hover:bg-white/[0.05]'
+              ? 'bg-white/[0.05] text-zinc-100'
+              : 'text-zinc-500 hover:text-zinc-300 hover:bg-white/[0.02]'
           }`}
-          title="Chat Sessions"
+          title="Agent Chat Stream"
         >
-          <MessageSquare className="w-5 h-5" />
+          <IconChat className="w-4 h-4" />
           {activeTab === 'chat' && (
-            <div className="absolute left-0 top-2 bottom-2 w-0.5 bg-violet-400 rounded-r-full" />
+            <div className="absolute left-0 top-2 bottom-2 w-0.5 bg-zinc-300 rounded-r-full" />
           )}
-          <span className="absolute left-16 px-2 py-1 bg-[#18191d] border border-white/10 text-xs text-white rounded-md whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none z-50 shadow-xl">
-            Agent Chat
+          <span className="absolute left-14 px-2 py-1 bg-[#14151d] border border-white/[0.06] text-xs text-zinc-300 rounded-md whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none z-50 shadow-xl">
+            Conversations
           </span>
         </button>
 
-        {/* Tab 2: Background Cron Schedulers */}
+        {/* Tab 2: Workspaces & Files */}
+        <button
+          onClick={() => setActiveTab('files')}
+          className={`relative group w-9 h-9 rounded-md flex items-center justify-center transition-colors ${
+            activeTab === 'files'
+              ? 'bg-white/[0.05] text-zinc-100'
+              : 'text-zinc-500 hover:text-zinc-300 hover:bg-white/[0.02]'
+          }`}
+          title="Files & Workspace"
+        >
+          <IconFolder className="w-4 h-4" />
+          {activeTab === 'files' && (
+            <div className="absolute left-0 top-2 bottom-2 w-0.5 bg-zinc-300 rounded-r-full" />
+          )}
+          <span className="absolute left-14 px-2 py-1 bg-[#14151d] border border-white/[0.06] text-xs text-zinc-300 rounded-md whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none z-50 shadow-xl">
+            Workspace Explorer
+          </span>
+        </button>
+
+        {/* Tab 3: Background Cron Schedulers */}
         <button
           onClick={() => setActiveTab('scheduler')}
-          className={`relative group p-2.5 rounded-xl transition-all ${
+          className={`relative group w-9 h-9 rounded-md flex items-center justify-center transition-colors ${
             activeTab === 'scheduler'
-              ? 'bg-cyan-500/20 text-cyan-300 shadow-[0_0_12px_rgba(6,182,212,0.3)]'
-              : 'text-[#94a3b8] hover:text-white hover:bg-white/[0.05]'
+              ? 'bg-white/[0.05] text-zinc-100'
+              : 'text-zinc-500 hover:text-zinc-300 hover:bg-white/[0.02]'
           }`}
-          title="Cron Schedulers & Automations"
+          title="Cron Automations & Schedules"
         >
-          <Clock className="w-5 h-5" />
+          <IconSchedule className="w-4 h-4" />
           {cronCount > 0 && (
-            <span className="absolute top-1.5 right-1.5 w-2 h-2 bg-cyan-400 rounded-full animate-ping" />
+            <span className="absolute top-1.5 right-1.5 w-1.5 h-1.5 bg-amber-400/80 rounded-full" />
           )}
           {activeTab === 'scheduler' && (
-            <div className="absolute left-0 top-2 bottom-2 w-0.5 bg-cyan-400 rounded-r-full" />
+            <div className="absolute left-0 top-2 bottom-2 w-0.5 bg-zinc-300 rounded-r-full" />
           )}
-          <span className="absolute left-16 px-2 py-1 bg-[#18191d] border border-white/10 text-xs text-white rounded-md whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none z-50 shadow-xl">
-            Cron Automations ({cronCount} active)
+          <span className="absolute left-14 px-2 py-1 bg-[#14151d] border border-white/[0.06] text-xs text-zinc-300 rounded-md whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none z-50 shadow-xl">
+            Automations ({cronCount})
           </span>
         </button>
 
-        {/* Tab 3: MCP & REA Skills */}
+        {/* Tab 4: MCP & REA Skills */}
         <button
           onClick={() => setActiveTab('mcp')}
-          className={`relative group p-2.5 rounded-xl transition-all ${
+          className={`relative group w-9 h-9 rounded-md flex items-center justify-center transition-colors ${
             activeTab === 'mcp'
-              ? 'bg-emerald-500/20 text-emerald-300 shadow-[0_0_12px_rgba(16,185,129,0.3)]'
-              : 'text-[#94a3b8] hover:text-white hover:bg-white/[0.05]'
+              ? 'bg-white/[0.05] text-zinc-100'
+              : 'text-zinc-500 hover:text-zinc-300 hover:bg-white/[0.02]'
           }`}
-          title="MCP Servers & REA Skillpack"
+          title="MCP Tool Servers & REA Skills"
         >
-          <Cpu className="w-5 h-5" />
-          <span className="absolute -top-0.5 -right-0.5 px-1 bg-emerald-500/20 text-[10px] text-emerald-300 font-mono rounded-full border border-emerald-500/30">
-            {mcpCount}
-          </span>
-          {activeTab === 'mcp' && (
-            <div className="absolute left-0 top-2 bottom-2 w-0.5 bg-emerald-400 rounded-r-full" />
+          <IconSkills className="w-4 h-4" />
+          {mcpCount > 0 && (
+            <span className="absolute top-1.5 right-1.5 w-1.5 h-1.5 bg-emerald-400/80 rounded-full" />
           )}
-          <span className="absolute left-16 px-2 py-1 bg-[#18191d] border border-white/10 text-xs text-white rounded-md whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none z-50 shadow-xl">
-            MCP & morluto/rea Skills
+          {activeTab === 'mcp' && (
+            <div className="absolute left-0 top-2 bottom-2 w-0.5 bg-zinc-300 rounded-r-full" />
+          )}
+          <span className="absolute left-14 px-2 py-1 bg-[#14151d] border border-white/[0.06] text-xs text-zinc-300 rounded-md whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none z-50 shadow-xl">
+            MCP Skills ({mcpCount})
           </span>
         </button>
       </div>
 
-      {/* Bottom Group: Status Indicator & Settings */}
-      <div className="flex flex-col items-center gap-3 w-full">
-        {/* OmniRoute Status Dot */}
-        <div 
-          className="group relative flex items-center justify-center p-2 rounded-lg hover:bg-white/[0.05] cursor-pointer"
-          onClick={openSettings}
-          title="OmniRoute AI Gateway: Active"
-        >
-          <div className="w-2.5 h-2.5 rounded-full bg-emerald-400 shadow-[0_0_8px_#34d399] animate-pulse" />
-          <span className="absolute left-16 px-2 py-1 bg-[#18191d] border border-white/10 text-xs text-emerald-300 rounded-md whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none z-50 shadow-xl">
-            OmniRoute: Hermes 3 (Connected)
-          </span>
-        </div>
-
-        {/* Settings Button */}
+      {/* Bottom Group: Settings & Profile */}
+      <div className="flex flex-col items-center gap-2 w-full">
         <button
           onClick={openSettings}
-          className="relative group p-2.5 text-[#94a3b8] hover:text-white hover:bg-white/[0.05] rounded-xl transition-all"
-          title="Studio & Model Settings"
+          className="relative group w-9 h-9 rounded-md flex items-center justify-center text-zinc-500 hover:text-zinc-300 hover:bg-white/[0.02] transition-colors"
+          title="Settings & OmniRoute Gateway"
         >
-          <SettingsIcon className="w-5 h-5 group-hover:rotate-45 transition-transform duration-300" />
-          <span className="absolute left-16 px-2 py-1 bg-[#18191d] border border-white/10 text-xs text-white rounded-md whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none z-50 shadow-xl">
-            Settings & API Keys
+          <IconSettings className="w-4 h-4" />
+          <span className="absolute left-14 px-2 py-1 bg-[#14151d] border border-white/[0.06] text-xs text-zinc-300 rounded-md whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none z-50 shadow-xl">
+            Settings
           </span>
         </button>
+
+        {/* User Avatar Chip */}
+        <div 
+          className="w-7 h-7 rounded-full bg-white/[0.06] text-zinc-300 text-[10px] font-medium flex items-center justify-center cursor-pointer border border-white/[0.06] hover:border-white/[0.12] transition-colors"
+          title="Developer"
+        >
+          DEV
+        </div>
       </div>
     </aside>
   );

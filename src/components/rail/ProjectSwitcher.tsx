@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { FolderGit2, ChevronDown, Check, Plus, HardDrive, ShieldCheck } from 'lucide-react';
+import { IconFolder } from '../icons/AntigravityIcons';
 
 interface ProjectSwitcherProps {
   currentProject: string;
@@ -15,61 +15,72 @@ export const ProjectSwitcher: React.FC<ProjectSwitcherProps> = ({ currentProject
   ];
 
   return (
-    <div className="relative p-3 border-b border-[#e6eaf00f]">
+    <div className="relative p-2.5 border-b border-[#444746] select-none font-sans">
       <button
+        type="button"
         onClick={() => setIsOpen(!isOpen)}
-        className="w-full flex items-center justify-between px-3 py-2 rounded-lg bg-[#18191d] hover:bg-[#212226] border border-[#e6eaf00f] transition-all text-left group"
+        className="w-full flex items-center justify-between px-2.5 py-1.5 rounded-lg bg-[#282a2c] hover:bg-[#333537] border border-[#444746] transition-colors text-left group cursor-pointer"
       >
-        <div className="flex items-center gap-2.5 overflow-hidden">
-          <div className="w-6 h-6 rounded bg-violet-600/20 text-violet-400 flex items-center justify-center flex-shrink-0">
-            <FolderGit2 className="w-3.5 h-3.5" />
+        <div className="flex items-center gap-2 overflow-hidden">
+          <div className="w-5 h-5 rounded bg-[#1e1f20] text-[#a8c7fa] flex items-center justify-center flex-shrink-0 border border-[#444746]">
+            <IconFolder className="w-3.5 h-3.5" />
           </div>
           <div className="truncate">
-            <div className="text-xs font-medium text-white group-hover:text-cyan-300 transition-colors flex items-center gap-1.5">
+            <div className="text-xs font-medium text-[#e3e3e3] group-hover:text-white transition-colors flex items-center gap-1.5">
               <span>{currentProject}</span>
-              <span className="text-[10px] px-1.5 py-0.2 bg-white/[0.06] text-[#94a3b8] rounded-full font-mono">
+              <span className="text-[10px] px-1 py-0.2 bg-[#1e1f20] text-[#8e918f] rounded font-mono border border-[#444746]">
                 main
               </span>
             </div>
-            <div className="text-[10px] text-[#64748b] truncate flex items-center gap-1">
-              <ShieldCheck className="w-2.5 h-2.5 text-emerald-400" />
+            <div className="text-[10px] text-[#8e918f] truncate flex items-center gap-1 mt-0.5">
+              <span className="w-1.5 h-1.5 rounded-full bg-[#80da88]" />
               <span>OWASP ASI05 Jailed</span>
             </div>
           </div>
         </div>
-        <ChevronDown className={`w-3.5 h-3.5 text-[#94a3b8] transition-transform ${isOpen ? 'rotate-180' : ''}`} />
+        <svg
+          viewBox="0 -960 960 960"
+          className={`w-3.5 h-3.5 text-[#8e918f] transition-transform ${isOpen ? 'rotate-180' : ''}`}
+          fill="currentColor"
+        >
+          <path d="M480-345 240-585l56-56 184 184 184-184 56 56-240 240Z"/>
+        </svg>
       </button>
 
       {isOpen && (
         <>
           <div className="fixed inset-0 z-30" onClick={() => setIsOpen(false)} />
-          <div className="absolute top-14 left-3 right-3 z-40 bg-[#18191d] border border-white/10 rounded-xl shadow-2xl p-1.5 backdrop-blur-xl">
-            <div className="text-[10px] font-semibold text-[#64748b] uppercase tracking-wider px-2 py-1">
+          <div className="absolute top-12 left-2.5 right-2.5 z-40 bg-[#1e1f20] border border-[#444746] rounded-xl shadow-2xl p-1 animate-in fade-in duration-150">
+            <div className="text-[10px] font-medium text-[#8e918f] uppercase tracking-wider px-2 py-1">
               Active Workspaces
             </div>
             {projects.map((p) => (
               <button
                 key={p.name}
+                type="button"
                 onClick={() => setIsOpen(false)}
-                className={`w-full flex items-center justify-between px-2.5 py-1.5 rounded-lg text-xs transition-all ${
+                className={`w-full flex items-center justify-between px-2.5 py-1.5 rounded-lg text-xs transition-colors cursor-pointer ${
                   p.name === currentProject
-                    ? 'bg-violet-600/20 text-violet-300 font-medium'
-                    : 'text-[#94a3b8] hover:text-white hover:bg-white/[0.05]'
+                    ? 'bg-[#004a77] text-[#c2e7ff] font-medium'
+                    : 'text-[#c4c7c5] hover:text-[#e3e3e3] hover:bg-[#282a2c]'
                 }`}
               >
                 <div className="flex items-center gap-2 truncate">
-                  <HardDrive className="w-3 h-3 text-[#64748b]" />
+                  <IconFolder className="w-3.5 h-3.5 text-[#a8c7fa]" />
                   <span className="truncate">{p.name}</span>
                 </div>
-                {p.name === currentProject && <Check className="w-3.5 h-3.5 text-violet-400" />}
+                {p.name === currentProject && (
+                  <span className="text-[#c2e7ff]">&bull;</span>
+                )}
               </button>
             ))}
-            <div className="h-[1px] bg-white/[0.06] my-1" />
+            <div className="h-[1px] bg-[#444746] my-1" />
             <button
+              type="button"
               onClick={() => setIsOpen(false)}
-              className="w-full flex items-center gap-2 px-2.5 py-1.5 rounded-lg text-xs text-cyan-400 hover:bg-cyan-500/10 transition-colors"
+              className="w-full flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg text-xs text-[#8e918f] hover:text-[#e3e3e3] hover:bg-[#282a2c] transition-colors cursor-pointer"
             >
-              <Plus className="w-3.5 h-3.5" />
+              <span>+</span>
               <span>Open Local Workspace...</span>
             </button>
           </div>

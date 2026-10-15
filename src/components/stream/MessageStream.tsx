@@ -1,24 +1,9 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { 
-  Send, 
-  Sparkles, 
-  Globe, 
-  Terminal, 
-  SearchCode, 
-  Paperclip, 
-  Mic, 
-  Bot, 
-  User, 
-  Activity, 
-  CheckCircle2, 
-  Zap,
-  ListTree
-} from 'lucide-react';
 import { Message, Session } from '../../types';
 import { ThinkingPill } from './ThinkingPill';
 import { ToolCards } from './ToolCards';
-import { SlashPopover, SLASH_COMMANDS } from './SlashPopover';
-import { MentionPopover, MENTIONS } from './MentionPopover';
+import { SlashPopover } from './SlashPopover';
+import { MentionPopover } from './MentionPopover';
 
 interface MessageStreamProps {
   session: Session;
@@ -105,201 +90,193 @@ export const MessageStream: React.FC<MessageStreamProps> = ({
   };
 
   return (
-    <div className="flex-1 flex flex-col h-full min-w-0 bg-[#090a0f] relative overflow-hidden">
+    <div className="flex-1 flex flex-col h-full bg-[#090a0f] overflow-hidden font-sans tracking-tight">
       
-      {/* Canvas Top Bar */}
-      <header className="h-12 border-b border-[#e6eaf00f] px-5 flex items-center justify-between bg-[#0d0e14]/80 backdrop-blur-md z-10 select-none">
-        <div className="flex items-center gap-3">
-          <div className="flex items-center gap-2">
-            <span className="text-xs font-semibold text-white tracking-wide truncate max-w-xs">
-              {session.title}
-            </span>
+      {/* Top Header Bar - Clean, seamless surface with subtle micro-hairline */}
+      <div className="h-10 bg-[#090a0f] border-b border-white/[0.04] px-4 flex items-center justify-between select-none shrink-0">
+        <div className="flex items-center gap-2.5">
+          <div className="flex items-center gap-1.5">
+            <span className="w-1.5 h-1.5 rounded-full bg-emerald-400" />
+            <span className="text-xs font-medium text-zinc-200">{session.title}</span>
           </div>
-
-          <div className="flex items-center gap-1.5 px-2 py-0.5 rounded-full bg-violet-600/15 border border-violet-500/30 text-[11px] font-mono text-violet-300">
-            <Zap className="w-3 h-3 text-violet-400" />
-            <span>{session.activeModel}</span>
-          </div>
+          <span className="text-[10px] font-mono px-1.5 py-0.2 rounded bg-white/[0.03] text-zinc-400 border border-white/[0.04]">
+            {session.activeModel || 'Hermes 3 (405B)'}
+          </span>
         </div>
 
-        {/* Telemetry Pills */}
-        <div className="flex items-center gap-3 text-xs">
-          <div className="flex items-center gap-1.5 text-[11px] text-[#64748b]">
-            <Activity className="w-3.5 h-3.5 text-cyan-400" />
-            <span className="font-mono">1.2k tokens</span>
-          </div>
-          <div className="flex items-center gap-1.5 text-[11px] text-emerald-400">
-            <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
-            <span className="font-mono">OmniRoute: 42ms</span>
-          </div>
+        <div className="flex items-center gap-2 text-[11px] text-zinc-500 font-mono">
+          <span>{session.timestamp}</span>
         </div>
-      </header>
+      </div>
 
-      {/* Messages Stream */}
-      <div className="flex-1 overflow-y-auto px-6 py-6 space-y-6">
-        {messages.map((msg) => (
-          <div key={msg.id} className="space-y-3">
-            {/* User Message */}
-            {msg.role === 'user' ? (
-              <div className="flex items-start gap-3 justify-end pl-12">
-                <div className="max-w-2xl bg-[#18191d] border border-white/10 rounded-2xl rounded-tr-sm p-4 text-xs text-[#f1f5f9] leading-relaxed shadow-lg">
-                  <div className="whitespace-pre-wrap">{msg.content}</div>
-                  {msg.mentions && msg.mentions.length > 0 && (
-                    <div className="flex flex-wrap gap-1.5 mt-2 pt-2 border-t border-white/[0.06]">
-                      {msg.mentions.map((m) => (
-                        <span
-                          key={m}
-                          className="px-2 py-0.5 rounded-md bg-cyan-500/10 border border-cyan-500/20 text-cyan-300 text-[10px] font-mono"
-                        >
-                          {m}
-                        </span>
-                      ))}
-                    </div>
-                  )}
+      {/* Messages Scroll Canvas - Open space, seamless content flow */}
+      <div className="flex-1 overflow-y-auto">
+        <div className="max-w-3xl mx-auto w-full px-5 py-6 space-y-6">
+          {messages.map((msg) => {
+            const isUser = msg.role === 'user';
+
+            return (
+              <div
+                key={msg.id}
+                className="space-y-1.5 animate-in fade-in duration-150"
+              >
+                {/* Sender Metadata Line */}
+                <div className="flex items-center gap-2 select-none">
+                  <span className="text-xs font-medium text-zinc-300">
+                    {isUser ? 'You' : 'Free Gravity'}
+                  </span>
+                  <span className="text-[10px] text-zinc-500 font-mono">
+                    {msg.timestamp}
+                  </span>
                 </div>
-                <div className="w-8 h-8 rounded-xl bg-gradient-to-tr from-violet-600 to-indigo-600 flex items-center justify-center flex-shrink-0 text-white shadow-md">
-                  <User className="w-4 h-4" />
-                </div>
-              </div>
-            ) : (
-              /* Agent Message */
-              <div className="flex items-start gap-3 pr-12">
-                <div className="w-8 h-8 rounded-xl bg-gradient-to-tr from-violet-600 to-cyan-400 p-[1px] flex-shrink-0 shadow-[0_0_12px_rgba(124,58,237,0.3)]">
-                  <div className="w-full h-full bg-[#090a0f] rounded-[11px] flex items-center justify-center">
-                    <Bot className="w-4 h-4 text-cyan-400" />
+
+                {/* Thinking Pill for Assistant */}
+                {!isUser && msg.thought && (
+                  <ThinkingPill
+                    durationSeconds={msg.thought.durationSeconds}
+                    content={msg.thought.content}
+                    completed={msg.thought.completed}
+                  />
+                )}
+
+                {/* Open Content Flow - No nested card/bubble boxes */}
+                {msg.content && (
+                  <div className={`text-[13px] leading-relaxed whitespace-pre-wrap ${
+                    isUser ? 'text-zinc-100 font-normal' : 'text-zinc-300 font-normal'
+                  }`}>
+                    {msg.content}
                   </div>
-                </div>
+                )}
 
-                <div className="flex-1 min-w-0 space-y-2">
-                  {/* Hermes 3 Thinking Pill */}
-                  {msg.thought && (
-                    <ThinkingPill
-                      durationSeconds={msg.thought.durationSeconds}
-                      content={msg.thought.content}
-                      completed={msg.thought.completed}
-                    />
-                  )}
-
-                  {/* Tool Cards (Browser, Terminal, Git Diff) */}
-                  {msg.toolCalls && msg.toolCalls.length > 0 && (
+                {/* Tool Calls */}
+                {msg.toolCalls && msg.toolCalls.length > 0 && (
+                  <div className="pt-1">
                     <ToolCards
                       toolCalls={msg.toolCalls}
                       onOpenBrowserTab={onOpenBrowserTab}
                       onAcceptDiff={onAcceptDiff}
                       onRevertDiff={onRevertDiff}
                     />
-                  )}
-
-                  {/* Message Content */}
-                  <div className="p-4 rounded-2xl bg-[#121317] border border-[#e6eaf00f] text-xs text-[#cbd5e1] leading-relaxed shadow-sm">
-                    <div className="whitespace-pre-wrap">{msg.content}</div>
                   </div>
-                </div>
+                )}
               </div>
-            )}
-          </div>
-        ))}
-        <div ref={messagesEndRef} />
+            );
+          })}
+          <div ref={messagesEndRef} />
+        </div>
       </div>
 
-      {/* Input Tray & Popovers */}
-      <div className="p-4 pt-1 bg-[#090a0f]/90 border-t border-[#e6eaf00f]">
-        
-        {/* Quick Action Pills */}
-        <div className="flex items-center gap-1.5 mb-2 overflow-x-auto pb-1 select-none">
-          <button
-            onClick={() => handleSlashSelect('/browser')}
-            className="flex items-center gap-1 px-2.5 py-1 rounded-full bg-[#18191d] hover:bg-cyan-500/10 border border-white/[0.06] hover:border-cyan-500/30 text-[11px] text-[#94a3b8] hover:text-cyan-300 transition-all"
-          >
-            <Globe className="w-3 h-3 text-cyan-400" />
-            <span>/browser</span>
-          </button>
-          <button
-            onClick={() => handleSlashSelect('/plan')}
-            className="flex items-center gap-1 px-2.5 py-1 rounded-full bg-[#18191d] hover:bg-indigo-500/10 border border-white/[0.06] hover:border-indigo-500/30 text-[11px] text-[#94a3b8] hover:text-indigo-300 transition-all"
-          >
-            <ListTree className="w-3 h-3 text-indigo-400" />
-            <span>/plan</span>
-          </button>
-          <button
-            onClick={() => handleSlashSelect('/rea')}
-            className="flex items-center gap-1 px-2.5 py-1 rounded-full bg-[#18191d] hover:bg-rose-500/10 border border-white/[0.06] hover:border-rose-500/30 text-[11px] text-[#94a3b8] hover:text-rose-300 transition-all"
-          >
-            <SearchCode className="w-3 h-3 text-rose-400" />
-            <span>/rea</span>
-          </button>
-          <button
-            onClick={() => handleMentionSelect('@file')}
-            className="flex items-center gap-1 px-2.5 py-1 rounded-full bg-[#18191d] hover:bg-violet-500/10 border border-white/[0.06] hover:border-violet-500/30 text-[11px] text-[#94a3b8] hover:text-violet-300 transition-all"
-          >
-            <span className="text-violet-400 font-mono">@file</span>
-            <span>Attach</span>
-          </button>
-        </div>
-
-        {/* Textarea Container with relative popovers */}
-        <div className="relative rounded-2xl bg-[#121317] border border-white/10 focus-within:border-violet-500/50 shadow-2xl transition-all">
+      {/* Bottom Input Tray - Minimal, seamless Antigravity contour */}
+      <div className="shrink-0 bg-[#090a0f] border-t border-white/[0.04] p-4 pt-2">
+        <div className="max-w-3xl mx-auto w-full space-y-2">
           
-          {/* Popovers */}
-          <SlashPopover
-            isOpen={slashOpen}
-            onSelect={handleSlashSelect}
-            query={slashQuery}
-          />
-          <MentionPopover
-            isOpen={mentionOpen}
-            onSelect={handleMentionSelect}
-            query={mentionQuery}
-          />
-
-          <textarea
-            ref={textareaRef}
-            value={inputText}
-            onChange={handleInputChange}
-            onKeyDown={handleKeyDown}
-            placeholder="Instruct Free Gravity... (Type / for commands, @ for files & URLs)"
-            rows={2}
-            className="w-full px-4 pt-3 pb-10 bg-transparent text-xs text-white placeholder-[#64748b] outline-none resize-none leading-relaxed font-sans"
-          />
-
-          {/* Bottom Toolbar within Input */}
-          <div className="absolute left-3 right-3 bottom-2 flex items-center justify-between pointer-events-auto">
-            <div className="flex items-center gap-1 text-[#64748b]">
-              <button
-                type="button"
-                onClick={() => handleMentionSelect('@file')}
-                title="Attach Context (@file)"
-                className="p-1.5 rounded-lg hover:text-white hover:bg-white/[0.06] transition-colors"
-              >
-                <Paperclip className="w-3.5 h-3.5" />
-              </button>
-              <button
-                type="button"
-                onClick={() => handleSlashSelect('/browser')}
-                title="Browser Action (/browser)"
-                className="p-1.5 rounded-lg hover:text-cyan-300 hover:bg-cyan-500/10 transition-colors"
-              >
-                <Globe className="w-3.5 h-3.5" />
-              </button>
-              <span className="text-[10px] text-[#475569] ml-1">
-                Press Enter to send, Shift+Enter for new line
-              </span>
-            </div>
-
+          {/* Action Chips */}
+          <div className="flex items-center gap-1.5 overflow-x-auto pb-0.5 select-none no-scrollbar">
             <button
               type="button"
-              onClick={handleSend}
-              disabled={!inputText.trim()}
-              className={`p-2 rounded-xl text-white transition-all ${
-                inputText.trim()
-                  ? 'bg-gradient-to-r from-violet-600 to-indigo-600 hover:from-violet-500 hover:to-indigo-500 shadow-[0_0_12px_rgba(124,58,237,0.4)] active:scale-95'
-                  : 'bg-white/[0.05] text-[#475569] cursor-not-allowed'
-              }`}
+              onClick={() => handleSlashSelect('/browser')}
+              className="flex items-center gap-1 px-2.5 py-0.5 rounded-full bg-white/[0.03] hover:bg-white/[0.06] border border-white/[0.04] text-[11px] text-zinc-400 hover:text-zinc-200 transition-colors cursor-pointer shrink-0"
             >
-              <Send className="w-3.5 h-3.5" />
+              <span className="text-zinc-300 font-mono">/browser</span>
+              <span>CDP Automation</span>
+            </button>
+            <button
+              type="button"
+              onClick={() => handleSlashSelect('/plan')}
+              className="flex items-center gap-1 px-2.5 py-0.5 rounded-full bg-white/[0.03] hover:bg-white/[0.06] border border-white/[0.04] text-[11px] text-zinc-400 hover:text-zinc-200 transition-colors cursor-pointer shrink-0"
+            >
+              <span className="text-zinc-300 font-mono">/plan</span>
+              <span>Step Planner</span>
+            </button>
+            <button
+              type="button"
+              onClick={() => handleSlashSelect('/rea')}
+              className="flex items-center gap-1 px-2.5 py-0.5 rounded-full bg-white/[0.03] hover:bg-white/[0.06] border border-white/[0.04] text-[11px] text-zinc-400 hover:text-zinc-200 transition-colors cursor-pointer shrink-0"
+            >
+              <span className="text-emerald-400/90 font-mono">/rea</span>
+              <span>Deep Analysis</span>
+            </button>
+            <button
+              type="button"
+              onClick={() => handleMentionSelect('@file')}
+              className="flex items-center gap-1 px-2.5 py-0.5 rounded-full bg-white/[0.03] hover:bg-white/[0.06] border border-white/[0.04] text-[11px] text-zinc-400 hover:text-zinc-200 transition-colors cursor-pointer shrink-0"
+            >
+              <span className="text-amber-400/90 font-mono">@file</span>
+              <span>Attach Context</span>
             </button>
           </div>
 
+          {/* Seamless Input Capsule */}
+          <div className="relative rounded-xl bg-[#101116] border border-white/[0.06] focus-within:border-white/[0.14] transition-colors">
+            
+            {/* Popovers */}
+            <SlashPopover
+              isOpen={slashOpen}
+              onSelect={handleSlashSelect}
+              query={slashQuery}
+            />
+            <MentionPopover
+              isOpen={mentionOpen}
+              onSelect={handleMentionSelect}
+              query={mentionQuery}
+            />
+
+            <textarea
+              ref={textareaRef}
+              value={inputText}
+              onChange={handleInputChange}
+              onKeyDown={handleKeyDown}
+              placeholder="Instruct Free Gravity... (/ for commands, @ for context)"
+              rows={2}
+              className="w-full px-3.5 pt-2.5 pb-9 bg-transparent text-xs text-zinc-200 placeholder-zinc-500 outline-none resize-none leading-relaxed font-sans"
+            />
+
+            {/* Bottom Toolbar within Input */}
+            <div className="absolute left-3 right-2.5 bottom-1.5 flex items-center justify-between pointer-events-auto select-none">
+              <div className="flex items-center gap-1 text-zinc-500">
+                <button
+                  type="button"
+                  onClick={() => handleMentionSelect('@file')}
+                  title="Attach Context (@file)"
+                  className="p-1 rounded hover:text-zinc-300 hover:bg-white/[0.04] transition-colors cursor-pointer"
+                >
+                  <svg viewBox="0 -960 960 960" className="w-3.5 h-3.5" fill="currentColor">
+                    <path d="M720-330q0 104-73 177T470-80q-104 0-177-73t-73-177v-380q0-75 52.5-127.5T400-890q75 0 127.5 52.5T580-710v350q0 46-32 78t-78 32q-46 0-78-32t-32-78v-370h60v370q0 21 14.5 35.5T470-280q21 0 35.5-14.5T520-330v-350q0-50-35-85t-85-35q-50 0-85 35t-35 85v380q0 79 55.5 134.5T470-140q79 0 134.5-55.5T660-330v-370h60v370Z"/>
+                  </svg>
+                </button>
+                <button
+                  type="button"
+                  onClick={() => handleSlashSelect('/browser')}
+                  title="Browser Action (/browser)"
+                  className="p-1 rounded hover:text-zinc-300 hover:bg-white/[0.04] transition-colors cursor-pointer"
+                >
+                  <svg viewBox="0 -960 960 960" className="w-3.5 h-3.5" fill="currentColor">
+                    <path d="M480-80q-83 0-156-31.5T197-197q-54-54-85.5-127T80-480q0-83 31.5-156T197-763q54-54 127-85.5T480-880q83 0 156 31.5T763-763q54 54 85.5 127T880-480q0 83-31.5 156T763-197q-54 54-127 85.5T480-80Zm-40-82v-78q-33 0-56.5-23.5T360-320v-40L168-552q-3 18-5.5 36t-2.5 36q0 121 79.5 212T440-162Zm276-102q41-45 62.5-102.5T800-480q0-127-83-220.5T508-800v58q0 25-17.5 42.5T448-682h-88v82q0 25-17.5 42.5T300-540h-60v80h160q25 0 42.5 17.5T460-400v60h60q33 0 56.5 23.5T600-260v36q31-10 58-24.5t58-35.5Z"/>
+                  </svg>
+                </button>
+                <span className="text-[10px] text-zinc-500 ml-1 font-mono hidden sm:inline">
+                  Enter to run • Shift+Enter newline
+                </span>
+              </div>
+
+              <button
+                type="button"
+                onClick={handleSend}
+                disabled={!inputText.trim()}
+                className={`w-6 h-6 rounded-md flex items-center justify-center transition-colors ${
+                  inputText.trim()
+                    ? 'bg-white/[0.12] hover:bg-white/[0.2] text-zinc-100 cursor-pointer'
+                    : 'bg-white/[0.03] text-zinc-600 cursor-not-allowed'
+                }`}
+                title="Send Prompt"
+              >
+                <svg viewBox="0 -960 960 960" className="w-3.5 h-3.5" fill="currentColor">
+                  <path d="M120-160v-640l760 320-760 320Zm80-120 474-200-474-200v140l240 60-240 60v140Zm0 0v-400 400Z"/>
+                </svg>
+              </button>
+            </div>
+
+          </div>
         </div>
       </div>
 

@@ -190,23 +190,23 @@ export const OsDownloadButton: React.FC<OsDownloadButtonProps> = ({
 
   return (
     <div className={`relative inline-flex items-center ${className}`} ref={dropdownRef}>
-      {/* Primary Download Pill */}
-      <div className="inline-flex rounded-full p-[1px] bg-gradient-to-r from-violet-600 via-indigo-500 to-cyan-500 shadow-lg shadow-violet-950/40 hover:shadow-cyan-900/30 transition-all duration-300">
+      {/* Primary Download Pill - Exact Antigravity Material 3 Pill */}
+      <div className="inline-flex rounded-full p-[1px] bg-[#444746] hover:bg-[#a8c7fa] transition-all duration-300">
         <button
           onClick={() => handleDownload(osInfo)}
-          className="inline-flex items-center gap-3 px-6 py-3.5 rounded-full bg-[#0d0e14] hover:bg-[#151720] text-slate-100 font-medium text-sm md:text-base tracking-wide transition-all group cursor-pointer"
+          className="inline-flex items-center gap-3 px-6 py-3 rounded-full bg-[#1e1f20] hover:bg-[#282a2c] text-[#e3e3e3] font-medium text-sm tracking-wide transition-all group cursor-pointer"
         >
-          <span className="p-1 rounded-full bg-violet-500/20 text-cyan-400 group-hover:scale-110 transition-transform">
+          <span className="p-1 rounded-full bg-[#282a2c] text-[#a8c7fa] group-hover:scale-105 transition-transform">
             {osInfo.isMobile ? <Smartphone className="w-4 h-4" /> : <Download className="w-4 h-4" />}
           </span>
           <div className="flex flex-col text-left">
-            <span className="leading-tight font-semibold text-white flex items-center gap-2">
+            <span className="leading-tight font-semibold text-[#e3e3e3] flex items-center gap-2">
               {osInfo.isMobile ? 'Launch Web Studio' : `Download for ${osInfo.name}`}
-              <span className="text-[10px] px-2 py-0.5 rounded-full bg-violet-950/80 border border-violet-500/30 text-violet-300 font-mono">
-                v1.0.0
+              <span className="text-[10px] px-2 py-0.5 rounded-full bg-[#004a77] border border-[#004a77] text-[#c2e7ff] font-mono">
+                v2.0
               </span>
             </span>
-            <span className="text-[11px] text-slate-400 font-mono">
+            <span className="text-[11px] text-[#8e918f] font-mono">
               {osInfo.isMobile ? 'Desktop recommended for local LLMs' : `${osInfo.badge} • ${osInfo.format}`}
             </span>
           </div>
@@ -216,20 +216,20 @@ export const OsDownloadButton: React.FC<OsDownloadButtonProps> = ({
         <button
           onClick={() => setIsOpen(!isOpen)}
           aria-label="Select alternative platforms"
-          className="px-3 rounded-r-full bg-[#0d0e14] hover:bg-[#181a24] border-l border-white/10 text-slate-400 hover:text-white transition-colors cursor-pointer"
+          className="px-3 rounded-r-full bg-[#1e1f20] hover:bg-[#282a2c] border-l border-[#444746] text-[#8e918f] hover:text-[#e3e3e3] transition-colors cursor-pointer"
         >
-          <ChevronDown className={`w-4 h-4 transition-transform duration-200 ${isOpen ? 'rotate-180 text-cyan-400' : ''}`} />
+          <ChevronDown className={`w-4 h-4 transition-transform duration-200 ${isOpen ? 'rotate-180 text-[#a8c7fa]' : ''}`} />
         </button>
       </div>
 
       {/* Alternative Platforms Dropdown Menu */}
       {isOpen && (
-        <div className="absolute top-full left-0 mt-3 w-80 sm:w-96 rounded-2xl bg-[#121317]/95 backdrop-blur-xl border border-white/10 shadow-2xl shadow-black/80 p-2 z-50 text-left animate-in fade-in slide-in-from-top-2 duration-200">
-          <div className="px-3 py-2 border-b border-white/5 flex items-center justify-between">
-            <span className="text-xs font-semibold uppercase tracking-wider text-slate-400 flex items-center gap-1.5 font-mono">
-              <Laptop className="w-3.5 h-3.5 text-cyan-400" /> All Release Binaries
+        <div className="absolute top-full left-0 mt-3 w-80 sm:w-96 rounded-2xl bg-[#1e1f20] border border-[#444746] shadow-2xl p-2 z-50 text-left animate-in fade-in duration-200">
+          <div className="px-3 py-2 border-b border-[#444746] flex items-center justify-between">
+            <span className="text-xs font-semibold uppercase tracking-wider text-[#8e918f] flex items-center gap-1.5 font-mono">
+              <Laptop className="w-3.5 h-3.5 text-[#a8c7fa]" /> All Release Binaries
             </span>
-            <span className="text-[11px] text-slate-500 font-mono">100% Free & Open Source</span>
+            <span className="text-[11px] text-[#8e918f] font-mono">100% Free & Open Source</span>
           </div>
 
           <div className="py-1 space-y-1 max-h-72 overflow-y-auto">
@@ -242,8 +242,8 @@ export const OsDownloadButton: React.FC<OsDownloadButtonProps> = ({
                 }}
                 className={`group flex items-center justify-between p-2.5 rounded-xl cursor-pointer transition-all ${
                   osInfo.id === key 
-                    ? 'bg-violet-950/40 border border-violet-500/30 text-white' 
-                    : 'hover:bg-white/5 text-slate-300'
+                    ? 'bg-[#004a77] border border-[#004a77] text-white' 
+                    : 'hover:bg-[#282a2c] text-[#c4c7c5]'
                 }`}
               >
                 <div className="flex items-center gap-3">

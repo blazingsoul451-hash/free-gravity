@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Clock, Play, Plus, Power, CheckCircle2, AlertCircle } from 'lucide-react';
+import { IconSchedule } from '../icons/AntigravityIcons';
 import { CronJob } from '../../types';
 
 interface CronSchedulerProps {
@@ -23,74 +23,76 @@ export const CronScheduler: React.FC<CronSchedulerProps> = ({
   };
 
   return (
-    <div className="flex-1 flex flex-col min-h-0 bg-[#121317]">
+    <div className="flex-1 flex flex-col min-h-0 bg-[#1e1f20] font-sans select-none">
       {/* Header */}
-      <div className="p-3 border-b border-[#e6eaf00f] flex items-center justify-between">
+      <div className="p-3 border-b border-[#444746] flex items-center justify-between">
         <div>
-          <div className="text-xs font-semibold text-white flex items-center gap-1.5">
-            <Clock className="w-3.5 h-3.5 text-cyan-400" />
-            <span>Background Automations</span>
+          <div className="text-xs font-medium text-[#e3e3e3] flex items-center gap-1.5">
+            <IconSchedule className="w-3.5 h-3.5 text-[#a8c7fa]" />
+            <span>Automations & Cron</span>
           </div>
-          <div className="text-[10px] text-[#64748b]">
-            Recurring agent cron tasks & heartbeat monitors
+          <div className="text-[10px] text-[#8e918f] mt-0.5">
+            Recurring background agents & watchers
           </div>
         </div>
       </div>
 
       {/* Cron Cards */}
-      <div className="flex-1 overflow-y-auto p-3 space-y-3">
+      <div className="flex-1 overflow-y-auto p-2.5 space-y-2">
         {jobs.map((job) => (
           <div
             key={job.id}
-            className={`p-3 rounded-xl border transition-all ${
+            className={`p-2.5 rounded-lg border transition-colors ${
               job.enabled
-                ? 'bg-[#18191d] border-cyan-500/20 shadow-[0_0_15px_rgba(6,182,212,0.06)]'
-                : 'bg-[#141519] border-[#e6eaf00f] opacity-60'
+                ? 'bg-[#282a2c] border-[#444746]'
+                : 'bg-[#282a2c]/50 border-[#444746]/40 opacity-60'
             }`}
           >
             <div className="flex items-start justify-between gap-2">
-              <div className="space-y-1">
-                <div className="text-xs font-medium text-white flex items-center gap-1.5">
-                  <span className="truncate">{job.name}</span>
+              <div className="space-y-1 min-w-0">
+                <div className="text-xs font-medium text-[#e3e3e3] truncate">
+                  {job.name}
                 </div>
-                <div className="inline-block px-1.5 py-0.5 rounded bg-cyan-950/60 border border-cyan-500/30 text-[10px] font-mono text-cyan-300">
+                <div className="inline-block px-1.5 py-0.5 rounded bg-[#1e1f20] border border-[#444746] text-[10px] font-mono text-[#fcbd00]">
                   {job.schedule}
                 </div>
               </div>
 
               {/* Controls */}
-              <div className="flex items-center gap-1.5">
+              <div className="flex items-center gap-1">
                 <button
+                  type="button"
                   onClick={() => handleTrigger(job.id)}
                   disabled={!job.enabled || triggeringId === job.id}
                   title="Trigger Immediately"
-                  className={`p-1.5 rounded-lg border transition-all ${
+                  className={`p-1 rounded text-xs transition-colors cursor-pointer ${
                     triggeringId === job.id
-                      ? 'bg-cyan-500/20 text-cyan-300 border-cyan-500/40 animate-spin'
-                      : 'bg-white/[0.04] hover:bg-white/[0.08] text-[#94a3b8] hover:text-white border-white/[0.06]'
+                      ? 'bg-[#333537] text-[#a8c7fa] animate-spin'
+                      : 'bg-[#1e1f20] hover:bg-[#333537] text-[#c4c7c5] hover:text-white border border-[#444746]'
                   }`}
                 >
-                  <Play className="w-3 h-3 fill-current" />
+                  ▶
                 </button>
                 <button
+                  type="button"
                   onClick={() => onToggleJob(job.id)}
                   title={job.enabled ? 'Pause schedule' : 'Enable schedule'}
-                  className={`p-1.5 rounded-lg border transition-all ${
+                  className={`px-2 py-0.5 rounded text-[10px] font-medium transition-colors cursor-pointer border ${
                     job.enabled
-                      ? 'bg-emerald-500/10 text-emerald-400 border-emerald-500/30'
-                      : 'bg-white/[0.04] text-[#64748b] border-white/[0.06]'
+                      ? 'bg-[#0f5223]/30 text-[#80da88] border-[#80da88]/40'
+                      : 'bg-[#1e1f20] text-[#8e918f] border-[#444746]'
                   }`}
                 >
-                  <Power className="w-3 h-3" />
+                  {job.enabled ? 'Active' : 'Paused'}
                 </button>
               </div>
             </div>
 
-            <p className="text-[11px] text-[#94a3b8] mt-2 line-clamp-2">
+            <p className="text-[11px] text-[#c4c7c5] mt-2 line-clamp-2 leading-relaxed">
               "{job.prompt}"
             </p>
 
-            <div className="flex items-center justify-between mt-3 pt-2 border-t border-white/[0.04] text-[10px] text-[#64748b]">
+            <div className="flex items-center justify-between mt-2.5 pt-1.5 border-t border-[#444746]/60 text-[10px] text-[#8e918f] font-mono">
               <span>Next: {job.nextRun}</span>
               {job.lastRun && <span>Last: {job.lastRun}</span>}
             </div>

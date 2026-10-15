@@ -1,109 +1,107 @@
 @import "tailwindcss";
+@import "./antigravity-tokens.css";
 
 :root {
-  /* Surface Tokens (Antigravity Obsidian Spec) */
+  /* Surface Tokens (Google Antigravity AI-Native Seamless Standard) */
   --surface-base: #090a0f;
-  --surface-subtle: #121317;
-  --surface-panel: #18191d;
-  --surface-card: #212226;
-  --surface-active: #282a30;
+  --surface-rail: #101116;
+  --surface-panel: #14151d;
+  --surface-card: #181922;
+  --surface-active: #1f202b;
   
-  /* Micro-Border Tokens */
-  --surface-border: rgba(230, 234, 240, 0.06);
-  --surface-border-subtle: rgba(255, 255, 255, 0.04);
-  --surface-border-hover: rgba(255, 255, 255, 0.12);
-  --surface-border-active: rgba(124, 58, 237, 0.45);
+  /* Micro-Hairline Tokens */
+  --surface-border: rgba(255, 255, 255, 0.04);
+  --surface-border-subtle: rgba(255, 255, 255, 0.03);
+  --surface-border-hover: rgba(255, 255, 255, 0.08);
+  --surface-border-active: rgba(255, 255, 255, 0.12);
   
-  /* Brand Glow & Accent Tokens */
-  --accent-violet: #7c3aed;
-  --accent-cyan: #06b6d4;
-  --accent-teal: #14b8a6;
-  --accent-amber: #f59e0b;
-  --accent-rose: #f43f5e;
+  /* Muted Accents */
+  --accent-primary: #a1a1aa;
+  --accent-primary-container: rgba(255, 255, 255, 0.06);
+  --accent-secondary: #d4d4d8;
+  --accent-secondary-container: rgba(255, 255, 255, 0.04);
+  --accent-tertiary: #6ee7b7;
+  --accent-warning: #fcd34d;
+  --accent-error: #fca5a5;
   
-  /* Text Tokens */
-  --text-primary: #f1f5f9;
-  --text-secondary: #94a3b8;
-  --text-muted: #64748b;
-  --text-faint: #475569;
+  /* Typography Hierarchy Tokens */
+  --text-primary: #e4e4e7;   /* zinc-200 */
+  --text-secondary: #a1a1aa; /* zinc-400 */
+  --text-muted: #71717a;     /* zinc-500 */
+  --text-faint: #52525b;     /* zinc-600 */
   
-  /* Glass & Blur */
-  --frosted-glass: blur(12px);
+  /* Radii */
   --radius-pill: 9999px;
-  --radius-panel: 12px;
-  --radius-card: 8px;
+  --radius-panel: 8px;
+  --radius-card: 6px;
 }
 
-/* Custom Scrollbars */
+body {
+  font-family: 'Google Sans Text', 'Google Sans', 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  background-color: var(--surface-base, #090a0f);
+  color: var(--text-primary, #e4e4e7);
+  letter-spacing: -0.01em;
+}
+
+code, pre, .font-mono {
+  font-family: 'Google Sans Code', 'JetBrains Mono', 'Fira Code', monospace;
+}
+
+/* Minimal Micro-Scrollbars */
 ::-webkit-scrollbar {
-  width: 5px;
-  height: 5px;
+  width: 4px;
+  height: 4px;
 }
 ::-webkit-scrollbar-track {
   background: transparent;
 }
 ::-webkit-scrollbar-thumb {
-  background: rgba(255, 255, 255, 0.1);
+  background: rgba(255, 255, 255, 0.08);
   border-radius: 999px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: rgba(255, 255, 255, 0.2);
+  background: rgba(255, 255, 255, 0.16);
 }
 
-/* Antigravity Glassmorphism Utilities */
-.glass-panel {
-  background: rgba(18, 19, 23, 0.85);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border: 1px solid var(--surface-border);
+/* Antigravity Seamless Surfaces */
+.ga-panel {
+  background-color: #14151d;
+  border: 1px solid rgba(255, 255, 255, 0.04);
 }
 
-.glass-card {
-  background: rgba(33, 34, 38, 0.7);
-  backdrop-filter: blur(8px);
-  border: 1px solid var(--surface-border);
+.ga-card {
+  background-color: #101116;
+  border: 1px solid rgba(255, 255, 255, 0.04);
 }
 
-.glow-violet {
-  box-shadow: 0 0 25px -5px rgba(124, 58, 237, 0.35);
+.ga-card-high {
+  background-color: #181922;
+  border: 1px solid rgba(255, 255, 255, 0.06);
 }
 
-.glow-cyan {
-  box-shadow: 0 0 25px -5px rgba(6, 182, 212, 0.35);
-}
-
-.pill-border {
-  border-radius: 9999px;
-  border: 1px solid var(--surface-border);
-}
-
-/* Thinking Pulse Animation */
-@keyframes thinkingPulse {
+/* Subtle, Understated Thinking Pulse */
+@keyframes antigravityThinkingPulse {
   0%, 100% {
     opacity: 0.85;
-    transform: scale(1);
-    box-shadow: 0 0 10px rgba(124, 58, 237, 0.3);
   }
   50% {
     opacity: 1;
-    transform: scale(1.015);
-    box-shadow: 0 0 22px rgba(6, 182, 212, 0.5);
   }
 }
 
 .thinking-pulse {
-  animation: thinkingPulse 2.4s ease-in-out infinite;
+  animation: antigravityThinkingPulse 2.4s ease-in-out infinite;
 }
 
-/* Code Diff Highlight */
+/* Muted Diff Styling */
 .diff-added {
-  background-color: rgba(34, 197, 94, 0.12);
-  border-left: 2px solid #22c55e;
-  color: #86efac;
+  background-color: rgba(6, 78, 59, 0.2);
+  border-left: 2px solid rgba(52, 211, 153, 0.6);
+  color: #a7f3d0;
 }
 
 .diff-removed {
-  background-color: rgba(239, 68, 68, 0.12);
-  border-left: 2px solid #ef4444;
-  color: #fca5a5;
+  background-color: rgba(127, 29, 29, 0.2);
+  border-left: 2px solid rgba(248, 113, 113, 0.6);
+  color: #fecaca;
 }

@@ -1,15 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { 
-  Globe, 
-  Code2, 
-  Terminal, 
-  FileText, 
-  PanelRightClose, 
-  PanelRightOpen, 
-  Maximize2,
-  Sliders,
-  Sparkles
-} from 'lucide-react';
+  IconBrowser, 
+  IconDiff, 
+  IconTerminal, 
+  IconFolder 
+} from '../components/icons/AntigravityIcons';
 import { ActivityBar } from '../components/rail/ActivityBar';
 import { ProjectSwitcher } from '../components/rail/ProjectSwitcher';
 import { SessionList } from '../components/rail/SessionList';
@@ -37,7 +32,7 @@ interface StudioWorkspaceProps {
 
 export const StudioWorkspace: React.FC<StudioWorkspaceProps> = ({ onNavigateHome }) => {
   // Navigation & Rail state
-  const [railTab, setRailTab] = useState<'chat' | 'scheduler' | 'mcp'>('chat');
+  const [railTab, setRailTab] = useState<'chat' | 'scheduler' | 'mcp' | 'files'>('chat');
   const [settingsOpen, setSettingsOpen] = useState(false);
   const [settings, setSettings] = useState<Settings>(INITIAL_SETTINGS);
 
@@ -52,7 +47,7 @@ export const StudioWorkspace: React.FC<StudioWorkspaceProps> = ({ onNavigateHome
   const [inspectorTab, setInspectorTab] = useState<TabType>('browser');
   const [inspectorOpen, setInspectorOpen] = useState(true);
   const [browserHeadful, setBrowserHeadful] = useState(false);
-  const [inspectorWidth, setInspectorWidth] = useState(480);
+  const [inspectorWidth, setInspectorWidth] = useState(500);
   const [isResizing, setIsResizing] = useState(false);
 
   const activeSession = sessions.find((s) => s.id === activeSessionId) || sessions[0];
@@ -116,56 +111,73 @@ export const StudioWorkspace: React.FC<StudioWorkspaceProps> = ({ onNavigateHome
     const offAssistantMsg = wsClient.on('agent:assistant_message', (payload: any) => {
       setMessages((prev) => {
         const last = prev[prev.length - 1];
-        if (!last || last.role !== 'assistant') return prev;
+        if (last && last.role === 'assistant') {
+          return [
+            ...prev.slice(0, -1),
+            {
+              ...last,
+              content: payload?.content || last.content,
+              thought: payload?.thought
+                ? {
+                    content: payload.thought,
+                    durationSeconds: payload.durationSeconds || 2.0,
+                    completed: true,
+                  }
+                : last.thought,
+            },
+          ];
+        }
         return [
-          ...prev.slice(0, -1),
+          ...prev,
           {
-            ...last,
-            content: payload?.content || last.content,
+            id: `m-${Date.now()}`,
+            role: 'assistant',
+            content: payload?.content || '',
+            timestamp: new Date().toLocaleTimeString(),
+            thought: payload?.thought
+              ? {
+                  content: payload.thought,
+                  durationSeconds: payload.durationSeconds || 2.0,
+                  completed: true,
+                }
+              : undefined,
           },
         ];
       });
     });
 
-    const offToolCallStart = wsClient.on('agent:tool_call_start', (payload: any) => {
+    const offToolCallStart = wsClient.on('agent:tool_call_start', (tc: ToolCall) => {
       setMessages((prev) => {
         const last = prev[prev.length - 1];
         if (!last || last.role !== 'assistant') return prev;
-        const existingCalls = last.toolCalls || [];
-        const newCall: ToolCall = {
-          id: payload.callId || `tc-${Date.now()}`,
-          name: payload.name || 'run_command',
-          summary: `Executing ${payload.name || 'tool'}...`,
-          status: 'running',
-          timestamp: new Date().toLocaleTimeString(),
-          args: payload.arguments || {},
-        };
+        const existingCalls = [...(last.toolCalls || [])];
+        const idx = existingCalls.findIndex((c) => c.id === tc.id);
+        if (idx >= 0) {
+          existingCalls[idx] = { ...existingCalls[idx], ...tc, status: 'running' };
+        } else {
+          existingCalls.push({ ...tc, status: 'running' });
+        }
         return [
           ...prev.slice(0, -1),
           {
             ...last,
-            toolCalls: [...existingCalls, newCall],
+            toolCalls: existingCalls,
           },
         ];
       });
     });
 
-    const offToolCallComplete = wsClient.on('agent:tool_call_complete', (payload: any) => {
+    const offToolCallComplete = wsClient.on('agent:tool_call_complete', (tc: ToolCall) => {
       setMessages((prev) => {
         const last = prev[prev.length - 1];
         if (!last || last.role !== 'assistant') return prev;
-        const existingCalls = (last.toolCalls || []).map((tc) => {
-          if (tc.id === payload.callId || tc.name === payload.name) {
-            return {
-              ...tc,
-              status: (payload.result?.status === 'error' ? 'failed' : 'completed') as any,
-              output: typeof payload.result === 'string' ? payload.result : JSON.stringify(payload.result?.output || payload.result),
-              durationMs: payload.durationMs || 320,
-              summary: `${payload.name || tc.name} finished (${payload.result?.status || 'success'})`,
-            };
-          }
-          return tc;
-        });
+        const existingCalls = [...(last.toolCalls || [])];
+        const idx = existingCalls.findIndex((c) => c.id === tc.id);
+        if (idx >= 0) {
+          existingCalls[idx] = { ...existingCalls[idx], ...tc, status: 'completed' };
+        } else {
+          existingCalls.push({ ...tc, status: 'completed' });
+        }
         return [
           ...prev.slice(0, -1),
           {
@@ -178,7 +190,7 @@ export const StudioWorkspace: React.FC<StudioWorkspaceProps> = ({ onNavigateHome
 
     const offHitl = wsClient.on('security:hitl_required', (payload: any) => {
       const confirmApproval = window.confirm(
-        `[OWASP ASI02 Interceptor] A potentially dangerous command requires approval:\n\nCommand: ${payload.command}\nReasons: ${(payload.reasons || []).join(', ')}\n\nDo you authorize execution?`
+        `[OWASP ASI02 Interceptor] Potentially destructive command requires approval:\n\nCommand: ${payload.command}\nReasons: ${(payload.reasons || []).join(', ')}\n\nAuthorize execution?`
       );
       wsClient.resolveHitl(payload.id, confirmApproval);
     });
@@ -203,7 +215,7 @@ export const StudioWorkspace: React.FC<StudioWorkspaceProps> = ({ onNavigateHome
       timestamp: 'Just now',
       category: 'Today',
       messageCount: 0,
-      activeModel: 'Hermes 3 405B (Free)',
+      activeModel: 'Hermes 3 (405B)',
     };
     setSessions([newSession, ...sessions]);
     setActiveSessionId(newId);
@@ -234,11 +246,10 @@ export const StudioWorkspace: React.FC<StudioWorkspaceProps> = ({ onNavigateHome
       setMessages((prev) => [...prev, userMsg, pendingAssistantMsg]);
       wsClient.sendAgentMessage(text, { model: settings.model });
     } else {
-      // Fallback simulated Hermes 3 agent response if server offline
       const assistantMsg: Message = {
         id: `m-${Date.now() + 1}`,
         role: 'assistant',
-        content: `I've analyzed your instruction. Executing browser inspection and terminal check:`,
+        content: `I've analyzed your instruction. Executing browser inspection and code verification:`,
         timestamp: new Date().toLocaleTimeString(),
         thought: {
           durationSeconds: 1.8,
@@ -258,7 +269,6 @@ export const StudioWorkspace: React.FC<StudioWorkspaceProps> = ({ onNavigateHome
             durationMs: 450,
             args: { action: 'navigate', url: 'http://localhost:5173' },
             output: 'Target loaded (200 OK). Captured DOM tree snapshot.',
-            screenshotUrl: 'https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=600&auto=format&fit=crop&q=80',
           },
         ],
       };
@@ -307,9 +317,9 @@ export const StudioWorkspace: React.FC<StudioWorkspaceProps> = ({ onNavigateHome
   };
 
   return (
-    <div className="flex h-screen w-screen overflow-hidden bg-[#090a0f] text-[#f1f5f9] select-none font-sans">
+    <div className="flex h-screen w-screen overflow-hidden bg-[#131314] text-[#e3e3e3] select-none font-sans">
       
-      {/* COLUMN 1: LEFT RAIL */}
+      {/* COLUMN 1: LEFT RAIL (Exact width 48px) */}
       <ActivityBar
         activeTab={railTab}
         setActiveTab={setRailTab}
@@ -319,10 +329,11 @@ export const StudioWorkspace: React.FC<StudioWorkspaceProps> = ({ onNavigateHome
         mcpCount={mcpSkills.filter((s) => s.enabled).length}
       />
 
-      <div className="w-64 flex flex-col border-r border-[#e6eaf00f] bg-[#121317] flex-shrink-0">
+      {/* DRAWER SLIDE-OUT PANEL (Exact width 280px) */}
+      <div className="w-[280px] flex flex-col border-r border-[#444746] bg-[#1e1f20] flex-shrink-0">
         <ProjectSwitcher currentProject="free-gravity" />
 
-        {railTab === 'chat' && (
+        {(railTab === 'chat' || railTab === 'files') && (
           <SessionList
             sessions={sessions}
             activeSessionId={activeSessionId}
@@ -348,8 +359,8 @@ export const StudioWorkspace: React.FC<StudioWorkspaceProps> = ({ onNavigateHome
         )}
       </div>
 
-      {/* COLUMN 2: CENTER CANVAS (Agent Stream & Input Tray) */}
-      <main className="flex-1 flex flex-col min-w-0 h-full relative">
+      {/* COLUMN 2: CENTER CANVAS (Agent Reasoning Stream & Input Tray) */}
+      <main className="flex-1 flex flex-col min-w-0 h-full relative bg-[#131314]">
         <MessageStream
           session={activeSession}
           messages={messages}
@@ -362,71 +373,75 @@ export const StudioWorkspace: React.FC<StudioWorkspaceProps> = ({ onNavigateHome
           onRevertDiff={() => {}}
         />
 
-        {/* Floating toggle button for Inspector if closed */}
+        {/* Floating toggle button for Inspector if collapsed */}
         {!inspectorOpen && (
           <button
+            type="button"
             onClick={() => setInspectorOpen(true)}
-            className="absolute right-4 top-3 z-30 p-2 rounded-xl bg-[#18191d] border border-white/10 text-[#94a3b8] hover:text-white shadow-xl transition-all"
-            title="Open Inspector Panel"
+            className="absolute right-4 top-3 z-30 p-1.5 rounded-full bg-[#1e1f20] hover:bg-[#282a2c] border border-[#444746] text-[#c4c7c5] hover:text-[#e3e3e3] transition-colors cursor-pointer shadow-lg"
+            title="Expand Auxiliary Inspector"
           >
-            <PanelRightOpen className="w-4 h-4" />
+            <svg viewBox="0 -960 960 960" className="w-4 h-4" fill="currentColor">
+              <path d="M120-120v-720h720v720H120Zm80-80h560v-560H200v560Zm400-80v-400h80v400h-80Z"/>
+            </svg>
           </button>
         )}
       </main>
 
-      {/* COLUMN 3: RIGHT AUXILIARY INSPECTOR (Browser, Monaco, Term, Artifacts) */}
+      {/* COLUMN 3: RIGHT AUXILIARY INSPECTOR (Browser, Monaco, Terminal, Artifacts) */}
       {inspectorOpen && (
         <aside
           style={{ width: `${inspectorWidth}px` }}
-          className="relative flex flex-col h-full border-l border-[#e6eaf00f] bg-[#0d0e14] flex-shrink-0 z-20"
+          className="relative flex flex-col h-full border-l border-[#444746] bg-[#1e1f20] flex-shrink-0 z-20"
         >
           {/* Drag Resizer Handle */}
           <div
             onMouseDown={handleMouseDownResize}
-            className={`absolute -left-1 top-0 bottom-0 w-2 cursor-col-resize hover:bg-violet-500/40 transition-colors z-30 ${
-              isResizing ? 'bg-violet-500/60' : 'bg-transparent'
+            className={`absolute -left-1 top-0 bottom-0 w-2 cursor-col-resize hover:bg-[#a8c7fa]/20 transition-colors z-30 ${
+              isResizing ? 'bg-[#a8c7fa]/40' : 'bg-transparent'
             }`}
           />
 
-          {/* Inspector Tabs Header */}
-          <div className="h-12 bg-[#121317] border-b border-[#e6eaf00f] px-2 flex items-center justify-between">
+          {/* Inspector Tabs Header - Exact Material 3 Antigravity Tokens */}
+          <div className="h-11 bg-[#1e1f20] border-b border-[#444746] px-2 flex items-center justify-between select-none">
             <div className="flex items-center gap-1">
               {[
-                { id: 'browser', label: 'Browser', icon: <Globe className="w-3.5 h-3.5 text-cyan-400" />, badge: 'LIVE' },
-                { id: 'code', label: 'Code', icon: <Code2 className="w-3.5 h-3.5 text-violet-400" /> },
-                { id: 'term', label: 'Term', icon: <Terminal className="w-3.5 h-3.5 text-amber-400" /> },
-                { id: 'artifacts', label: 'Artifacts', icon: <FileText className="w-3.5 h-3.5 text-emerald-400" /> },
+                { id: 'browser', label: 'Browser', icon: <IconBrowser className="w-3.5 h-3.5" /> },
+                { id: 'code', label: 'Diff / Code', icon: <IconDiff className="w-3.5 h-3.5" /> },
+                { id: 'term', label: 'Terminal', icon: <IconTerminal className="w-3.5 h-3.5" /> },
+                { id: 'artifacts', label: 'Artifacts', icon: <IconFolder className="w-3.5 h-3.5" /> },
               ].map((tab) => (
                 <button
                   key={tab.id}
+                  type="button"
                   onClick={() => setInspectorTab(tab.id as TabType)}
-                  className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium transition-all ${
+                  className={`flex items-center gap-1.5 px-3 py-1 rounded-full text-xs transition-colors cursor-pointer ${
                     inspectorTab === tab.id
-                      ? 'bg-[#1e2026] text-white shadow-sm border border-white/10 font-semibold'
-                      : 'text-[#94a3b8] hover:text-white hover:bg-white/[0.04]'
+                      ? 'bg-[#004a77] text-[#c2e7ff] font-medium border border-[#004a77]'
+                      : 'text-[#c4c7c5] hover:text-[#e3e3e3] hover:bg-[#282a2c]'
                   }`}
                 >
                   {tab.icon}
                   <span>{tab.label}</span>
-                  {tab.badge && (
-                    <span className="w-1.5 h-1.5 rounded-full bg-cyan-400 animate-ping" />
-                  )}
                 </button>
               ))}
             </div>
 
-            {/* Close Inspector Button */}
+            {/* Collapse Inspector Button */}
             <button
+              type="button"
               onClick={() => setInspectorOpen(false)}
-              className="p-1.5 rounded-lg hover:bg-white/[0.06] text-[#64748b] hover:text-white transition-colors"
+              className="p-1 rounded-full hover:bg-[#282a2c] text-[#8e918f] hover:text-[#e3e3e3] transition-colors cursor-pointer"
               title="Collapse Inspector"
             >
-              <PanelRightClose className="w-4 h-4" />
+              <svg viewBox="0 -960 960 960" className="w-4 h-4" fill="currentColor">
+                <path d="m256-200-56-56 224-224-224-224 56-56 280 280-280 280Zm288 0-56-56 224-224-224-224 56-56 280 280-280 280Z"/>
+              </svg>
             </button>
           </div>
 
           {/* Inspector Active Pane */}
-          <div className="flex-1 overflow-hidden">
+          <div className="flex-1 overflow-hidden bg-[#131314]">
             {inspectorTab === 'browser' && (
               <BrowserViewport
                 isHeadful={browserHeadful}

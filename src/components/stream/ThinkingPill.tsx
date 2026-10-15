@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { Sparkles, ChevronDown, Clock, Brain } from 'lucide-react';
 
 interface ThinkingPillProps {
   durationSeconds: number;
@@ -15,38 +14,59 @@ export const ThinkingPill: React.FC<ThinkingPillProps> = ({
   const [isExpanded, setIsExpanded] = useState(false);
 
   return (
-    <div className="my-2.5">
-      {/* Collapsible Pill Button */}
+    <div className="my-1.5 select-none tracking-tight">
+      {/* Collapsible Pill Button - Seamless, Hairline border */}
       <button
+        type="button"
         onClick={() => setIsExpanded(!isExpanded)}
-        className={`group flex items-center gap-2 px-3 py-1.5 rounded-full text-xs font-mono transition-all select-none ${
+        className={`group inline-flex items-center gap-2 px-2.5 py-1 rounded-md text-xs transition-colors cursor-pointer ${
           completed
-            ? 'bg-[#18191d] border border-white/10 hover:border-violet-500/40 text-[#94a3b8] hover:text-white'
-            : 'bg-violet-950/40 border border-violet-500/40 text-violet-300 thinking-pulse'
+            ? 'bg-[#101116] hover:bg-white/[0.04] border border-white/[0.04] text-zinc-400 hover:text-zinc-200'
+            : 'bg-[#101116] border border-white/[0.06] text-zinc-300'
         }`}
       >
-        <Brain className={`w-3.5 h-3.5 ${completed ? 'text-violet-400' : 'text-cyan-400 animate-spin'}`} />
-        <span className="font-sans font-medium">
-          {completed ? `Thought for ${durationSeconds}s` : 'Thinking...'}
+        {/* Subtle sparkle indicator */}
+        <svg
+          viewBox="0 -960 960 960"
+          className={`w-3.5 h-3.5 ${completed ? 'text-zinc-400' : 'text-zinc-400 animate-spin'}`}
+          fill="currentColor"
+        >
+          <path d="m354-287 126-76 126 77-33-144 111-96-146-13-58-136-58 135-146 13 111 97-33 143ZM233-120l65-281L80-590l288-25 112-265 112 265 288 25-218 189 65 281-247-149-247 149Zm247-355Z"/>
+        </svg>
+
+        <span className="font-medium">
+          {completed ? `Thought for ${durationSeconds.toFixed(1)}s` : 'Thinking...'}
         </span>
-        <span className="text-[10px] text-[#64748b] bg-white/[0.04] px-1.5 py-0.2 rounded-full">
+
+        {/* Discreet Model Tag */}
+        <span className="text-[10px] font-mono text-zinc-500">
           Hermes 3
         </span>
-        <ChevronDown
-          className={`w-3.5 h-3.5 text-[#64748b] transition-transform duration-200 ${
-            isExpanded ? 'rotate-180 text-violet-400' : 'group-hover:text-white'
+
+        {/* Expand/Collapse Chevron */}
+        <svg
+          viewBox="0 -960 960 960"
+          className={`w-3.5 h-3.5 text-zinc-500 transition-transform duration-200 group-hover:text-zinc-300 ${
+            isExpanded ? 'rotate-180' : ''
           }`}
-        />
+          fill="currentColor"
+        >
+          <path d="M480-345 240-585l56-56 184 184 184-184 56 56-240 240Z"/>
+        </svg>
       </button>
 
-      {/* Expanded Chain-of-Thought Drawer */}
+      {/* Expanded Reasoning Tray */}
       {isExpanded && (
-        <div className="mt-2 p-3.5 rounded-xl bg-[#141519]/90 border border-violet-500/20 text-xs text-[#cbd5e1] font-mono leading-relaxed whitespace-pre-wrap shadow-lg animate-in fade-in duration-150">
-          <div className="text-[10px] uppercase font-semibold text-violet-400/80 tracking-wider mb-2 flex items-center gap-1.5">
-            <Sparkles className="w-3 h-3" />
-            <span>Hermes 3 Chain-of-Thought Reasoning</span>
+        <div className="mt-2 p-3 rounded-lg bg-[#101116] border border-white/[0.04] text-xs font-mono leading-relaxed whitespace-pre-wrap">
+          <div className="text-[11px] font-medium text-zinc-400 mb-1.5 flex items-center gap-1.5 pb-1 border-b border-white/[0.04]">
+            <svg viewBox="0 -960 960 960" className="w-3 h-3 text-zinc-500" fill="currentColor">
+              <path d="M480-80q-83 0-156-31.5T197-197q-54-54-85.5-127T80-480q0-83 31.5-156T197-763q54-54 127-85.5T480-880q83 0 156 31.5T763-763q54 54 85.5 127T880-480q0 83-31.5 156T763-197q-54 54-127 85.5T480-80Zm0-80q134 0 227-93t93-227q0-134-93-227t-227-93q-134 0-227 93t-93 227q0 134 93 227t227 93Zm0-320Z"/>
+            </svg>
+            <span>Agent Chain-of-Thought Stream</span>
           </div>
-          {content}
+          <div className="text-zinc-300 text-xs leading-relaxed font-mono select-text">
+            {content}
+          </div>
         </div>
       )}
     </div>

@@ -9,7 +9,7 @@ export interface ToolCall {
   durationMs?: number;
   args: Record<string, any>;
   output?: string;
-  diff?: {
+  diff?: string | {
     file: string;
     additions: number;
     deletions: number;

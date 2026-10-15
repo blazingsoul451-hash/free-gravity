@@ -1,19 +1,4 @@
 import React, { useState } from 'react';
-import { 
-  X, 
-  Key, 
-  Cpu, 
-  ShieldCheck, 
-  Globe, 
-  Sliders, 
-  Check, 
-  Eye, 
-  EyeOff, 
-  RefreshCw,
-  Server,
-  Terminal,
-  ExternalLink
-} from 'lucide-react';
 import { Settings } from '../../types';
 
 interface SettingsModalProps {
@@ -42,7 +27,7 @@ export const SettingsModal: React.FC<SettingsModalProps> = ({
     setTimeout(() => {
       setTesting(false);
       setTestSuccess(true);
-    }, 900);
+    }, 800);
   };
 
   const handleSave = () => {
@@ -60,34 +45,39 @@ export const SettingsModal: React.FC<SettingsModalProps> = ({
   ];
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-md animate-in fade-in duration-200">
-      <div className="relative w-full max-w-2xl bg-[#121317] border border-white/10 rounded-2xl shadow-2xl overflow-hidden flex flex-col max-h-[90vh]">
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/70 backdrop-blur-sm animate-in fade-in duration-150 select-none font-sans tracking-tight">
+      <div className="relative w-full max-w-2xl bg-[#101116] border border-white/[0.06] rounded-xl shadow-2xl overflow-hidden flex flex-col max-h-[90vh]">
         
         {/* Header */}
-        <div className="flex items-center justify-between px-6 py-4 border-b border-white/[0.08] bg-[#18191d]/80">
+        <div className="flex items-center justify-between px-5 py-3.5 border-b border-white/[0.04] bg-[#14151d]">
           <div className="flex items-center gap-2.5">
-            <div className="w-8 h-8 rounded-lg bg-violet-600/20 border border-violet-500/30 flex items-center justify-center text-violet-400">
-              <Sliders className="w-4 h-4" />
+            <div className="w-7 h-7 rounded-md bg-white/[0.04] border border-white/[0.04] flex items-center justify-center text-zinc-400">
+              <svg viewBox="0 -960 960 960" className="w-4 h-4" fill="currentColor">
+                <path d="m370-80-16-128q-13-5-24.5-12T307-235l-119 50L78-375l103-78q-1-7-1-13.5v-27q0-6.5 1-13.5L78-585l110-190 119 50q11-8 23-15t24-12l16-128h220l16 128q13 5 24.5 12t22.5 15l119-50 110 190-103 78q1 7 1 13.5v27q0 6.5-2 13.5l103 78-110 190-118-50q-11 8-23 15t-24 12L590-80H370Zm70-80h79l14-106q31-8 57.5-23.5T639-327l99 41 39-68-86-65q5-14 7-29.5t2-31.5q0-16-2-31.5t-7-29.5l86-65-39-68-99 42q-22-23-48.5-38.5T533-654l-13-106h-79l-14 106q-31 8-57.5 23.5T321-593l-99-41-39 68 86 64q-5 15-7 30t-2 32q0 16 2 31t7 30l-86 65 39 68 99-42q22 23 48.5 38.5T427-266l13 106Zm40-200q50 0 85-35t35-85q0-50-35-85t-85-35q-50 0-85 35t-35 85q0 50 35 85t85 35Zm0-120Z"/>
+              </svg>
             </div>
             <div>
-              <h2 className="text-sm font-semibold text-white">Free Gravity Settings</h2>
-              <p className="text-xs text-[#94a3b8]">OmniRoute Gateway, Hermes 3 Loop & Security</p>
+              <h2 className="text-sm font-medium text-zinc-100">Settings & AI Gateway</h2>
+              <p className="text-xs text-zinc-500">Models, Jailed Workspace & Security</p>
             </div>
           </div>
           <button
+            type="button"
             onClick={onClose}
-            className="p-1.5 rounded-lg text-[#94a3b8] hover:text-white hover:bg-white/[0.06] transition-colors"
+            className="p-1 rounded-md text-zinc-500 hover:text-zinc-200 hover:bg-white/[0.04] transition-colors cursor-pointer"
           >
-            <X className="w-4 h-4" />
+            <svg viewBox="0 -960 960 960" className="w-4 h-4" fill="currentColor">
+              <path d="m256-200-56-56 224-224-224-224 56-56 224 224 224-224 56 56-224 224 224 224-56 56-224-224-224 224Z"/>
+            </svg>
           </button>
         </div>
 
         {/* Body Form */}
-        <div className="flex-1 overflow-y-auto p-6 space-y-6">
+        <div className="flex-1 overflow-y-auto p-5 space-y-5">
           
           {/* Provider Tabs */}
           <div>
-            <label className="text-xs font-semibold text-[#94a3b8] uppercase tracking-wider block mb-2">
+            <label className="text-[11px] font-medium text-zinc-500 uppercase tracking-wider block mb-1.5">
               AI Routing Gateway
             </label>
             <div className="grid grid-cols-3 gap-2">
@@ -98,176 +88,140 @@ export const SettingsModal: React.FC<SettingsModalProps> = ({
               ].map((p) => (
                 <button
                   key={p.id}
+                  type="button"
                   onClick={() => setForm({ ...form, provider: p.id as any })}
-                  className={`p-3 rounded-xl border text-left transition-all ${
+                  className={`p-2.5 rounded-lg border text-left transition-colors cursor-pointer ${
                     form.provider === p.id
-                      ? 'bg-violet-600/20 border-violet-500/50 shadow-[0_0_15px_rgba(124,58,237,0.25)]'
-                      : 'bg-[#18191d] border-white/[0.06] hover:border-white/20'
+                      ? 'bg-white/[0.06] text-zinc-100 border-white/[0.08]'
+                      : 'bg-[#14151d] text-zinc-400 hover:text-zinc-200 border-white/[0.04]'
                   }`}
                 >
-                  <div className="text-xs font-medium text-white">{p.label}</div>
-                  <div className="text-[10px] text-[#64748b] mt-0.5">{p.desc}</div>
+                  <div className="text-xs font-medium mb-0.5">{p.label}</div>
+                  <div className="text-[10px] text-zinc-500">{p.desc}</div>
                 </button>
               ))}
             </div>
           </div>
 
-          {/* API Key / Endpoint */}
-          <div className="space-y-2">
-            <div className="flex items-center justify-between">
-              <label className="text-xs font-semibold text-[#94a3b8] uppercase tracking-wider">
-                {form.provider === 'ollama' ? 'Ollama Host Endpoint' : 'API Key'}
-              </label>
-              {form.provider !== 'ollama' && (
-                <a
-                  href="https://openrouter.ai/keys"
-                  target="_blank"
-                  rel="noreferrer"
-                  className="text-xs text-cyan-400 hover:underline flex items-center gap-1"
-                >
-                  <span>Get Free Key</span>
-                  <ExternalLink className="w-3 h-3" />
-                </a>
-              )}
-            </div>
-
-            <div className="flex gap-2">
-              <div className="relative flex-1">
-                <input
-                  type={form.provider === 'ollama' || showKey ? 'text' : 'password'}
-                  value={form.provider === 'ollama' ? form.customEndpoint : form.apiKey}
-                  onChange={(e) =>
-                    form.provider === 'ollama'
-                      ? setForm({ ...form, customEndpoint: e.target.value })
-                      : setForm({ ...form, apiKey: e.target.value })
-                  }
-                  placeholder={
-                    form.provider === 'ollama'
-                      ? 'http://localhost:11434'
-                      : 'sk-or-v1-...'
-                  }
-                  className="w-full pl-3 pr-10 py-2 bg-[#18191d] border border-white/10 rounded-xl text-xs text-white placeholder-[#64748b] font-mono outline-none focus:border-violet-500/60"
-                />
-                {form.provider !== 'ollama' && (
-                  <button
-                    type="button"
-                    onClick={() => setShowKey(!showKey)}
-                    className="absolute right-3 top-2.5 text-[#64748b] hover:text-white"
-                  >
-                    {showKey ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
-                  </button>
-                )}
-              </div>
-
-              <button
-                type="button"
-                onClick={handleTestConnection}
-                disabled={testing}
-                className="px-3 py-2 rounded-xl bg-white/[0.06] hover:bg-white/[0.1] border border-white/10 text-xs text-white flex items-center gap-1.5 transition-all"
-              >
-                <RefreshCw className={`w-3.5 h-3.5 ${testing ? 'animate-spin text-cyan-400' : ''}`} />
-                <span>Test</span>
-              </button>
-            </div>
-
-            {testSuccess !== null && (
-              <div className="text-xs text-emerald-400 flex items-center gap-1.5 mt-1">
-                <Check className="w-3.5 h-3.5" />
-                <span>Connection verified: OmniRoute Gateway ready for Hermes 3</span>
-              </div>
-            )}
-          </div>
-
-          {/* Model Selector */}
+          {/* Model Selection */}
           <div>
-            <label className="text-xs font-semibold text-[#94a3b8] uppercase tracking-wider block mb-2">
-              Active Agent Model (Hermes 3 Protocol)
+            <label className="text-[11px] font-medium text-zinc-500 uppercase tracking-wider block mb-1.5">
+              Active Model
             </label>
-            <div className="space-y-1.5">
+            <div className="space-y-1 max-h-48 overflow-y-auto pr-1">
               {models.map((m) => (
                 <div
                   key={m.id}
                   onClick={() => setForm({ ...form, model: m.id })}
-                  className={`flex items-center justify-between p-2.5 rounded-xl border cursor-pointer transition-all ${
+                  className={`p-2 rounded-md border flex items-center justify-between cursor-pointer transition-colors ${
                     form.model === m.id
-                      ? 'bg-violet-600/15 border-violet-500/40 text-white'
-                      : 'bg-[#18191d] border-white/[0.05] text-[#94a3b8] hover:border-white/20'
+                      ? 'bg-white/[0.06] text-zinc-100 border-white/[0.08]'
+                      : 'bg-[#14151d] text-zinc-400 hover:text-zinc-200 border-white/[0.04]'
                   }`}
                 >
-                  <div className="flex items-center gap-2">
-                    <div className={`w-2 h-2 rounded-full ${form.model === m.id ? 'bg-violet-400 shadow-[0_0_8px_#a78bfa]' : 'bg-[#475569]'}`} />
-                    <div>
-                      <div className="text-xs font-medium text-white">{m.name}</div>
-                      <div className="text-[10px] text-[#64748b]">{m.provider}</div>
+                  <div>
+                    <div className="text-xs font-medium flex items-center gap-2">
+                      <span>{m.name}</span>
+                      <span className="text-[9px] px-1 py-0.2 rounded font-mono bg-white/[0.04] text-zinc-400 border border-white/[0.04]">
+                        {m.badge}
+                      </span>
                     </div>
+                    <div className="text-[10px] text-zinc-500 mt-0.5">{m.provider}</div>
                   </div>
-                  <span className={`text-[10px] px-2 py-0.5 rounded-full font-mono font-semibold ${
-                    m.badge === 'FREE'
-                      ? 'bg-emerald-500/20 text-emerald-300 border border-emerald-500/30'
-                      : m.badge === 'OFFLINE'
-                      ? 'bg-cyan-500/20 text-cyan-300 border border-cyan-500/30'
-                      : 'bg-white/[0.06] text-[#94a3b8]'
-                  }`}>
-                    {m.badge}
-                  </span>
+                  {form.model === m.id && (
+                    <span className="text-emerald-400 text-xs">&bull;</span>
+                  )}
                 </div>
               ))}
             </div>
           </div>
 
-          {/* Security & Sandboxing (OWASP ASI05 / HITL Interceptor) */}
-          <div className="pt-2 border-t border-white/[0.06]">
-            <label className="text-xs font-semibold text-[#94a3b8] uppercase tracking-wider flex items-center gap-1.5 mb-2">
-              <ShieldCheck className="w-3.5 h-3.5 text-emerald-400" />
-              <span>Zero-Setup Security (OWASP ASI05)</span>
+          {/* API Key Input */}
+          <div>
+            <label className="text-[11px] font-medium text-zinc-500 uppercase tracking-wider block mb-1.5">
+              OpenRouter / Gateway API Key
             </label>
-            <div className="grid grid-cols-2 gap-3">
-              <div 
-                onClick={() => setForm({ ...form, hitlInterceptor: !form.hitlInterceptor })}
-                className="p-3 rounded-xl bg-[#18191d] border border-white/[0.06] flex items-center justify-between cursor-pointer hover:border-white/20"
+            <div className="relative">
+              <input
+                type={showKey ? 'text' : 'password'}
+                value={form.apiKey}
+                onChange={(e) => setForm({ ...form, apiKey: e.target.value })}
+                placeholder="sk-or-v1-..."
+                className="w-full px-3 py-1.5 rounded-md bg-[#090a0f] border border-white/[0.04] focus:border-white/[0.08] text-xs font-mono text-zinc-200 outline-none"
+              />
+              <button
+                type="button"
+                onClick={() => setShowKey(!showKey)}
+                className="absolute right-3 top-2 text-xs text-zinc-500 hover:text-zinc-300"
               >
-                <div>
-                  <div className="text-xs font-medium text-white">HITL Command Interceptor</div>
-                  <div className="text-[10px] text-[#64748b]">Prompts before running rm, format, etc.</div>
-                </div>
-                <div className={`w-8 h-4.5 rounded-full p-0.5 transition-colors flex items-center ${
-                  form.hitlInterceptor ? 'bg-emerald-500 justify-end' : 'bg-white/10 justify-start'
-                }`}>
-                  <div className="w-3.5 h-3.5 rounded-full bg-white" />
-                </div>
-              </div>
+                {showKey ? 'Hide' : 'Show'}
+              </button>
+            </div>
+            <p className="text-[10px] text-zinc-500 mt-1">
+              Not required when using Local Ollama or OmniRoute free community gateway.
+            </p>
+          </div>
 
-              <div 
-                onClick={() => setForm({ ...form, browserMode: form.browserMode === 'headless' ? 'headful' : 'headless' })}
-                className="p-3 rounded-xl bg-[#18191d] border border-white/[0.06] flex items-center justify-between cursor-pointer hover:border-white/20"
-              >
-                <div>
-                  <div className="text-xs font-medium text-white">Browser Window Mode</div>
-                  <div className="text-[10px] text-[#64748b]">
-                    {form.browserMode === 'headless' ? 'Headless (Background screencast)' : 'Headful (Visible window for CAPTCHA)'}
-                  </div>
+          {/* OWASP Security Guards */}
+          <div className="p-3 rounded-lg bg-[#14151d] border border-white/[0.04] space-y-2">
+            <div className="flex items-center justify-between">
+              <div>
+                <div className="text-xs font-medium text-zinc-200 flex items-center gap-1.5">
+                  <span className="w-1.5 h-1.5 rounded-full bg-emerald-400/80" />
+                  <span>OWASP ASI05 Workspace Jail</span>
                 </div>
-                <Globe className={`w-4 h-4 ${form.browserMode === 'headful' ? 'text-cyan-400' : 'text-[#64748b]'}`} />
+                <div className="text-[10px] text-zinc-500 mt-0.5">
+                  Prohibits agents from reading or executing outside repository root
+                </div>
               </div>
+              <span className="text-[10px] font-mono text-emerald-300 px-1.5 py-0.2 rounded bg-emerald-950/20 border border-emerald-900/30">
+                ENFORCED
+              </span>
+            </div>
+
+            <div className="flex items-center justify-between pt-2 border-t border-white/[0.04]">
+              <div>
+                <div className="text-xs font-medium text-zinc-200">
+                  Human-in-the-Loop (HITL) Interceptor
+                </div>
+                <div className="text-[10px] text-zinc-500 mt-0.5">
+                  Requires explicit confirmation before destructive commands
+                </div>
+              </div>
+              <span className="text-[10px] font-mono text-emerald-300 px-1.5 py-0.2 rounded bg-emerald-950/20 border border-emerald-900/30">
+                ACTIVE
+              </span>
             </div>
           </div>
 
         </div>
 
-        {/* Footer Actions */}
-        <div className="flex items-center justify-end gap-3 px-6 py-4 border-t border-white/[0.08] bg-[#18191d]/80">
+        {/* Footer */}
+        <div className="px-5 py-3 bg-[#14151d] border-t border-white/[0.04] flex items-center justify-between">
           <button
-            onClick={onClose}
-            className="px-4 py-2 rounded-xl text-xs font-medium text-[#94a3b8] hover:text-white hover:bg-white/[0.06] transition-colors"
+            type="button"
+            onClick={handleTestConnection}
+            className="px-3 py-1 rounded-md text-xs font-medium bg-white/[0.04] hover:bg-white/[0.08] text-zinc-300 border border-white/[0.04] transition-colors cursor-pointer"
           >
-            Cancel
+            {testing ? 'Testing...' : testSuccess ? '✓ Gateway Online' : 'Test Gateway'}
           </button>
-          <button
-            onClick={handleSave}
-            className="px-4 py-2 rounded-xl text-xs font-medium bg-gradient-to-r from-violet-600 to-indigo-600 hover:from-violet-500 hover:to-indigo-500 text-white shadow-[0_0_15px_rgba(124,58,237,0.35)] transition-all"
-          >
-            Save Configuration
-          </button>
+
+          <div className="flex items-center gap-2">
+            <button
+              type="button"
+              onClick={onClose}
+              className="px-3 py-1 rounded-md text-xs text-zinc-400 hover:text-zinc-200 transition-colors cursor-pointer"
+            >
+              Cancel
+            </button>
+            <button
+              type="button"
+              onClick={handleSave}
+              className="px-4 py-1 rounded-md text-xs font-medium bg-white/[0.08] hover:bg-white/[0.14] text-zinc-100 border border-white/[0.06] transition-colors cursor-pointer"
+            >
+              Save Changes
+            </button>
+          </div>
         </div>
 
       </div>
