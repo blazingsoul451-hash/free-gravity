@@ -4,7 +4,7 @@ import { MonacoDiffEditor } from '../inspector/MonacoDiffEditor';
 import { XtermConsole } from '../inspector/XtermConsole';
 import { ArtifactsRenderer } from '../inspector/ArtifactsRenderer';
 
-export type AuxiliaryTab = 'overview' | 'browser' | 'diff' | 'terminal' | 'artifacts';
+export type AuxiliaryTab = 'overview' | 'subagents' | 'browser' | 'diff' | 'terminal' | 'artifacts';
 
 interface AntigravityAuxiliaryPaneProps {
   width: number;
@@ -30,6 +30,33 @@ export const AntigravityAuxiliaryPane: React.FC<AntigravityAuxiliaryPaneProps> =
     setInternalTab(tab);
   };
 
+  const subagents = [
+    {
+      id: 'sub-8f92',
+      name: 'Security Auditor',
+      role: 'OWASP ASI02 Interceptor & Sandbox Guard',
+      status: 'Running',
+      progress: 92,
+      color: 'bg-emerald-400',
+    },
+    {
+      id: 'sub-3a1b',
+      name: 'UI Renderer & Styler',
+      role: 'Pixel-perfect CSS & Google Sans Flex synthesis',
+      status: 'Active',
+      progress: 85,
+      color: 'bg-purple-400',
+    },
+    {
+      id: 'sub-5c4d',
+      name: 'Playwright CDP Runner',
+      role: 'Automated headless browser inspector',
+      status: 'Idle',
+      progress: 100,
+      color: 'bg-blue-400',
+    },
+  ];
+
   return (
     <aside
       style={{ width: `${width}px` }}
@@ -47,7 +74,7 @@ export const AntigravityAuxiliaryPane: React.FC<AntigravityAuxiliaryPaneProps> =
           <button
             type="button"
             onClick={() => setTab('overview')}
-            className={`px-2.5 py-1 rounded-md text-xs transition-colors cursor-pointer ${
+            className={`px-2 py-1 rounded-md text-xs transition-colors cursor-pointer ${
               currentTab === 'overview'
                 ? 'bg-[#1e1f20] text-[#e3e3e3] font-medium border border-[#444746]/40'
                 : 'text-[#8e918f] hover:text-[#e3e3e3] hover:bg-[#1e1f20]/50'
@@ -57,8 +84,19 @@ export const AntigravityAuxiliaryPane: React.FC<AntigravityAuxiliaryPaneProps> =
           </button>
           <button
             type="button"
+            onClick={() => setTab('subagents')}
+            className={`px-2 py-1 rounded-md text-xs transition-colors cursor-pointer ${
+              currentTab === 'subagents'
+                ? 'bg-[#1e1f20] text-[#e3e3e3] font-medium border border-[#444746]/40'
+                : 'text-[#8e918f] hover:text-[#e3e3e3] hover:bg-[#1e1f20]/50'
+            }`}
+          >
+            Subagents
+          </button>
+          <button
+            type="button"
             onClick={() => setTab('browser')}
-            className={`px-2.5 py-1 rounded-md text-xs transition-colors cursor-pointer ${
+            className={`px-2 py-1 rounded-md text-xs transition-colors cursor-pointer ${
               currentTab === 'browser'
                 ? 'bg-[#1e1f20] text-[#e3e3e3] font-medium border border-[#444746]/40'
                 : 'text-[#8e918f] hover:text-[#e3e3e3] hover:bg-[#1e1f20]/50'
@@ -69,7 +107,7 @@ export const AntigravityAuxiliaryPane: React.FC<AntigravityAuxiliaryPaneProps> =
           <button
             type="button"
             onClick={() => setTab('diff')}
-            className={`px-2.5 py-1 rounded-md text-xs transition-colors cursor-pointer ${
+            className={`px-2 py-1 rounded-md text-xs transition-colors cursor-pointer ${
               currentTab === 'diff'
                 ? 'bg-[#1e1f20] text-[#e3e3e3] font-medium border border-[#444746]/40'
                 : 'text-[#8e918f] hover:text-[#e3e3e3] hover:bg-[#1e1f20]/50'
@@ -80,7 +118,7 @@ export const AntigravityAuxiliaryPane: React.FC<AntigravityAuxiliaryPaneProps> =
           <button
             type="button"
             onClick={() => setTab('terminal')}
-            className={`px-2.5 py-1 rounded-md text-xs transition-colors cursor-pointer ${
+            className={`px-2 py-1 rounded-md text-xs transition-colors cursor-pointer ${
               currentTab === 'terminal'
                 ? 'bg-[#1e1f20] text-[#e3e3e3] font-medium border border-[#444746]/40'
                 : 'text-[#8e918f] hover:text-[#e3e3e3] hover:bg-[#1e1f20]/50'
@@ -91,7 +129,7 @@ export const AntigravityAuxiliaryPane: React.FC<AntigravityAuxiliaryPaneProps> =
           <button
             type="button"
             onClick={() => setTab('artifacts')}
-            className={`px-2.5 py-1 rounded-md text-xs transition-colors cursor-pointer ${
+            className={`px-2 py-1 rounded-md text-xs transition-colors cursor-pointer ${
               currentTab === 'artifacts'
                 ? 'bg-[#1e1f20] text-[#e3e3e3] font-medium border border-[#444746]/40'
                 : 'text-[#8e918f] hover:text-[#e3e3e3] hover:bg-[#1e1f20]/50'
@@ -101,17 +139,8 @@ export const AntigravityAuxiliaryPane: React.FC<AntigravityAuxiliaryPaneProps> =
           </button>
         </div>
 
-        {/* Right Action Icons: Fullscreen and Close */}
+        {/* Right Action Icons */}
         <div className="flex items-center gap-1 text-[#8e918f]">
-          <button
-            type="button"
-            className="p-1 hover:text-[#e3e3e3] hover:bg-[#1e1f20] rounded cursor-pointer"
-            title="Toggle Fullscreen"
-          >
-            <svg viewBox="0 -960 960 960" className="w-3.5 h-3.5" fill="currentColor">
-              <path d="M120-120v-200h80v120h120v80H120Zm520 0v-80h120v-120h80v200H640ZM120-640v-200h200v80H200v120h-80Zm640 0v-120H640v-80h200v200h-80Z"/>
-            </svg>
-          </button>
           <button
             type="button"
             onClick={onClose}
@@ -125,7 +154,7 @@ export const AntigravityAuxiliaryPane: React.FC<AntigravityAuxiliaryPaneProps> =
         </div>
       </div>
 
-      {/* Search Header - Exact Google Antigravity Pill Bar from Screenshot */}
+      {/* Search Header - Exact Google Antigravity Pill Bar */}
       <div className="p-3 border-b border-[#282a2c]/50">
         <div className="relative flex items-center w-full rounded-xl bg-[#1e1f20] border border-[#282a2c] focus-within:border-[#444746] px-3 py-2 transition-all">
           <svg viewBox="0 -960 960 960" className="w-4 h-4 text-[#8e918f] flex-shrink-0 mr-2.5" fill="currentColor">
@@ -145,7 +174,6 @@ export const AntigravityAuxiliaryPane: React.FC<AntigravityAuxiliaryPaneProps> =
       <div className="flex-1 overflow-hidden relative">
         {currentTab === 'overview' && (
           <div className="p-4 space-y-4 overflow-y-auto h-full">
-            {/* Quick Actions matching Screenshot */}
             <div className="space-y-1">
               <button
                 type="button"
@@ -155,7 +183,7 @@ export const AntigravityAuxiliaryPane: React.FC<AntigravityAuxiliaryPaneProps> =
                 <svg viewBox="0 -960 960 960" className="w-4 h-4 text-[#8e918f] group-hover:text-[#a8c7fa]" fill="currentColor">
                   <path d="M320-240h320v-80H320v80Zm0-160h320v-80H320v80ZM240-80q-33 0-56.5-23.5T160-160v-640q0-33 23.5-56.5T240-880h320l240 240v480q0 33-23.5 56.5T740-80H240Zm280-520v-200H240v640h500v-440H520ZM240-800v200-200 640-640Z"/>
                 </svg>
-                <span className="text-xs font-medium">Review</span>
+                <span className="text-xs font-medium">Review Code Changes</span>
               </button>
 
               <button
@@ -166,7 +194,7 @@ export const AntigravityAuxiliaryPane: React.FC<AntigravityAuxiliaryPaneProps> =
                 <svg viewBox="0 -960 960 960" className="w-4 h-4 text-[#8e918f] group-hover:text-[#a8c7fa]" fill="currentColor">
                   <path d="M160-160q-33 0-56.5-23.5T80-240v-480q0-33 23.5-56.5T160-800h240l80 80h320q33 0 56.5 23.5T880-640v400q0 33-23.5 56.5T800-160H160Zm0-80h640v-400H457l-80-80H160v480Zm0 0v-480 480Z"/>
                 </svg>
-                <span className="text-xs font-medium">Open File</span>
+                <span className="text-xs font-medium">Open File in IDE</span>
               </button>
 
               <button
@@ -177,7 +205,7 @@ export const AntigravityAuxiliaryPane: React.FC<AntigravityAuxiliaryPaneProps> =
                 <svg viewBox="0 -960 960 960" className="w-4 h-4 text-[#8e918f] group-hover:text-[#a8c7fa]" fill="currentColor">
                   <path d="m384-336 56 56 240-240-240-240-56 56 184 184-184 184ZM160-160q-33 0-56.5-23.5T80-240v-480q0-33 23.5-56.5T160-800h640q33 0 56.5 23.5T880-720v480q0 33-23.5 56.5T800-160H160Zm0-80h640v-480H160v480Zm0 0v-480 480Z"/>
                 </svg>
-                <span className="text-xs font-medium">Terminal</span>
+                <span className="text-xs font-medium">Open Terminal Sandbox</span>
               </button>
 
               <button
@@ -188,7 +216,18 @@ export const AntigravityAuxiliaryPane: React.FC<AntigravityAuxiliaryPaneProps> =
                 <svg viewBox="0 -960 960 960" className="w-4 h-4 text-[#8e918f] group-hover:text-[#a8c7fa]" fill="currentColor">
                   <path d="M480-80q-83 0-156-31.5T197-197q-54-54-85.5-127T80-480q0-83 31.5-156T197-763q54-54 127-85.5T480-880q83 0 156 31.5T763-763q54 54 85.5 127T880-480q0 83-31.5 156T763-197q-54 54-127 85.5T480-80Zm0-80q134 0 227-93t93-227q0-134-93-227t-227-93q-134 0-227 93t-93 227q0 134 93 227t227 93Zm0-320Z"/>
                 </svg>
-                <span className="text-xs font-medium">Playwright CDP Browser</span>
+                <span className="text-xs font-medium">Playwright CDP Live Browser</span>
+              </button>
+
+              <button
+                type="button"
+                onClick={() => setTab('subagents')}
+                className="w-full flex items-center gap-3 px-3 py-2 rounded-lg text-left text-[#c4c7c5] hover:text-[#e3e3e3] hover:bg-[#1e1f20] transition-colors cursor-pointer group"
+              >
+                <svg viewBox="0 -960 960 960" className="w-4 h-4 text-[#8e918f] group-hover:text-[#a8c7fa]" fill="currentColor">
+                  <path d="M480-480q-66 0-113-47t-47-113q0-66 47-113t113-47q66 0 113 47t47 113q0 66-47 113t-113 47ZM160-160v-112q0-34 17.5-62.5T224-378q62-31 126-46.5T480-440q64 0 128 15.5T736-378q29 15 46.5 43.5T800-272v112H160Z"/>
+                </svg>
+                <span className="text-xs font-medium">Background Subagents</span>
               </button>
 
               <button
@@ -202,6 +241,30 @@ export const AntigravityAuxiliaryPane: React.FC<AntigravityAuxiliaryPaneProps> =
                 <span className="text-xs font-medium">Project Artifacts & Architecture</span>
               </button>
             </div>
+          </div>
+        )}
+
+        {currentTab === 'subagents' && (
+          <div className="p-4 space-y-3 overflow-y-auto h-full">
+            <div className="flex items-center justify-between text-xs text-[#8e918f] mb-1">
+              <span className="font-medium text-[#e3e3e3]">Active Subagents ({subagents.length})</span>
+              <span className="text-[10px] text-emerald-400 font-mono">Parallel Mesh</span>
+            </div>
+            {subagents.map((sub) => (
+              <div key={sub.id} className="p-3 rounded-xl bg-[#1e1f20] border border-[#282a2c] space-y-2">
+                <div className="flex items-center justify-between">
+                  <div className="flex items-center gap-2">
+                    <span className={`w-2 h-2 rounded-full ${sub.color} ${sub.status === 'Running' ? 'animate-pulse' : ''}`} />
+                    <span className="text-xs font-semibold text-[#e3e3e3]">{sub.name}</span>
+                  </div>
+                  <span className="text-[10px] font-mono text-[#8e918f]">{sub.id}</span>
+                </div>
+                <p className="text-[11px] text-[#8e918f] leading-normal">{sub.role}</p>
+                <div className="w-full bg-[#131314] h-1.5 rounded-full overflow-hidden">
+                  <div className={`h-full ${sub.color}`} style={{ width: `${sub.progress}%` }} />
+                </div>
+              </div>
+            ))}
           </div>
         )}
 
