@@ -6,3 +6,5 @@ dist
 .env.local
 .freegravity
 __pycache__
+scratch_*.py
+test_fonts.py
