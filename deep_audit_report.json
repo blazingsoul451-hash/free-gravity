@@ -1,0 +1,2362 @@
+{
+  "hidden_tags": [
+    {
+      "tag": "div",
+      "id": "",
+      "class": [
+        "logo-context-menu",
+        "astro-nen7h5rs"
+      ],
+      "reasons": [
+        "aria-hidden=true"
+      ],
+      "text": "Copy Logo as SVGCopied!Press Guidelines"
+    },
+    {
+      "tag": "svg",
+      "id": "",
+      "class": [
+        "astro-nen7h5rs"
+      ],
+      "reasons": [
+        "aria-hidden=true"
+      ],
+      "text": ""
+    },
+    {
+      "tag": "span",
+      "id": "",
+      "class": [
+        "dropdown-icon"
+      ],
+      "reasons": [
+        "class contains hidden/modal: ['dropdown-icon']"
+      ],
+      "text": ""
+    },
+    {
+      "tag": "svg",
+      "id": "",
+      "class": [],
+      "reasons": [
+        "aria-hidden=true"
+      ],
+      "text": ""
+    },
+    {
+      "tag": "span",
+      "id": "",
+      "class": [
+        "dropdown-icon"
+      ],
+      "reasons": [
+        "class contains hidden/modal: ['dropdown-icon']"
+      ],
+      "text": ""
+    },
+    {
+      "tag": "svg",
+      "id": "",
+      "class": [],
+      "reasons": [
+        "aria-hidden=true"
+      ],
+      "text": ""
+    },
+    {
+      "tag": "span",
+      "id": "",
+      "class": [
+        "dropdown-icon"
+      ],
+      "reasons": [
+        "class contains hidden/modal: ['dropdown-icon']"
+      ],
+      "text": ""
+    },
+    {
+      "tag": "svg",
+      "id": "",
+      "class": [],
+      "reasons": [
+        "aria-hidden=true"
+      ],
+      "text": ""
+    },
+    {
+      "tag": "span",
+      "id": "",
+      "class": [
+        "dropdown-icon"
+      ],
+      "reasons": [
+        "class contains hidden/modal: ['dropdown-icon']"
+      ],
+      "text": ""
+    },
+    {
+      "tag": "svg",
+      "id": "",
+      "class": [],
+      "reasons": [
+        "aria-hidden=true"
+      ],
+      "text": ""
+    },
+    {
+      "tag": "svg",
+      "id": "",
+      "class": [
+        "icon-menu",
+        "astro-nen7h5rs"
+      ],
+      "reasons": [
+        "aria-hidden=true"
+      ],
+      "text": ""
+    },
+    {
+      "tag": "svg",
+      "id": "",
+      "class": [
+        "icon-close",
+        "astro-nen7h5rs"
+      ],
+      "reasons": [
+        "aria-hidden=true"
+      ],
+      "text": ""
+    },
+    {
+      "tag": "div",
+      "id": "",
+      "class": [
+        "dropdown",
+        "astro-nen7h5rs"
+      ],
+      "reasons": [
+        "class contains hidden/modal: ['dropdown', 'astro-nen7h5rs']"
+      ],
+      "text": "Explore our next generation productsSee overviewProductsAntigravity 2.0Antigravity ExtensionsAntigravity CLIAntigravity "
+    },
+    {
+      "tag": "div",
+      "id": "",
+      "class": [
+        "dropdown-panel-wrapper",
+        "astro-nen7h5rs"
+      ],
+      "reasons": [
+        "class contains hidden/modal: ['dropdown-panel-wrapper', 'astro-nen7h5rs']"
+      ],
+      "text": "Explore our next generation productsSee overviewProductsAntigravity 2.0Antigravity ExtensionsAntigravity CLIAntigravity "
+    },
+    {
+      "tag": "div",
+      "id": "",
+      "class": [
+        "dropdown-panel",
+        "astro-nz4fptcl"
+      ],
+      "reasons": [
+        "class contains hidden/modal: ['dropdown-panel', 'astro-nz4fptcl']"
+      ],
+      "text": "Explore our next generation productsSee overviewProductsAntigravity 2.0Antigravity ExtensionsAntigravity CLIAntigravity "
+    },
+    {
+      "tag": "p",
+      "id": "",
+      "class": [
+        "heading-7",
+        "dropdown-title",
+        "astro-nz4fptcl"
+      ],
+      "reasons": [
+        "class contains hidden/modal: ['heading-7', 'dropdown-title', 'astro-nz4fptcl']"
+      ],
+      "text": "Explore our next generation products"
+    },
+    {
+      "tag": "p",
+      "id": "",
+      "class": [
+        "caption",
+        "dropdown-info",
+        "astro-nz4fptcl"
+      ],
+      "reasons": [
+        "class contains hidden/modal: ['caption', 'dropdown-info', 'astro-nz4fptcl']"
+      ],
+      "text": ""
+    },
+    {
+      "tag": "svg",
+      "id": "",
+      "class": [
+        "astro-nz4fptcl"
+      ],
+      "reasons": [
+        "aria-hidden=true"
+      ],
+      "text": ""
+    },
+    {
+      "tag": "svg",
+      "id": "",
+      "class": [
+        "astro-nz4fptcl"
+      ],
+      "reasons": [
+        "aria-hidden=true"
+      ],
+      "text": ""
+    },
+    {
+      "tag": "svg",
+      "id": "",
+      "class": [
+        "astro-nz4fptcl"
+      ],
+      "reasons": [
+        "aria-hidden=true"
+      ],
+      "text": ""
+    },
+    {
+      "tag": "svg",
+      "id": "",
+      "class": [
+        "astro-nz4fptcl"
+      ],
+      "reasons": [
+        "aria-hidden=true"
+      ],
+      "text": ""
+    },
+    {
+      "tag": "svg",
+      "id": "",
+      "class": [
+        "astro-nz4fptcl"
+      ],
+      "reasons": [
+        "aria-hidden=true"
+      ],
+      "text": ""
+    },
+    {
+      "tag": "svg",
+      "id": "",
+      "class": [
+        "astro-nz4fptcl"
+      ],
+      "reasons": [
+        "aria-hidden=true"
+      ],
+      "text": ""
+    },
+    {
+      "tag": "div",
+      "id": "",
+      "class": [
+        "dropdown-panel-wrapper",
+        "astro-nen7h5rs"
+      ],
+      "reasons": [
+        "class contains hidden/modal: ['dropdown-panel-wrapper', 'astro-nen7h5rs']"
+      ],
+      "text": "Built for developers in the agent-first eraSee overviewFrontendFullstackScienceMarketer"
+    },
+    {
+      "tag": "div",
+      "id": "",
+      "class": [
+        "dropdown-panel",
+        "astro-nz4fptcl"
+      ],
+      "reasons": [
+        "class contains hidden/modal: ['dropdown-panel', 'astro-nz4fptcl']"
+      ],
+      "text": "Built for developers in the agent-first eraSee overviewFrontendFullstackScienceMarketer"
+    },
+    {
+      "tag": "p",
+      "id": "",
+      "class": [
+        "heading-7",
+        "dropdown-title",
+        "astro-nz4fptcl"
+      ],
+      "reasons": [
+        "class contains hidden/modal: ['heading-7', 'dropdown-title', 'astro-nz4fptcl']"
+      ],
+      "text": "Built for developers in the agent-first era"
+    },
+    {
+      "tag": "p",
+      "id": "",
+      "class": [
+        "caption",
+        "dropdown-info",
+        "astro-nz4fptcl"
+      ],
+      "reasons": [
+        "class contains hidden/modal: ['caption', 'dropdown-info', 'astro-nz4fptcl']"
+      ],
+      "text": ""
+    },
+    {
+      "tag": "div",
+      "id": "",
+      "class": [
+        "dropdown-panel-wrapper",
+        "astro-nen7h5rs"
+      ],
+      "reasons": [
+        "class contains hidden/modal: ['dropdown-panel-wrapper', 'astro-nen7h5rs']"
+      ],
+      "text": "Everything you need to stay up-to-date and get helpDocumentationBlogChangelogSupportPressReleases"
+    },
+    {
+      "tag": "div",
+      "id": "",
+      "class": [
+        "dropdown-panel",
+        "astro-nz4fptcl"
+      ],
+      "reasons": [
+        "class contains hidden/modal: ['dropdown-panel', 'astro-nz4fptcl']"
+      ],
+      "text": "Everything you need to stay up-to-date and get helpDocumentationBlogChangelogSupportPressReleases"
+    },
+    {
+      "tag": "p",
+      "id": "",
+      "class": [
+        "heading-7",
+        "dropdown-title",
+        "astro-nz4fptcl"
+      ],
+      "reasons": [
+        "class contains hidden/modal: ['heading-7', 'dropdown-title', 'astro-nz4fptcl']"
+      ],
+      "text": "Everything you need to stay up-to-date and get help"
+    },
+    {
+      "tag": "p",
+      "id": "",
+      "class": [
+        "caption",
+        "dropdown-info",
+        "astro-nz4fptcl"
+      ],
+      "reasons": [
+        "class contains hidden/modal: ['caption', 'dropdown-info', 'astro-nz4fptcl']"
+      ],
+      "text": ""
+    },
+    {
+      "tag": "svg",
+      "id": "",
+      "class": [
+        "astro-nz4fptcl"
+      ],
+      "reasons": [
+        "aria-hidden=true"
+      ],
+      "text": ""
+    },
+    {
+      "tag": "svg",
+      "id": "",
+      "class": [
+        "astro-nz4fptcl"
+      ],
+      "reasons": [
+        "aria-hidden=true"
+      ],
+      "text": ""
+    },
+    {
+      "tag": "svg",
+      "id": "",
+      "class": [
+        "astro-nen7h5rs"
+      ],
+      "reasons": [
+        "aria-hidden=true"
+      ],
+      "text": ""
+    },
+    {
+      "tag": "div",
+      "id": "mobile-product",
+      "class": [
+        "mobile-dropdown-section",
+        "astro-nen7h5rs"
+      ],
+      "reasons": [
+        "class contains hidden/modal: ['mobile-dropdown-section', 'astro-nen7h5rs']"
+      ],
+      "text": "Explore our next generation productsSee overviewProductsAntigravity 2.0Antigravity ExtensionsAntigravity CLIAntigravity "
+    },
+    {
+      "tag": "div",
+      "id": "",
+      "class": [
+        "dropdown-panel",
+        "astro-nz4fptcl"
+      ],
+      "reasons": [
+        "class contains hidden/modal: ['dropdown-panel', 'astro-nz4fptcl']"
+      ],
+      "text": "Explore our next generation productsSee overviewProductsAntigravity 2.0Antigravity ExtensionsAntigravity CLIAntigravity "
+    },
+    {
+      "tag": "p",
+      "id": "",
+      "class": [
+        "heading-7",
+        "dropdown-title",
+        "astro-nz4fptcl"
+      ],
+      "reasons": [
+        "class contains hidden/modal: ['heading-7', 'dropdown-title', 'astro-nz4fptcl']"
+      ],
+      "text": "Explore our next generation products"
+    },
+    {
+      "tag": "p",
+      "id": "",
+      "class": [
+        "caption",
+        "dropdown-info",
+        "astro-nz4fptcl"
+      ],
+      "reasons": [
+        "class contains hidden/modal: ['caption', 'dropdown-info', 'astro-nz4fptcl']"
+      ],
+      "text": ""
+    },
+    {
+      "tag": "svg",
+      "id": "",
+      "class": [
+        "astro-nz4fptcl"
+      ],
+      "reasons": [
+        "aria-hidden=true"
+      ],
+      "text": ""
+    },
+    {
+      "tag": "svg",
+      "id": "",
+      "class": [
+        "astro-nz4fptcl"
+      ],
+      "reasons": [
+        "aria-hidden=true"
+      ],
+      "text": ""
+    },
+    {
+      "tag": "svg",
+      "id": "",
+      "class": [
+        "astro-nz4fptcl"
+      ],
+      "reasons": [
+        "aria-hidden=true"
+      ],
+      "text": ""
+    },
+    {
+      "tag": "svg",
+      "id": "",
+      "class": [
+        "astro-nz4fptcl"
+      ],
+      "reasons": [
+        "aria-hidden=true"
+      ],
+      "text": ""
+    },
+    {
+      "tag": "svg",
+      "id": "",
+      "class": [
+        "astro-nz4fptcl"
+      ],
+      "reasons": [
+        "aria-hidden=true"
+      ],
+      "text": ""
+    },
+    {
+      "tag": "svg",
+      "id": "",
+      "class": [
+        "astro-nz4fptcl"
+      ],
+      "reasons": [
+        "aria-hidden=true"
+      ],
+      "text": ""
+    },
+    {
+      "tag": "svg",
+      "id": "",
+      "class": [
+        "astro-nen7h5rs"
+      ],
+      "reasons": [
+        "aria-hidden=true"
+      ],
+      "text": ""
+    },
+    {
+      "tag": "div",
+      "id": "mobile-use-cases",
+      "class": [
+        "mobile-dropdown-section",
+        "astro-nen7h5rs"
+      ],
+      "reasons": [
+        "class contains hidden/modal: ['mobile-dropdown-section', 'astro-nen7h5rs']"
+      ],
+      "text": "Built for developers in the agent-first eraSee overviewFrontendFullstackScienceMarketer"
+    },
+    {
+      "tag": "div",
+      "id": "",
+      "class": [
+        "dropdown-panel",
+        "astro-nz4fptcl"
+      ],
+      "reasons": [
+        "class contains hidden/modal: ['dropdown-panel', 'astro-nz4fptcl']"
+      ],
+      "text": "Built for developers in the agent-first eraSee overviewFrontendFullstackScienceMarketer"
+    },
+    {
+      "tag": "p",
+      "id": "",
+      "class": [
+        "heading-7",
+        "dropdown-title",
+        "astro-nz4fptcl"
+      ],
+      "reasons": [
+        "class contains hidden/modal: ['heading-7', 'dropdown-title', 'astro-nz4fptcl']"
+      ],
+      "text": "Built for developers in the agent-first era"
+    },
+    {
+      "tag": "p",
+      "id": "",
+      "class": [
+        "caption",
+        "dropdown-info",
+        "astro-nz4fptcl"
+      ],
+      "reasons": [
+        "class contains hidden/modal: ['caption', 'dropdown-info', 'astro-nz4fptcl']"
+      ],
+      "text": ""
+    },
+    {
+      "tag": "svg",
+      "id": "",
+      "class": [
+        "astro-nen7h5rs"
+      ],
+      "reasons": [
+        "aria-hidden=true"
+      ],
+      "text": ""
+    },
+    {
+      "tag": "div",
+      "id": "mobile-resources",
+      "class": [
+        "mobile-dropdown-section",
+        "astro-nen7h5rs"
+      ],
+      "reasons": [
+        "class contains hidden/modal: ['mobile-dropdown-section', 'astro-nen7h5rs']"
+      ],
+      "text": "Everything you need to stay up-to-date and get helpDocumentationBlogChangelogSupportPressReleases"
+    },
+    {
+      "tag": "div",
+      "id": "",
+      "class": [
+        "dropdown-panel",
+        "astro-nz4fptcl"
+      ],
+      "reasons": [
+        "class contains hidden/modal: ['dropdown-panel', 'astro-nz4fptcl']"
+      ],
+      "text": "Everything you need to stay up-to-date and get helpDocumentationBlogChangelogSupportPressReleases"
+    },
+    {
+      "tag": "p",
+      "id": "",
+      "class": [
+        "heading-7",
+        "dropdown-title",
+        "astro-nz4fptcl"
+      ],
+      "reasons": [
+        "class contains hidden/modal: ['heading-7', 'dropdown-title', 'astro-nz4fptcl']"
+      ],
+      "text": "Everything you need to stay up-to-date and get help"
+    },
+    {
+      "tag": "p",
+      "id": "",
+      "class": [
+        "caption",
+        "dropdown-info",
+        "astro-nz4fptcl"
+      ],
+      "reasons": [
+        "class contains hidden/modal: ['caption', 'dropdown-info', 'astro-nz4fptcl']"
+      ],
+      "text": ""
+    },
+    {
+      "tag": "svg",
+      "id": "",
+      "class": [
+        "astro-nz4fptcl"
+      ],
+      "reasons": [
+        "aria-hidden=true"
+      ],
+      "text": ""
+    },
+    {
+      "tag": "svg",
+      "id": "",
+      "class": [
+        "astro-nz4fptcl"
+      ],
+      "reasons": [
+        "aria-hidden=true"
+      ],
+      "text": ""
+    },
+    {
+      "tag": "div",
+      "id": "",
+      "class": [
+        "dropdown-overlay",
+        "astro-nen7h5rs"
+      ],
+      "reasons": [
+        "class contains hidden/modal: ['dropdown-overlay', 'astro-nen7h5rs']"
+      ],
+      "text": ""
+    },
+    {
+      "tag": "img",
+      "id": "",
+      "class": [
+        "blinking-cursor",
+        "astro-inbjnz4i"
+      ],
+      "reasons": [
+        "aria-hidden=true"
+      ],
+      "text": ""
+    },
+    {
+      "tag": "span",
+      "id": "",
+      "class": [
+        "visually-hidden",
+        "astro-inbjnz4i"
+      ],
+      "reasons": [
+        "class contains hidden/modal: ['visually-hidden', 'astro-inbjnz4i']"
+      ],
+      "text": "Experience liftoff with the next-gen agent platform"
+    },
+    {
+      "tag": "span",
+      "id": "",
+      "class": [
+        "typed-content",
+        "astro-inbjnz4i"
+      ],
+      "reasons": [
+        "aria-hidden=true"
+      ],
+      "text": "Experience liftoff with the next-gen agent platform"
+    },
+    {
+      "tag": "div",
+      "id": "",
+      "class": [
+        "share-monitor-icon",
+        "astro-56r3b3ue"
+      ],
+      "reasons": [
+        "aria-hidden=true"
+      ],
+      "text": ""
+    },
+    {
+      "tag": "svg",
+      "id": "",
+      "class": [
+        "astro-56r3b3ue"
+      ],
+      "reasons": [
+        "aria-hidden=true"
+      ],
+      "text": ""
+    },
+    {
+      "tag": "svg",
+      "id": "",
+      "class": [
+        "astro-56r3b3ue"
+      ],
+      "reasons": [
+        "aria-hidden=true"
+      ],
+      "text": ""
+    },
+    {
+      "tag": "svg",
+      "id": "",
+      "class": [
+        "astro-mkgfivnz"
+      ],
+      "reasons": [
+        "aria-hidden=true"
+      ],
+      "text": ""
+    },
+    {
+      "tag": "svg",
+      "id": "",
+      "class": [
+        "icon-play",
+        "astro-mkgfivnz"
+      ],
+      "reasons": [
+        "aria-hidden=true"
+      ],
+      "text": ""
+    },
+    {
+      "tag": "svg",
+      "id": "",
+      "class": [
+        "icon-pause",
+        "astro-mkgfivnz"
+      ],
+      "reasons": [
+        "aria-hidden=true"
+      ],
+      "text": ""
+    },
+    {
+      "tag": "svg",
+      "id": "",
+      "class": [
+        "icon-unmuted",
+        "astro-mkgfivnz"
+      ],
+      "reasons": [
+        "aria-hidden=true"
+      ],
+      "text": ""
+    },
+    {
+      "tag": "svg",
+      "id": "",
+      "class": [
+        "icon-muted",
+        "astro-mkgfivnz"
+      ],
+      "reasons": [
+        "aria-hidden=true"
+      ],
+      "text": ""
+    },
+    {
+      "tag": "svg",
+      "id": "",
+      "class": [
+        "icon-enter-fullscreen",
+        "astro-mkgfivnz"
+      ],
+      "reasons": [
+        "aria-hidden=true"
+      ],
+      "text": ""
+    },
+    {
+      "tag": "svg",
+      "id": "",
+      "class": [
+        "icon-exit-fullscreen",
+        "astro-mkgfivnz"
+      ],
+      "reasons": [
+        "aria-hidden=true"
+      ],
+      "text": ""
+    },
+    {
+      "tag": "svg",
+      "id": "",
+      "class": [
+        "astro-4xhi77lm"
+      ],
+      "reasons": [
+        "aria-hidden=true"
+      ],
+      "text": ""
+    },
+    {
+      "tag": "svg",
+      "id": "",
+      "class": [
+        "astro-4xhi77lm"
+      ],
+      "reasons": [
+        "aria-hidden=true"
+      ],
+      "text": ""
+    },
+    {
+      "tag": "svg",
+      "id": "",
+      "class": [
+        "astro-73zxsoak"
+      ],
+      "reasons": [
+        "aria-hidden=true"
+      ],
+      "text": ""
+    },
+    {
+      "tag": "svg",
+      "id": "",
+      "class": [
+        "astro-73zxsoak"
+      ],
+      "reasons": [
+        "aria-hidden=true"
+      ],
+      "text": ""
+    },
+    {
+      "tag": "svg",
+      "id": "",
+      "class": [
+        "astro-73zxsoak"
+      ],
+      "reasons": [
+        "aria-hidden=true"
+      ],
+      "text": ""
+    },
+    {
+      "tag": "svg",
+      "id": "",
+      "class": [
+        "astro-73zxsoak"
+      ],
+      "reasons": [
+        "aria-hidden=true"
+      ],
+      "text": ""
+    },
+    {
+      "tag": "svg",
+      "id": "",
+      "class": [
+        "astro-73zxsoak"
+      ],
+      "reasons": [
+        "aria-hidden=true"
+      ],
+      "text": ""
+    },
+    {
+      "tag": "svg",
+      "id": "",
+      "class": [
+        "astro-73zxsoak"
+      ],
+      "reasons": [
+        "aria-hidden=true"
+      ],
+      "text": ""
+    },
+    {
+      "tag": "svg",
+      "id": "",
+      "class": [
+        "astro-73zxsoak"
+      ],
+      "reasons": [
+        "aria-hidden=true"
+      ],
+      "text": ""
+    },
+    {
+      "tag": "svg",
+      "id": "",
+      "class": [
+        "astro-73zxsoak"
+      ],
+      "reasons": [
+        "aria-hidden=true"
+      ],
+      "text": ""
+    },
+    {
+      "tag": "svg",
+      "id": "",
+      "class": [
+        "astro-73zxsoak"
+      ],
+      "reasons": [
+        "aria-hidden=true"
+      ],
+      "text": ""
+    },
+    {
+      "tag": "svg",
+      "id": "",
+      "class": [
+        "astro-73zxsoak"
+      ],
+      "reasons": [
+        "aria-hidden=true"
+      ],
+      "text": ""
+    },
+    {
+      "tag": "svg",
+      "id": "",
+      "class": [
+        "astro-73zxsoak"
+      ],
+      "reasons": [
+        "aria-hidden=true"
+      ],
+      "text": ""
+    },
+    {
+      "tag": "svg",
+      "id": "",
+      "class": [
+        "astro-73zxsoak"
+      ],
+      "reasons": [
+        "aria-hidden=true"
+      ],
+      "text": ""
+    },
+    {
+      "tag": "svg",
+      "id": "",
+      "class": [
+        "astro-73zxsoak"
+      ],
+      "reasons": [
+        "aria-hidden=true"
+      ],
+      "text": ""
+    },
+    {
+      "tag": "svg",
+      "id": "",
+      "class": [
+        "astro-73zxsoak"
+      ],
+      "reasons": [
+        "aria-hidden=true"
+      ],
+      "text": ""
+    },
+    {
+      "tag": "svg",
+      "id": "",
+      "class": [
+        "astro-73zxsoak"
+      ],
+      "reasons": [
+        "aria-hidden=true"
+      ],
+      "text": ""
+    },
+    {
+      "tag": "svg",
+      "id": "",
+      "class": [
+        "astro-73zxsoak"
+      ],
+      "reasons": [
+        "aria-hidden=true"
+      ],
+      "text": ""
+    },
+    {
+      "tag": "svg",
+      "id": "",
+      "class": [
+        "astro-73zxsoak"
+      ],
+      "reasons": [
+        "aria-hidden=true"
+      ],
+      "text": ""
+    },
+    {
+      "tag": "svg",
+      "id": "",
+      "class": [
+        "astro-73zxsoak"
+      ],
+      "reasons": [
+        "aria-hidden=true"
+      ],
+      "text": ""
+    },
+    {
+      "tag": "svg",
+      "id": "",
+      "class": [
+        "astro-73zxsoak"
+      ],
+      "reasons": [
+        "aria-hidden=true"
+      ],
+      "text": ""
+    },
+    {
+      "tag": "svg",
+      "id": "",
+      "class": [
+        "astro-73zxsoak"
+      ],
+      "reasons": [
+        "aria-hidden=true"
+      ],
+      "text": ""
+    },
+    {
+      "tag": "svg",
+      "id": "",
+      "class": [
+        "astro-73zxsoak"
+      ],
+      "reasons": [
+        "aria-hidden=true"
+      ],
+      "text": ""
+    },
+    {
+      "tag": "svg",
+      "id": "",
+      "class": [
+        "astro-73zxsoak"
+      ],
+      "reasons": [
+        "aria-hidden=true"
+      ],
+      "text": ""
+    },
+    {
+      "tag": "img",
+      "id": "",
+      "class": [
+        "blinking-cursor",
+        "astro-inbjnz4i"
+      ],
+      "reasons": [
+        "aria-hidden=true"
+      ],
+      "text": ""
+    },
+    {
+      "tag": "span",
+      "id": "",
+      "class": [
+        "visually-hidden",
+        "astro-inbjnz4i"
+      ],
+      "reasons": [
+        "class contains hidden/modal: ['visually-hidden', 'astro-inbjnz4i']"
+      ],
+      "text": "Google Antigravity is our agentic development platform, allowing anyone to build in the agent-first era."
+    },
+    {
+      "tag": "span",
+      "id": "",
+      "class": [
+        "typed-content",
+        "astro-inbjnz4i"
+      ],
+      "reasons": [
+        "aria-hidden=true"
+      ],
+      "text": "Google Antigravity is our agentic development platform, allowing anyone to build in the agent-first era."
+    },
+    {
+      "tag": "svg",
+      "id": "",
+      "class": [
+        "astro-mkgfivnz"
+      ],
+      "reasons": [
+        "aria-hidden=true"
+      ],
+      "text": ""
+    },
+    {
+      "tag": "svg",
+      "id": "",
+      "class": [
+        "icon-play",
+        "astro-mkgfivnz"
+      ],
+      "reasons": [
+        "aria-hidden=true"
+      ],
+      "text": ""
+    },
+    {
+      "tag": "svg",
+      "id": "",
+      "class": [
+        "icon-pause",
+        "astro-mkgfivnz"
+      ],
+      "reasons": [
+        "aria-hidden=true"
+      ],
+      "text": ""
+    },
+    {
+      "tag": "svg",
+      "id": "",
+      "class": [
+        "icon-unmuted",
+        "astro-mkgfivnz"
+      ],
+      "reasons": [
+        "aria-hidden=true"
+      ],
+      "text": ""
+    },
+    {
+      "tag": "svg",
+      "id": "",
+      "class": [
+        "icon-muted",
+        "astro-mkgfivnz"
+      ],
+      "reasons": [
+        "aria-hidden=true"
+      ],
+      "text": ""
+    },
+    {
+      "tag": "svg",
+      "id": "",
+      "class": [
+        "icon-enter-fullscreen",
+        "astro-mkgfivnz"
+      ],
+      "reasons": [
+        "aria-hidden=true"
+      ],
+      "text": ""
+    },
+    {
+      "tag": "svg",
+      "id": "",
+      "class": [
+        "icon-exit-fullscreen",
+        "astro-mkgfivnz"
+      ],
+      "reasons": [
+        "aria-hidden=true"
+      ],
+      "text": ""
+    },
+    {
+      "tag": "img",
+      "id": "",
+      "class": [
+        "blinking-cursor",
+        "astro-inbjnz4i"
+      ],
+      "reasons": [
+        "aria-hidden=true"
+      ],
+      "text": ""
+    },
+    {
+      "tag": "span",
+      "id": "",
+      "class": [
+        "visually-hidden",
+        "astro-inbjnz4i"
+      ],
+      "reasons": [
+        "class contains hidden/modal: ['visually-hidden', 'astro-inbjnz4i']"
+      ],
+      "text": "Full stack developer"
+    },
+    {
+      "tag": "span",
+      "id": "",
+      "class": [
+        "typed-content",
+        "astro-inbjnz4i"
+      ],
+      "reasons": [
+        "aria-hidden=true"
+      ],
+      "text": "Full stack developer"
+    },
+    {
+      "tag": "svg",
+      "id": "",
+      "class": [
+        "astro-gk6ge62r"
+      ],
+      "reasons": [
+        "aria-hidden=true"
+      ],
+      "text": ""
+    },
+    {
+      "tag": "svg",
+      "id": "",
+      "class": [
+        "astro-paliblhy"
+      ],
+      "reasons": [
+        "aria-hidden=true"
+      ],
+      "text": ""
+    },
+    {
+      "tag": "img",
+      "id": "",
+      "class": [
+        "blinking-cursor",
+        "astro-inbjnz4i"
+      ],
+      "reasons": [
+        "aria-hidden=true"
+      ],
+      "text": ""
+    },
+    {
+      "tag": "span",
+      "id": "",
+      "class": [
+        "visually-hidden",
+        "astro-inbjnz4i"
+      ],
+      "reasons": [
+        "class contains hidden/modal: ['visually-hidden', 'astro-inbjnz4i']"
+      ],
+      "text": "Enterprise developer"
+    },
+    {
+      "tag": "span",
+      "id": "",
+      "class": [
+        "typed-content",
+        "astro-inbjnz4i"
+      ],
+      "reasons": [
+        "aria-hidden=true"
+      ],
+      "text": "Enterprise developer"
+    },
+    {
+      "tag": "svg",
+      "id": "",
+      "class": [
+        "astro-gk6ge62r"
+      ],
+      "reasons": [
+        "aria-hidden=true"
+      ],
+      "text": ""
+    },
+    {
+      "tag": "svg",
+      "id": "",
+      "class": [
+        "astro-paliblhy"
+      ],
+      "reasons": [
+        "aria-hidden=true"
+      ],
+      "text": ""
+    },
+    {
+      "tag": "img",
+      "id": "",
+      "class": [
+        "blinking-cursor",
+        "astro-inbjnz4i"
+      ],
+      "reasons": [
+        "aria-hidden=true"
+      ],
+      "text": ""
+    },
+    {
+      "tag": "span",
+      "id": "",
+      "class": [
+        "visually-hidden",
+        "astro-inbjnz4i"
+      ],
+      "reasons": [
+        "class contains hidden/modal: ['visually-hidden', 'astro-inbjnz4i']"
+      ],
+      "text": "Frontend developer"
+    },
+    {
+      "tag": "span",
+      "id": "",
+      "class": [
+        "typed-content",
+        "astro-inbjnz4i"
+      ],
+      "reasons": [
+        "aria-hidden=true"
+      ],
+      "text": "Frontend developer"
+    },
+    {
+      "tag": "svg",
+      "id": "",
+      "class": [
+        "astro-gk6ge62r"
+      ],
+      "reasons": [
+        "aria-hidden=true"
+      ],
+      "text": ""
+    },
+    {
+      "tag": "svg",
+      "id": "",
+      "class": [
+        "astro-paliblhy"
+      ],
+      "reasons": [
+        "aria-hidden=true"
+      ],
+      "text": ""
+    },
+    {
+      "tag": "svg",
+      "id": "",
+      "class": [
+        "astro-iormbkgb"
+      ],
+      "reasons": [
+        "aria-hidden=true"
+      ],
+      "text": ""
+    },
+    {
+      "tag": "svg",
+      "id": "",
+      "class": [
+        "astro-iormbkgb"
+      ],
+      "reasons": [
+        "aria-hidden=true"
+      ],
+      "text": ""
+    },
+    {
+      "tag": "svg",
+      "id": "",
+      "class": [
+        "astro-iormbkgb"
+      ],
+      "reasons": [
+        "aria-hidden=true"
+      ],
+      "text": ""
+    },
+    {
+      "tag": "svg",
+      "id": "",
+      "class": [
+        "astro-iormbkgb"
+      ],
+      "reasons": [
+        "aria-hidden=true"
+      ],
+      "text": ""
+    },
+    {
+      "tag": "img",
+      "id": "",
+      "class": [
+        "blinking-cursor",
+        "astro-inbjnz4i"
+      ],
+      "reasons": [
+        "aria-hidden=true"
+      ],
+      "text": ""
+    },
+    {
+      "tag": "span",
+      "id": "",
+      "class": [
+        "visually-hidden",
+        "astro-inbjnz4i"
+      ],
+      "reasons": [
+        "class contains hidden/modal: ['visually-hidden', 'astro-inbjnz4i']"
+      ],
+      "text": "Download Google Antigravity"
+    },
+    {
+      "tag": "span",
+      "id": "",
+      "class": [
+        "typed-content",
+        "astro-inbjnz4i"
+      ],
+      "reasons": [
+        "aria-hidden=true"
+      ],
+      "text": "Download Google Antigravity"
+    },
+    {
+      "tag": "a",
+      "id": "",
+      "class": [
+        "call-to-action--nav",
+        "glue-cookie-notification-bar-control",
+        "astro-jo6i4kqk"
+      ],
+      "reasons": [
+        "aria-hidden=true"
+      ],
+      "text": "Manage cookies"
+    }
+  ],
+  "scripts": [
+    {
+      "type": null,
+      "snippet": "if (window.location.hostname === 'www.antigravity.google') {\n      window.location.replace(\n        `https://antigravity.google${window.location.pathn"
+    },
+    {
+      "type": "application/ld+json",
+      "snippet": "{\"@context\":\"https://schema.org\",\"@graph\":[{\"@type\":\"WebSite\",\"@id\":\"https://antigravity.google/#website\",\"name\":\"Google Antigravity\",\"url\":\"https://a"
+    },
+    {
+      "type": null,
+      "snippet": "window.dataLayer = window.dataLayer || [];\n  window.__agyGtmLoaded = window.__agyGtmLoaded || false;\n  window.__agyLastPageViewPath = window.__agyLast"
+    },
+    {
+      "type": "module",
+      "snippet": "var e=/^\\d+\\.\\d+\\.\\d+$/,t=/^\\d+$/;function n(n){let r=Array.isArray(n)?n:n&&typeof n==`object`&&Array.isArray(n.versions)?n.versions:null;if(!r||r.len"
+    },
+    {
+      "type": "module",
+      "snippet": "document.addEventListener(`DOMContentLoaded`,()=>{let e=document.querySelector(`[data-try-solutions-section]`);e&&e.querySelectorAll(`[data-solution-s"
+    }
+  ],
+  "astro_islands": [],
+  "interactive_components": [],
+  "modals_and_overlays": [
+    {
+      "tag": "div",
+      "class": [
+        "logo-context-menu",
+        "astro-nen7h5rs"
+      ],
+      "text": "Copy Logo as SVGCopied!Press Guidelines"
+    },
+    {
+      "tag": "button",
+      "class": [
+        "context-menu-item",
+        "astro-nen7h5rs"
+      ],
+      "text": "Copy Logo as SVGCopied!"
+    },
+    {
+      "tag": "div",
+      "class": [
+        "context-menu-divider",
+        "astro-nen7h5rs"
+      ],
+      "text": ""
+    },
+    {
+      "tag": "a",
+      "class": [
+        "context-menu-item",
+        "astro-nen7h5rs"
+      ],
+      "text": "Press Guidelines"
+    },
+    {
+      "tag": "span",
+      "class": [
+        "tooltip",
+        "astro-nen7h5rs"
+      ],
+      "text": "Launch Remote Control"
+    },
+    {
+      "tag": "span",
+      "class": [
+        "tooltip",
+        "astro-nen7h5rs"
+      ],
+      "text": "Launch Remote Control"
+    },
+    {
+      "tag": "div",
+      "class": [
+        "dropdown-overlay",
+        "astro-nen7h5rs"
+      ],
+      "text": ""
+    },
+    {
+      "tag": "dialog",
+      "class": [
+        "dialog",
+        "youtube-dialog",
+        "astro-mkgfivnz"
+      ],
+      "text": "0:00 / 0:00"
+    },
+    {
+      "tag": "div",
+      "class": [
+        "dialog-backdrop",
+        "astro-mkgfivnz"
+      ],
+      "text": ""
+    },
+    {
+      "tag": "div",
+      "class": [
+        "dialog-inner",
+        "astro-mkgfivnz"
+      ],
+      "text": "0:00 / 0:00"
+    },
+    {
+      "tag": "div",
+      "class": [
+        "dialog-content",
+        "astro-mkgfivnz"
+      ],
+      "text": "0:00 / 0:00"
+    },
+    {
+      "tag": "button",
+      "class": [
+        "dialog-close-button",
+        "astro-mkgfivnz"
+      ],
+      "text": ""
+    },
+    {
+      "tag": "div",
+      "class": [
+        "dialog-body",
+        "astro-mkgfivnz"
+      ],
+      "text": ""
+    },
+    {
+      "tag": "dialog",
+      "class": [
+        "dialog",
+        "youtube-dialog",
+        "astro-mkgfivnz"
+      ],
+      "text": "0:00 / 0:00"
+    },
+    {
+      "tag": "div",
+      "class": [
+        "dialog-backdrop",
+        "astro-mkgfivnz"
+      ],
+      "text": ""
+    },
+    {
+      "tag": "div",
+      "class": [
+        "dialog-inner",
+        "astro-mkgfivnz"
+      ],
+      "text": "0:00 / 0:00"
+    },
+    {
+      "tag": "div",
+      "class": [
+        "dialog-content",
+        "astro-mkgfivnz"
+      ],
+      "text": "0:00 / 0:00"
+    },
+    {
+      "tag": "button",
+      "class": [
+        "dialog-close-button",
+        "astro-mkgfivnz"
+      ],
+      "text": ""
+    },
+    {
+      "tag": "div",
+      "class": [
+        "dialog-body",
+        "astro-mkgfivnz"
+      ],
+      "text": ""
+    },
+    {
+      "tag": "div",
+      "class": [
+        "slide-image-overlay",
+        "astro-gk6ge62r"
+      ],
+      "text": "Full stack developerFull stack developerWatch case"
+    },
+    {
+      "tag": "div",
+      "class": [
+        "slide-image-overlay",
+        "astro-gk6ge62r"
+      ],
+      "text": "Enterprise developerEnterprise developerWatch case"
+    },
+    {
+      "tag": "div",
+      "class": [
+        "slide-image-overlay",
+        "astro-gk6ge62r"
+      ],
+      "text": "Frontend developerFrontend developerWatch case"
+    },
+    {
+      "tag": "div",
+      "class": [
+        "download-section-backdrop",
+        "astro-vwyjoj4m"
+      ],
+      "text": ""
+    }
+  ],
+  "svg_icons": [
+    {
+      "class": [
+        "logo",
+        "astro-nen7h5rs"
+      ],
+      "viewBox": "0 0 1687 217",
+      "width": "163.26",
+      "height": "21"
+    },
+    {
+      "class": [
+        "astro-nen7h5rs"
+      ],
+      "viewBox": "0 0 180 180",
+      "width": "18",
+      "height": "18"
+    },
+    {
+      "class": [
+        "astro-nen7h5rs"
+      ],
+      "viewBox": "0 -960 960 960",
+      "width": "20px",
+      "height": "20px"
+    },
+    {
+      "class": [],
+      "viewBox": "0 0 24 24",
+      "width": "18",
+      "height": "18"
+    },
+    {
+      "class": [],
+      "viewBox": "0 0 24 24",
+      "width": "18",
+      "height": "18"
+    },
+    {
+      "class": [],
+      "viewBox": "0 0 24 24",
+      "width": "18",
+      "height": "18"
+    },
+    {
+      "class": [],
+      "viewBox": "0 0 24 24",
+      "width": "18",
+      "height": "18"
+    },
+    {
+      "class": [
+        "icon-menu",
+        "astro-nen7h5rs"
+      ],
+      "viewBox": "0 -960 960 960",
+      "width": "20px",
+      "height": "20px"
+    },
+    {
+      "class": [
+        "icon-close",
+        "astro-nen7h5rs"
+      ],
+      "viewBox": "0 -960 960 960",
+      "width": "20px",
+      "height": "20px"
+    },
+    {
+      "class": [
+        "astro-nz4fptcl"
+      ],
+      "viewBox": "0 -960 960 960",
+      "width": "22px",
+      "height": "22px"
+    },
+    {
+      "class": [
+        "astro-nz4fptcl"
+      ],
+      "viewBox": "0 -960 960 960",
+      "width": "22px",
+      "height": "22px"
+    },
+    {
+      "class": [
+        "astro-nz4fptcl"
+      ],
+      "viewBox": "0 -960 960 960",
+      "width": "18px",
+      "height": "18px"
+    },
+    {
+      "class": [
+        "astro-nz4fptcl"
+      ],
+      "viewBox": "0 -960 960 960",
+      "width": "22px",
+      "height": "22px"
+    },
+    {
+      "class": [
+        "astro-nz4fptcl"
+      ],
+      "viewBox": "0 -960 960 960",
+      "width": "22px",
+      "height": "22px"
+    },
+    {
+      "class": [
+        "astro-nz4fptcl"
+      ],
+      "viewBox": "0 -960 960 960",
+      "width": "22px",
+      "height": "22px"
+    },
+    {
+      "class": [
+        "astro-nz4fptcl"
+      ],
+      "viewBox": "0 -960 960 960",
+      "width": "18px",
+      "height": "18px"
+    },
+    {
+      "class": [
+        "astro-nz4fptcl"
+      ],
+      "viewBox": "0 -960 960 960",
+      "width": "18px",
+      "height": "18px"
+    },
+    {
+      "class": [
+        "astro-nen7h5rs"
+      ],
+      "viewBox": "0 0 24 24",
+      "width": "24",
+      "height": "24"
+    },
+    {
+      "class": [
+        "astro-nz4fptcl"
+      ],
+      "viewBox": "0 -960 960 960",
+      "width": "22px",
+      "height": "22px"
+    },
+    {
+      "class": [
+        "astro-nz4fptcl"
+      ],
+      "viewBox": "0 -960 960 960",
+      "width": "22px",
+      "height": "22px"
+    },
+    {
+      "class": [
+        "astro-nz4fptcl"
+      ],
+      "viewBox": "0 -960 960 960",
+      "width": "18px",
+      "height": "18px"
+    },
+    {
+      "class": [
+        "astro-nz4fptcl"
+      ],
+      "viewBox": "0 -960 960 960",
+      "width": "22px",
+      "height": "22px"
+    },
+    {
+      "class": [
+        "astro-nz4fptcl"
+      ],
+      "viewBox": "0 -960 960 960",
+      "width": "22px",
+      "height": "22px"
+    },
+    {
+      "class": [
+        "astro-nz4fptcl"
+      ],
+      "viewBox": "0 -960 960 960",
+      "width": "22px",
+      "height": "22px"
+    },
+    {
+      "class": [
+        "astro-nen7h5rs"
+      ],
+      "viewBox": "0 0 24 24",
+      "width": "24",
+      "height": "24"
+    },
+    {
+      "class": [
+        "astro-nen7h5rs"
+      ],
+      "viewBox": "0 0 24 24",
+      "width": "24",
+      "height": "24"
+    },
+    {
+      "class": [
+        "astro-nz4fptcl"
+      ],
+      "viewBox": "0 -960 960 960",
+      "width": "18px",
+      "height": "18px"
+    },
+    {
+      "class": [
+        "astro-nz4fptcl"
+      ],
+      "viewBox": "0 -960 960 960",
+      "width": "18px",
+      "height": "18px"
+    },
+    {
+      "class": [
+        "logo",
+        "astro-lcdefpme"
+      ],
+      "viewBox": "0 0 1687 217",
+      "width": "233.23",
+      "height": "30"
+    },
+    {
+      "class": [
+        "astro-56r3b3ue"
+      ],
+      "viewBox": "0 0 28 28",
+      "width": "30",
+      "height": "30"
+    },
+    {
+      "class": [
+        "astro-56r3b3ue"
+      ],
+      "viewBox": "0 0 20 20",
+      "width": "17",
+      "height": "17"
+    },
+    {
+      "class": [
+        "astro-mkgfivnz"
+      ],
+      "viewBox": "0 -960 960 960",
+      "width": "24px",
+      "height": "24px"
+    },
+    {
+      "class": [
+        "icon-play",
+        "astro-mkgfivnz"
+      ],
+      "viewBox": "0 0 24 24",
+      "width": "18",
+      "height": "18"
+    },
+    {
+      "class": [
+        "icon-pause",
+        "astro-mkgfivnz"
+      ],
+      "viewBox": "0 0 24 24",
+      "width": "18",
+      "height": "18"
+    },
+    {
+      "class": [
+        "icon-unmuted",
+        "astro-mkgfivnz"
+      ],
+      "viewBox": "0 0 24 24",
+      "width": "18",
+      "height": "18"
+    },
+    {
+      "class": [
+        "icon-muted",
+        "astro-mkgfivnz"
+      ],
+      "viewBox": "0 0 24 24",
+      "width": "18",
+      "height": "18"
+    },
+    {
+      "class": [
+        "icon-enter-fullscreen",
+        "astro-mkgfivnz"
+      ],
+      "viewBox": "0 0 24 24",
+      "width": "20",
+      "height": "20"
+    },
+    {
+      "class": [
+        "icon-exit-fullscreen",
+        "astro-mkgfivnz"
+      ],
+      "viewBox": "0 0 24 24",
+      "width": "20",
+      "height": "20"
+    },
+    {
+      "class": [
+        "astro-4xhi77lm"
+      ],
+      "viewBox": "0 -960 960 960",
+      "width": "24px",
+      "height": "24px"
+    },
+    {
+      "class": [
+        "astro-4xhi77lm"
+      ],
+      "viewBox": "0 -960 960 960",
+      "width": "24px",
+      "height": "24px"
+    },
+    {
+      "class": [
+        "astro-73zxsoak"
+      ],
+      "viewBox": "0 0 960 960",
+      "width": "1em",
+      "height": "1em"
+    },
+    {
+      "class": [
+        "astro-73zxsoak"
+      ],
+      "viewBox": "0 0 960 960",
+      "width": "1em",
+      "height": "1em"
+    },
+    {
+      "class": [
+        "astro-73zxsoak"
+      ],
+      "viewBox": "0 0 960 960",
+      "width": "1em",
+      "height": "1em"
+    },
+    {
+      "class": [
+        "astro-73zxsoak"
+      ],
+      "viewBox": "0 0 960 960",
+      "width": "1em",
+      "height": "1em"
+    },
+    {
+      "class": [
+        "astro-73zxsoak"
+      ],
+      "viewBox": "0 0 960 960",
+      "width": "1em",
+      "height": "1em"
+    },
+    {
+      "class": [
+        "astro-73zxsoak"
+      ],
+      "viewBox": "0 0 960 960",
+      "width": "1em",
+      "height": "1em"
+    },
+    {
+      "class": [
+        "astro-73zxsoak"
+      ],
+      "viewBox": "0 0 960 960",
+      "width": "1em",
+      "height": "1em"
+    },
+    {
+      "class": [
+        "astro-73zxsoak"
+      ],
+      "viewBox": "0 0 960 960",
+      "width": "1em",
+      "height": "1em"
+    },
+    {
+      "class": [
+        "astro-73zxsoak"
+      ],
+      "viewBox": "0 0 960 960",
+      "width": "1em",
+      "height": "1em"
+    },
+    {
+      "class": [
+        "astro-73zxsoak"
+      ],
+      "viewBox": "0 0 960 960",
+      "width": "1em",
+      "height": "1em"
+    },
+    {
+      "class": [
+        "astro-73zxsoak"
+      ],
+      "viewBox": "0 0 960 960",
+      "width": "1em",
+      "height": "1em"
+    },
+    {
+      "class": [
+        "astro-73zxsoak"
+      ],
+      "viewBox": "0 0 960 960",
+      "width": "1em",
+      "height": "1em"
+    },
+    {
+      "class": [
+        "astro-73zxsoak"
+      ],
+      "viewBox": "0 0 960 960",
+      "width": "1em",
+      "height": "1em"
+    },
+    {
+      "class": [
+        "astro-73zxsoak"
+      ],
+      "viewBox": "0 0 960 960",
+      "width": "1em",
+      "height": "1em"
+    },
+    {
+      "class": [
+        "astro-73zxsoak"
+      ],
+      "viewBox": "0 0 960 960",
+      "width": "1em",
+      "height": "1em"
+    },
+    {
+      "class": [
+        "astro-73zxsoak"
+      ],
+      "viewBox": "0 0 960 960",
+      "width": "1em",
+      "height": "1em"
+    },
+    {
+      "class": [
+        "astro-73zxsoak"
+      ],
+      "viewBox": "0 0 960 960",
+      "width": "1em",
+      "height": "1em"
+    },
+    {
+      "class": [
+        "astro-73zxsoak"
+      ],
+      "viewBox": "0 0 960 960",
+      "width": "1em",
+      "height": "1em"
+    },
+    {
+      "class": [
+        "astro-73zxsoak"
+      ],
+      "viewBox": "0 0 960 960",
+      "width": "1em",
+      "height": "1em"
+    },
+    {
+      "class": [
+        "astro-73zxsoak"
+      ],
+      "viewBox": "0 0 960 960",
+      "width": "1em",
+      "height": "1em"
+    },
+    {
+      "class": [
+        "astro-73zxsoak"
+      ],
+      "viewBox": "0 0 960 960",
+      "width": "1em",
+      "height": "1em"
+    },
+    {
+      "class": [
+        "astro-73zxsoak"
+      ],
+      "viewBox": "0 0 960 960",
+      "width": "1em",
+      "height": "1em"
+    },
+    {
+      "class": [
+        "astro-mkgfivnz"
+      ],
+      "viewBox": "0 -960 960 960",
+      "width": "24px",
+      "height": "24px"
+    },
+    {
+      "class": [
+        "icon-play",
+        "astro-mkgfivnz"
+      ],
+      "viewBox": "0 0 24 24",
+      "width": "18",
+      "height": "18"
+    },
+    {
+      "class": [
+        "icon-pause",
+        "astro-mkgfivnz"
+      ],
+      "viewBox": "0 0 24 24",
+      "width": "18",
+      "height": "18"
+    },
+    {
+      "class": [
+        "icon-unmuted",
+        "astro-mkgfivnz"
+      ],
+      "viewBox": "0 0 24 24",
+      "width": "18",
+      "height": "18"
+    },
+    {
+      "class": [
+        "icon-muted",
+        "astro-mkgfivnz"
+      ],
+      "viewBox": "0 0 24 24",
+      "width": "18",
+      "height": "18"
+    },
+    {
+      "class": [
+        "icon-enter-fullscreen",
+        "astro-mkgfivnz"
+      ],
+      "viewBox": "0 0 24 24",
+      "width": "20",
+      "height": "20"
+    },
+    {
+      "class": [
+        "icon-exit-fullscreen",
+        "astro-mkgfivnz"
+      ],
+      "viewBox": "0 0 24 24",
+      "width": "20",
+      "height": "20"
+    },
+    {
+      "class": [
+        "astro-gk6ge62r"
+      ],
+      "viewBox": "0 -960 960 960",
+      "width": "40px",
+      "height": "40px"
+    },
+    {
+      "class": [
+        "astro-paliblhy"
+      ],
+      "viewBox": "0 -960 960 960",
+      "width": "24px",
+      "height": "24px"
+    },
+    {
+      "class": [
+        "astro-gk6ge62r"
+      ],
+      "viewBox": "0 -960 960 960",
+      "width": "40px",
+      "height": "40px"
+    },
+    {
+      "class": [
+        "astro-paliblhy"
+      ],
+      "viewBox": "0 -960 960 960",
+      "width": "24px",
+      "height": "24px"
+    },
+    {
+      "class": [
+        "astro-gk6ge62r"
+      ],
+      "viewBox": "0 -960 960 960",
+      "width": "40px",
+      "height": "40px"
+    },
+    {
+      "class": [
+        "astro-paliblhy"
+      ],
+      "viewBox": "0 -960 960 960",
+      "width": "24px",
+      "height": "24px"
+    },
+    {
+      "class": [
+        "astro-iormbkgb"
+      ],
+      "viewBox": "0 -960 960 960",
+      "width": "24px",
+      "height": "24px"
+    },
+    {
+      "class": [
+        "astro-iormbkgb"
+      ],
+      "viewBox": "0 -960 960 960",
+      "width": "24px",
+      "height": "24px"
+    },
+    {
+      "class": [
+        "astro-iormbkgb"
+      ],
+      "viewBox": "0 -960 960 960",
+      "width": "24px",
+      "height": "24px"
+    },
+    {
+      "class": [
+        "astro-iormbkgb"
+      ],
+      "viewBox": "0 -960 960 960",
+      "width": "24px",
+      "height": "24px"
+    },
+    {
+      "class": [
+        "footer-antigravity",
+        "astro-ipindhfc"
+      ],
+      "viewBox": "0 0 1297 270",
+      "width": "1297",
+      "height": "270"
+    },
+    {
+      "class": [
+        "astro-jo6i4kqk"
+      ],
+      "viewBox": "0 0 75 24",
+      "width": "75",
+      "height": "24"
+    }
+  ],
+  "all_js_bundles": [
+    "/_astro/page.LAbJoB63.js",
+    "/_astro/AnalyticsBootstrap.astro_astro_type_script_index_0_lang.BsphJQHO.js",
+    "/_astro/AnnouncementPill.astro_astro_type_script_index_0_lang.D0moc2f_.js",
+    "/_astro/Header.astro_astro_type_script_index_0_lang.CqynDiJE.js",
+    "/_astro/MainParticlesComponent.astro_astro_type_script_index_0_lang.PB2MIXT9.js",
+    "/_astro/TypedHeader.astro_astro_type_script_index_0_lang.Dn4qOYTE.js",
+    "/_astro/MobileDesktopJourney.astro_astro_type_script_index_0_lang.BpMSTZpe.js",
+    "/_astro/ModalYoutube.astro_astro_type_script_index_0_lang.Drx1MIOp.js",
+    "/_astro/YoutubeVideoSection.astro_astro_type_script_index_0_lang.Dg7u1WnZ.js",
+    "/_astro/AgentFirst.astro_astro_type_script_index_0_lang.DHglPJ15.js",
+    "/_astro/FeatureExplorerNew.astro_astro_type_script_index_0_lang.CjI9X57e.js",
+    "/_astro/CustomCursor.astro_astro_type_script_index_0_lang.CdMLsXM6.js",
+    "/_astro/Slider.astro_astro_type_script_index_0_lang.COD_D88F.js",
+    "/_astro/UseCases.astro_astro_type_script_index_0_lang.cgteStrr.js",
+    "/_astro/MorphingParticlesComponent.astro_astro_type_script_index_0_lang.B4r3VvfF.js",
+    "/_astro/LandingLatestBlogs.astro_astro_type_script_index_0_lang.C0pOmJid.js",
+    "/_astro/DownloadSection.astro_astro_type_script_index_0_lang.1raiohwM.js",
+    "/_astro/AntigravityFooter.astro_astro_type_script_index_0_lang.DQIYDjYp.js",
+    "https://www.gstatic.com/glue/cookienotificationbar/cookienotificationbar.min.js",
+    "/_astro/SmoothScrollLayout.astro_astro_type_script_index_0_lang.BIBS_Ca_.js",
+    "/_astro/index.astro_astro_type_script_index_0_lang.KqE5DyCY.js"
+  ],
+  "dynamic_json": []
+}

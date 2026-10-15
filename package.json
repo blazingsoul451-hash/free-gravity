@@ -1,0 +1,47 @@
+{
+  "name": "free-gravity",
+  "version": "1.0.0",
+  "description": "Free Gravity — The Open Agentic Studio & IDE",
+  "type": "module",
+  "bin": {
+    "free-gravity": "./bin/free-gravity-cli.ts"
+  },
+  "scripts": {
+    "dev": "vite",
+    "server": "tsx server/index.ts",
+    "dev:all": "concurrently -n \"SERVER,CLIENT\" -c \"magenta,cyan\" \"tsx server/index.ts\" \"vite\"",
+    "build": "tsc && vite build",
+    "preview": "vite preview",
+    "cli": "tsx bin/free-gravity-cli.ts"
+  },
+  "dependencies": {
+    "@monaco-editor/react": "^4.7.0",
+    "clsx": "^2.1.1",
+    "cors": "^2.8.5",
+    "express": "^4.21.2",
+    "gsap": "^3.12.7",
+    "lucide-react": "^1.16.0",
+    "playwright": "^1.50.1",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
+    "tailwind-merge": "^3.0.1",
+    "ws": "^8.18.0"
+  },
+  "devDependencies": {
+    "@tailwindcss/vite": "^4.0.0",
+    "@types/cors": "^2.8.17",
+    "@types/express": "^5.0.0",
+    "@types/node": "^22.13.0",
+    "@types/react": "^19.0.0",
+    "@types/react-dom": "^19.0.0",
+    "@types/ws": "^8.5.14",
+    "@vitejs/plugin-react": "^4.3.4",
+    "autoprefixer": "^10.4.20",
+    "concurrently": "^9.1.2",
+    "postcss": "^8.5.3",
+    "tailwindcss": "^4.0.0",
+    "tsx": "^4.19.3",
+    "typescript": "^5.7.3",
+    "vite": "^6.2.0"
+  }
+}

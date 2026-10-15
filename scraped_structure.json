@@ -1,0 +1,612 @@
+{
+  "title": "Google Antigravity",
+  "headings": [
+    {
+      "level": "h1",
+      "text": "Experience liftoff with the next-gen agent platformExperience liftoff with the next-gen agent platform"
+    },
+    {
+      "level": "h2",
+      "text": "Built for developersfor the agent-first era"
+    }
+  ],
+  "sections": [
+    {
+      "tag": "main",
+      "id": "",
+      "class": "",
+      "heading": "Experience liftoff with the next-gen agent platformExperience liftoff with the next-gen agent platform",
+      "paragraphs": [
+        "Explore our next generation products",
+        "Products",
+        "Built for developers in the agent-first era",
+        "Everything you need to stay up-to-date and get help",
+        "Explore our next generation products"
+      ]
+    },
+    {
+      "tag": "main",
+      "id": "",
+      "class": "main astro-lcdefpme",
+      "heading": "Experience liftoff with the next-gen agent platformExperience liftoff with the next-gen agent platform",
+      "paragraphs": [
+        "Download on Desktop",
+        "Available on macOS, Windows, Linux, and Googlebook",
+        "Your command center to manage multiple local agents in parallel. Group conversations into Projects, operate across multiple workspaces, and automate routine tasks with scheduled messages.",
+        "The lightweight, fast, terminal-first surface to work with Antigravity agents. Run autonomous coding agents, execute shell commands directly, and manage background subagents all from your keyboard.",
+        "The fully-featured, agentic IDE. Complete with the agent manager, artifacts, and a deep understanding of your codebase."
+      ]
+    },
+    {
+      "tag": "section",
+      "id": "",
+      "class": "welcome-wrapper astro-lcdefpme",
+      "heading": "Experience liftoff with the next-gen agent platformExperience liftoff with the next-gen agent platform",
+      "paragraphs": [
+        "Download on Desktop",
+        "Available on macOS, Windows, Linux, and Googlebook"
+      ]
+    },
+    {
+      "tag": "section",
+      "id": "youtube-video-section",
+      "class": "landing-video-section astro-lcdefpme astro-4xhi77lm",
+      "heading": "",
+      "paragraphs": []
+    },
+    {
+      "tag": "section",
+      "id": "",
+      "class": "agent-first-section astro-73zxsoak",
+      "heading": "",
+      "paragraphs": []
+    },
+    {
+      "tag": "section",
+      "id": "",
+      "class": "feature-explorer-section astro-hkzvdn3m",
+      "heading": "",
+      "paragraphs": [
+        "Your command center to manage multiple local agents in parallel. Group conversations into Projects, operate across multiple workspaces, and automate routine tasks with scheduled messages.",
+        "The lightweight, fast, terminal-first surface to work with Antigravity agents. Run autonomous coding agents, execute shell commands directly, and manage background subagents all from your keyboard.",
+        "The fully-featured, agentic IDE. Complete with the agent manager, artifacts, and a deep understanding of your codebase.",
+        "Prototype custom agents leveraging Antigravity's harness with minimal code. Simple Python scripts to iterate on agentic applications, automate software engineering tasks, and run evaluations on top of the Antigravity agent harness."
+      ]
+    },
+    {
+      "tag": "section",
+      "id": "",
+      "class": "landing-use-case-section astro-gk6ge62r",
+      "heading": "Built for developersfor the agent-first era",
+      "paragraphs": [
+        "Google Antigravity is built for user trust, whether you're a professional developer working in a large enterprise codebase, a hobbyist vibe-coding in their spare time, or anyone in between.",
+        "Build production-ready applications with confidence with thoroughly designed artifacts and comprehensive verification tests.",
+        "Google Antigravity empowers the next era of enterprise builders.",
+        "Streamline UX development by leveraging browser-in-the-loop agents to automate repetitive tasks."
+      ]
+    },
+    {
+      "tag": "section",
+      "id": "",
+      "class": "try-solutions-section astro-t24vh7ys",
+      "heading": "",
+      "paragraphs": [
+        "Available at no charge",
+        "For developers",
+        "Achieve new heights",
+        "Now Available!",
+        "For organizations"
+      ]
+    },
+    {
+      "tag": "section",
+      "id": "",
+      "class": "landing-latest-blogs astro-m5y766cv",
+      "heading": "",
+      "paragraphs": [
+        "Custom agents in Google plugins",
+        "Gemini 3.8 Flash in Google Antigravity",
+        "Teamwork: when AI becomes a research partner",
+        "Visualizing with the help of Antigravity",
+        "Improving the version control experience"
+      ]
+    },
+    {
+      "tag": "section",
+      "id": "download-section",
+      "class": "download-section-container download-section-container--mobile-desktop-only astro-vwyjoj4m",
+      "heading": "",
+      "paragraphs": [
+        "Download on Desktop",
+        "Available on macOS, Windows, Linux, and Googlebook"
+      ]
+    }
+  ],
+  "links": [
+    {
+      "text": "",
+      "href": "/"
+    },
+    {
+      "text": "Press Guidelines",
+      "href": "/press"
+    },
+    {
+      "text": "Pricing",
+      "href": "/pricing"
+    },
+    {
+      "text": "Enterprise",
+      "href": "/use-cases/enterprise"
+    },
+    {
+      "text": "🚀Launch Remote Control",
+      "href": "https://antigravity.google.com"
+    },
+    {
+      "text": "Download",
+      "href": "/download"
+    },
+    {
+      "text": "🚀Launch Remote Control",
+      "href": "https://antigravity.google.com"
+    },
+    {
+      "text": "See overview",
+      "href": "/product"
+    },
+    {
+      "text": "Antigravity 2.0",
+      "href": "/product/antigravity-2"
+    },
+    {
+      "text": "Antigravity Extensions",
+      "href": "/docs/ide/extensions"
+    },
+    {
+      "text": "Antigravity CLI",
+      "href": "/product/antigravity-cli"
+    },
+    {
+      "text": "Antigravity IDE",
+      "href": "/product/antigravity-ide"
+    },
+    {
+      "text": "Antigravity SDK",
+      "href": "/product/antigravity-sdk"
+    },
+    {
+      "text": "See overview",
+      "href": "/use-cases"
+    },
+    {
+      "text": "Frontend",
+      "href": "/use-cases/frontend"
+    },
+    {
+      "text": "Fullstack",
+      "href": "/use-cases/fullstack"
+    },
+    {
+      "text": "Science",
+      "href": "/use-cases/science"
+    },
+    {
+      "text": "Marketer",
+      "href": "/use-cases/marketer"
+    },
+    {
+      "text": "Documentation",
+      "href": "/docs/getting-started"
+    },
+    {
+      "text": "Blog",
+      "href": "/blog"
+    },
+    {
+      "text": "Changelog",
+      "href": "/docs/changelog"
+    },
+    {
+      "text": "Support",
+      "href": "/support"
+    },
+    {
+      "text": "Press",
+      "href": "/press"
+    },
+    {
+      "text": "Releases",
+      "href": "/releases"
+    },
+    {
+      "text": "See overview",
+      "href": "/product"
+    },
+    {
+      "text": "Antigravity 2.0",
+      "href": "/product/antigravity-2"
+    },
+    {
+      "text": "Antigravity Extensions",
+      "href": "/docs/ide/extensions"
+    },
+    {
+      "text": "Antigravity CLI",
+      "href": "/product/antigravity-cli"
+    },
+    {
+      "text": "Antigravity IDE",
+      "href": "/product/antigravity-ide"
+    },
+    {
+      "text": "Antigravity SDK",
+      "href": "/product/antigravity-sdk"
+    },
+    {
+      "text": "See overview",
+      "href": "/use-cases"
+    },
+    {
+      "text": "Frontend",
+      "href": "/use-cases/frontend"
+    },
+    {
+      "text": "Fullstack",
+      "href": "/use-cases/fullstack"
+    },
+    {
+      "text": "Science",
+      "href": "/use-cases/science"
+    },
+    {
+      "text": "Marketer",
+      "href": "/use-cases/marketer"
+    },
+    {
+      "text": "Pricing",
+      "href": "/pricing"
+    },
+    {
+      "text": "Enterprise",
+      "href": "/use-cases/enterprise"
+    },
+    {
+      "text": "Documentation",
+      "href": "/docs/getting-started"
+    },
+    {
+      "text": "Blog",
+      "href": "/blog"
+    },
+    {
+      "text": "Changelog",
+      "href": "/docs/changelog"
+    },
+    {
+      "text": "Support",
+      "href": "/support"
+    },
+    {
+      "text": "Press",
+      "href": "/press"
+    },
+    {
+      "text": "Releases",
+      "href": "/releases"
+    },
+    {
+      "text": "Download",
+      "href": "/download"
+    },
+    {
+      "text": "Download",
+      "href": "/download"
+    },
+    {
+      "text": "Antigravity 2.0",
+      "href": "/product/antigravity-2"
+    },
+    {
+      "text": "Antigravity CLI",
+      "href": "/product/antigravity-cli"
+    },
+    {
+      "text": "Antigravity IDE",
+      "href": "/product/antigravity-ide"
+    },
+    {
+      "text": "Antigravity SDK",
+      "href": "/product/antigravity-sdk"
+    },
+    {
+      "text": "Explore Product",
+      "href": "/product"
+    },
+    {
+      "text": "View case",
+      "href": "/use-cases/fullstack"
+    },
+    {
+      "text": "View case",
+      "href": "/use-cases/enterprise"
+    },
+    {
+      "text": "View case",
+      "href": "/use-cases/frontend"
+    },
+    {
+      "text": "Download",
+      "href": "/download"
+    },
+    {
+      "text": "Read More",
+      "href": "/docs/enterprise"
+    },
+    {
+      "text": "View blog",
+      "href": "/blog"
+    },
+    {
+      "text": "Custom agents in Google pluginsSep 28, 2026ProductRead blog",
+      "href": "/blog/custom-agents-in-google-plugins"
+    },
+    {
+      "text": "Gemini 3.8 Flash in Google AntigravitySep 1, 2026ModelRead blog",
+      "href": "/blog/gemini-3-8-flash-in-google-antigravity"
+    },
+    {
+      "text": "Teamwork: when AI becomes a research partnerAug 27, 2026ResearchProductRead blog",
+      "href": "/blog/teamwork-when-ai-becomes-a-research-partner"
+    },
+    {
+      "text": "Visualizing with the help of AntigravityAug 26, 2026ProductRead blog",
+      "href": "/blog/visualizing-with-the-help-of-antigravity"
+    },
+    {
+      "text": "Improving the version control experienceAug 24, 2026ProductRead blog",
+      "href": "/blog/vcs-and-terminal"
+    },
+    {
+      "text": "Antigravity anywhere with Remote ControlAug 21, 2026ProductRead blog",
+      "href": "/blog/remote-control-for-antigravity"
+    },
+    {
+      "text": "Bringing Antigravity to Gemini Enterprise: Agentic workflows for every developerAug 20, 2026EnterpriseRead blog",
+      "href": "/blog/antigravity-enterprise"
+    },
+    {
+      "text": "Introducing IDE extensionsAug 20, 2026ProductRead blog",
+      "href": "/blog/antigravity-ide-extensions"
+    },
+    {
+      "text": "Gemini 3.7 Flash in Google AntigravityAug 13, 2026ModelRead blog",
+      "href": "/blog/gemini-3-7-flash-in-google-antigravity"
+    },
+    {
+      "text": "Download for Apple Silicon",
+      "href": "/download"
+    },
+    {
+      "text": "Download for Intel",
+      "href": "/download"
+    },
+    {
+      "text": "Product",
+      "href": "/product"
+    },
+    {
+      "text": "Download",
+      "href": "/download"
+    },
+    {
+      "text": "Antigravity 2.0",
+      "href": "/product/antigravity-2"
+    },
+    {
+      "text": "Antigravity Extensions",
+      "href": "/docs/ide/extensions"
+    },
+    {
+      "text": "Antigravity CLI",
+      "href": "/product/antigravity-cli"
+    },
+    {
+      "text": "Antigravity IDE",
+      "href": "/product/antigravity-ide"
+    },
+    {
+      "text": "Antigravity SDK",
+      "href": "/product/antigravity-sdk"
+    },
+    {
+      "text": "Docs",
+      "href": "/docs/getting-started"
+    },
+    {
+      "text": "Changelog",
+      "href": "/docs/changelog"
+    },
+    {
+      "text": "Releases",
+      "href": "/releases"
+    },
+    {
+      "text": "Blog",
+      "href": "/blog"
+    },
+    {
+      "text": "Pricing",
+      "href": "/pricing"
+    },
+    {
+      "text": "Use Cases",
+      "href": "/use-cases"
+    },
+    {
+      "text": "Press",
+      "href": "/press"
+    },
+    {
+      "text": "",
+      "href": "https://www.google.com"
+    },
+    {
+      "text": "About Google",
+      "href": "https://about.google/"
+    },
+    {
+      "text": "Google Products",
+      "href": "https://about.google/products/"
+    },
+    {
+      "text": "Privacy",
+      "href": "https://policies.google.com/privacy?hl=en-US"
+    },
+    {
+      "text": "Terms",
+      "href": "/terms"
+    }
+  ],
+  "buttons": [
+    "Copy Logo as SVGCopied!",
+    "Products",
+    "Use Cases",
+    "Resources",
+    "Products",
+    "Use Cases",
+    "Resources",
+    "Send link to desktop",
+    "Send link to desktop"
+  ],
+  "media": [
+    {
+      "type": "img",
+      "src": "/assets/image/antigravity-cursor.png",
+      "alt": ""
+    },
+    {
+      "type": "source",
+      "src": "/assets/video/hero_video.mp4",
+      "alt": ""
+    },
+    {
+      "type": "img",
+      "src": "/assets/image/antigravity-cursor.png",
+      "alt": ""
+    },
+    {
+      "type": "img",
+      "src": "/assets/image/product/new-chat.png",
+      "alt": "Your command center to manage multiple local agents in parallel. Group conversations into Projects, operate across multiple workspaces, and automate routine tasks with scheduled messages."
+    },
+    {
+      "type": "img",
+      "src": "/assets/image/landing/antigravity-cli.png",
+      "alt": "The lightweight, fast, terminal-first surface to work with Antigravity agents. Run autonomous coding agents, execute shell commands directly, and manage background subagents all from your keyboard."
+    },
+    {
+      "type": "source",
+      "src": "/assets/video/landing/an-ai-ide-core.mp4",
+      "alt": ""
+    },
+    {
+      "type": "img",
+      "src": "/assets/image/landing/feature-3.jpg",
+      "alt": "Prototype custom agents leveraging Antigravity's harness with minimal code. Simple Python scripts to iterate on agentic applications, automate software engineering tasks, and run evaluations on top of the Antigravity agent harness."
+    },
+    {
+      "type": "img",
+      "src": "/assets/image/landing/landing-thumbnail-fullstack.jpg",
+      "alt": "Full stack developer"
+    },
+    {
+      "type": "img",
+      "src": "/assets/image/antigravity-cursor.png",
+      "alt": ""
+    },
+    {
+      "type": "img",
+      "src": "/assets/image/landing/landing-thumbnail-enterprise.jpg",
+      "alt": "Enterprise developer"
+    },
+    {
+      "type": "img",
+      "src": "/assets/image/antigravity-cursor.png",
+      "alt": ""
+    },
+    {
+      "type": "img",
+      "src": "/assets/image/landing/landing-thumbnail-frontend.jpg",
+      "alt": "Frontend developer"
+    },
+    {
+      "type": "img",
+      "src": "/assets/image/antigravity-cursor.png",
+      "alt": ""
+    },
+    {
+      "type": "img",
+      "src": "/assets/image/blog/Custom_Agents_in_Plugins_1x1.png",
+      "alt": "Custom agents in Google plugins"
+    },
+    {
+      "type": "img",
+      "src": "/assets/image/blog/3.8-Flash---Square.png",
+      "alt": "Gemini 3.8 Flash in Google Antigravity"
+    },
+    {
+      "type": "img",
+      "src": "/assets/image/blog/teamwork-square.jpg",
+      "alt": "Teamwork: when AI becomes a research partner"
+    },
+    {
+      "type": "img",
+      "src": "/assets/image/blog/visualizing-with-antigravity-square.png",
+      "alt": "Visualizing with the help of Antigravity"
+    },
+    {
+      "type": "img",
+      "src": "/assets/image/blog/VSC-Blog-1x1.png",
+      "alt": "Improving the version control experience"
+    },
+    {
+      "type": "img",
+      "src": "/assets/image/blog/remote-control-square.png",
+      "alt": "Antigravity anywhere with Remote Control"
+    },
+    {
+      "type": "img",
+      "src": "/assets/image/blog/AGY-Enterprise---Square.png",
+      "alt": "Bringing Antigravity to Gemini Enterprise: Agentic workflows for every developer"
+    },
+    {
+      "type": "img",
+      "src": "/assets/image/blog/IDE-Extensions-Square.png",
+      "alt": "Introducing IDE extensions"
+    },
+    {
+      "type": "img",
+      "src": "/assets/image/blog/3.7-Flash---Square.jpg",
+      "alt": "Gemini 3.7 Flash in Google Antigravity"
+    },
+    {
+      "type": "img",
+      "src": "/assets/image/antigravity-cursor.png",
+      "alt": ""
+    }
+  ],
+  "stylesheets": [
+    "https://www.gstatic.com/glue/cookienotificationbar/cookienotificationbar.min.css",
+    "https://fonts.googleapis.com/css2?family=Google+Sans+Flex:opsz,slnt,wdth,wght,ROND@8..144,-10..0,25..150,400..500,0..100&display=swap",
+    "https://fonts.googleapis.com/css2?family=Google+Sans+Code:ital@0;1&display=swap",
+    "https://fonts.googleapis.com/css2?family=Google+Symbols:opsz,wght,FILL,GRAD,ROND@20..48,100..700,0..1,-50..200,0..100&display=block",
+    "/_astro/BaseLayout.3aiiGRAG.css",
+    "/_astro/SmoothScrollLayout.Cp-sTGiV.css",
+    "/_astro/MobileDesktopJourney.C2AmVCQG.css",
+    "/_astro/CustomCursor.DojRXcfS.css",
+    "/_astro/AnnouncementPill.AGG_9Wye.css",
+    "/_astro/index.iGWkJUWM.css",
+    "/_astro/ModalYoutube.Br_CC_9Z.css"
+  ]
+}
