@@ -1,192 +1,103 @@
 import React, { useState, useEffect } from 'react';
-import { 
-  IconBrowser, 
-  IconDiff, 
-  IconTerminal, 
-  IconFolder 
-} from '../components/icons/AntigravityIcons';
-import { ActivityBar } from '../components/rail/ActivityBar';
-import { ProjectSwitcher } from '../components/rail/ProjectSwitcher';
-import { SessionList } from '../components/rail/SessionList';
+import { AntigravityTopBar } from '../components/studio/AntigravityTopBar';
+import { AntigravitySidebar, SidebarConversation } from '../components/studio/AntigravitySidebar';
+import { AntigravityAuxiliaryPane, AuxiliaryTab } from '../components/studio/AntigravityAuxiliaryPane';
+import { MessageStream } from '../components/stream/MessageStream';
+import { SettingsModal } from '../components/rail/SettingsModal';
 import { CronScheduler } from '../components/rail/CronScheduler';
 import { McpSkillsManager } from '../components/rail/McpSkillsManager';
-import { SettingsModal } from '../components/rail/SettingsModal';
-import { MessageStream } from '../components/stream/MessageStream';
-import { BrowserViewport } from '../components/inspector/BrowserViewport';
-import { MonacoDiffEditor } from '../components/inspector/MonacoDiffEditor';
-import { XtermConsole } from '../components/inspector/XtermConsole';
-import { ArtifactsRenderer } from '../components/inspector/ArtifactsRenderer';
 import { 
   INITIAL_SETTINGS, 
-  INITIAL_SESSIONS, 
   INITIAL_CRON_JOBS, 
-  INITIAL_MCP_SKILLS, 
-  INITIAL_MESSAGES 
+  INITIAL_MCP_SKILLS 
 } from '../lib/mock-data';
-import { TabType, Settings, Session, CronJob, McpSkill, Message, ToolCall } from '../types';
+import { Settings, CronJob, McpSkill, ToolCall } from '../types';
 import { wsClient } from '../lib/ws-client';
 
 interface StudioWorkspaceProps {
   onNavigateHome: () => void;
 }
 
+const INITIAL_CONVERSATIONS: SidebarConversation[] = [
+  {
+    id: 'conv-1',
+    project: 'FREE GRAVITY PROJECT',
+    title: 'Chat Plan Feasibility Check',
+    time: 'Just now',
+    isLoading: true,
+  },
+  {
+    id: 'conv-2',
+    project: 'FREE GRAVITY PROJECT',
+    title: 'Build Free Gravity App',
+    time: '42m',
+  },
+  {
+    id: 'conv-3',
+    project: 'FREE GRAVITY PROJECT',
+    title: 'Building Server Security and B...',
+    time: '22h',
+  },
+  {
+    id: 'conv-4',
+    project: 'FREE GRAVITY PROJECT',
+    title: 'Agent And MCP Server Imple...',
+    time: '22h',
+  },
+  {
+    id: 'conv-5',
+    project: 'FREE GRAVITY PROJECT',
+    title: 'Free Gravity Showcase And SDK',
+    time: '22h',
+  },
+  {
+    id: 'conv-6',
+    project: 'OCTAL DIALER PROJECT',
+    title: 'Frontend UI Design Refactor',
+    time: '1h',
+    hasDot: true,
+  },
+  {
+    id: 'conv-7',
+    project: 'OCTAL DIALER PROJECT',
+    title: 'New Octal Dialer Project',
+    time: '22h',
+  },
+  {
+    id: 'conv-8',
+    project: 'OCTAL DIALER PROJECT',
+    title: 'App Development Project Ma...',
+    time: '23h',
+  },
+];
+
 export const StudioWorkspace: React.FC<StudioWorkspaceProps> = ({ onNavigateHome }) => {
-  // Navigation & Rail state
-  const [railTab, setRailTab] = useState<'chat' | 'scheduler' | 'mcp' | 'files'>('chat');
+  // Navigation & Dialog states
   const [settingsOpen, setSettingsOpen] = useState(false);
   const [settings, setSettings] = useState<Settings>(INITIAL_SETTINGS);
+  const [automationsOpen, setAutomationsOpen] = useState(false);
+  const [customizationsOpen, setCustomizationsOpen] = useState(false);
 
-  // Data state
-  const [sessions, setSessions] = useState<Session[]>(INITIAL_SESSIONS);
-  const [activeSessionId, setActiveSessionId] = useState<string>(INITIAL_SESSIONS[0].id);
+  // Conversations & Projects state
+  const [conversations, setConversations] = useState<SidebarConversation[]>(INITIAL_CONVERSATIONS);
+  const [activeSessionId, setActiveSessionId] = useState<string>('conv-1');
+
+  // Background jobs & MCP skills
   const [cronJobs, setCronJobs] = useState<CronJob[]>(INITIAL_CRON_JOBS);
   const [mcpSkills, setMcpSkills] = useState<McpSkill[]>(INITIAL_MCP_SKILLS);
-  const [messages, setMessages] = useState<Message[]>(INITIAL_MESSAGES);
 
-  // Inspector state
-  const [inspectorTab, setInspectorTab] = useState<TabType>('browser');
-  const [inspectorOpen, setInspectorOpen] = useState(true);
-  const [browserHeadful, setBrowserHeadful] = useState(false);
-  const [inspectorWidth, setInspectorWidth] = useState(500);
+  // Right Auxiliary Inspector state
+  const [auxiliaryOpen, setAuxiliaryOpen] = useState(true);
+  const [auxiliaryTab, setAuxiliaryTab] = useState<AuxiliaryTab>('overview');
+  const [auxiliaryWidth, setAuxiliaryWidth] = useState(480);
   const [isResizing, setIsResizing] = useState(false);
 
-  const activeSession = sessions.find((s) => s.id === activeSessionId) || sessions[0];
+  const activeConversation =
+    conversations.find((c) => c.id === activeSessionId) || conversations[0];
 
   // Real-time Agent Loop & Security Guard connection
   useEffect(() => {
     wsClient.connect();
-
-    const offThoughtDelta = wsClient.on('agent:thought_delta', (payload: any) => {
-      setMessages((prev) => {
-        const last = prev[prev.length - 1];
-        if (!last || last.role !== 'assistant') return prev;
-        const currentThought = last.thought?.content || '';
-        const newThought = currentThought + (payload?.delta || '');
-        return [
-          ...prev.slice(0, -1),
-          {
-            ...last,
-            thought: {
-              content: newThought,
-              durationSeconds: last.thought?.durationSeconds || 1.2,
-              completed: false,
-            },
-          },
-        ];
-      });
-    });
-
-    const offThoughtComplete = wsClient.on('agent:thought_complete', (payload: any) => {
-      setMessages((prev) => {
-        const last = prev[prev.length - 1];
-        if (!last || last.role !== 'assistant') return prev;
-        return [
-          ...prev.slice(0, -1),
-          {
-            ...last,
-            thought: {
-              content: payload?.thought || last.thought?.content || '',
-              durationSeconds: payload?.durationSeconds || 2.4,
-              completed: true,
-            },
-          },
-        ];
-      });
-    });
-
-    const offContentDelta = wsClient.on('agent:content_delta', (payload: any) => {
-      setMessages((prev) => {
-        const last = prev[prev.length - 1];
-        if (!last || last.role !== 'assistant') return prev;
-        return [
-          ...prev.slice(0, -1),
-          {
-            ...last,
-            content: (last.content || '') + (payload?.delta || ''),
-          },
-        ];
-      });
-    });
-
-    const offAssistantMsg = wsClient.on('agent:assistant_message', (payload: any) => {
-      setMessages((prev) => {
-        const last = prev[prev.length - 1];
-        if (last && last.role === 'assistant') {
-          return [
-            ...prev.slice(0, -1),
-            {
-              ...last,
-              content: payload?.content || last.content,
-              thought: payload?.thought
-                ? {
-                    content: payload.thought,
-                    durationSeconds: payload.durationSeconds || 2.0,
-                    completed: true,
-                  }
-                : last.thought,
-            },
-          ];
-        }
-        return [
-          ...prev,
-          {
-            id: `m-${Date.now()}`,
-            role: 'assistant',
-            content: payload?.content || '',
-            timestamp: new Date().toLocaleTimeString(),
-            thought: payload?.thought
-              ? {
-                  content: payload.thought,
-                  durationSeconds: payload.durationSeconds || 2.0,
-                  completed: true,
-                }
-              : undefined,
-          },
-        ];
-      });
-    });
-
-    const offToolCallStart = wsClient.on('agent:tool_call_start', (tc: ToolCall) => {
-      setMessages((prev) => {
-        const last = prev[prev.length - 1];
-        if (!last || last.role !== 'assistant') return prev;
-        const existingCalls = [...(last.toolCalls || [])];
-        const idx = existingCalls.findIndex((c) => c.id === tc.id);
-        if (idx >= 0) {
-          existingCalls[idx] = { ...existingCalls[idx], ...tc, status: 'running' };
-        } else {
-          existingCalls.push({ ...tc, status: 'running' });
-        }
-        return [
-          ...prev.slice(0, -1),
-          {
-            ...last,
-            toolCalls: existingCalls,
-          },
-        ];
-      });
-    });
-
-    const offToolCallComplete = wsClient.on('agent:tool_call_complete', (tc: ToolCall) => {
-      setMessages((prev) => {
-        const last = prev[prev.length - 1];
-        if (!last || last.role !== 'assistant') return prev;
-        const existingCalls = [...(last.toolCalls || [])];
-        const idx = existingCalls.findIndex((c) => c.id === tc.id);
-        if (idx >= 0) {
-          existingCalls[idx] = { ...existingCalls[idx], ...tc, status: 'completed' };
-        } else {
-          existingCalls.push({ ...tc, status: 'completed' });
-        }
-        return [
-          ...prev.slice(0, -1),
-          {
-            ...last,
-            toolCalls: existingCalls,
-          },
-        ];
-      });
-    });
 
     const offHitl = wsClient.on('security:hitl_required', (payload: any) => {
       const confirmApproval = window.confirm(
@@ -196,83 +107,27 @@ export const StudioWorkspace: React.FC<StudioWorkspaceProps> = ({ onNavigateHome
     });
 
     return () => {
-      offThoughtDelta();
-      offThoughtComplete();
-      offContentDelta();
-      offAssistantMsg();
-      offToolCallStart();
-      offToolCallComplete();
       offHitl();
     };
   }, []);
 
   // Handlers
   const handleNewSession = () => {
-    const newId = `s-${Date.now()}`;
-    const newSession: Session = {
+    const newId = `conv-${Date.now()}`;
+    const newConv: SidebarConversation = {
       id: newId,
-      title: 'New Autonomous Session',
-      timestamp: 'Just now',
-      category: 'Today',
-      messageCount: 0,
-      activeModel: 'Hermes 3 (405B)',
+      project: 'FREE GRAVITY PROJECT',
+      title: 'New Conversation',
+      time: 'Just now',
+      isLoading: false,
     };
-    setSessions([newSession, ...sessions]);
+    setConversations([newConv, ...conversations]);
     setActiveSessionId(newId);
-    setMessages([]);
   };
 
   const handleSendMessage = (text: string) => {
-    const userMsg: Message = {
-      id: `m-${Date.now()}`,
-      role: 'user',
-      content: text,
-      timestamp: new Date().toLocaleTimeString(),
-    };
-
     if (wsClient.isConnected()) {
-      const pendingAssistantMsg: Message = {
-        id: `m-${Date.now() + 1}`,
-        role: 'assistant',
-        content: '',
-        timestamp: new Date().toLocaleTimeString(),
-        thought: {
-          durationSeconds: 0.1,
-          completed: false,
-          content: 'Hermes 3 analyzing task and preparing tool calls...',
-        },
-        toolCalls: [],
-      };
-      setMessages((prev) => [...prev, userMsg, pendingAssistantMsg]);
       wsClient.sendAgentMessage(text, { model: settings.model });
-    } else {
-      const assistantMsg: Message = {
-        id: `m-${Date.now() + 1}`,
-        role: 'assistant',
-        content: `I've analyzed your instruction. Executing browser inspection and code verification:`,
-        timestamp: new Date().toLocaleTimeString(),
-        thought: {
-          durationSeconds: 1.8,
-          completed: true,
-          content: `User requested: "${text}".
-1. Evaluating tools: Playwright browser automation is required.
-2. Invoking browser_action to inspect DOM elements.
-3. Checking git status and building verification artifacts.`,
-        },
-        toolCalls: [
-          {
-            id: `tc-${Date.now()}`,
-            name: 'browser_action',
-            summary: 'Executing Playwright navigation & DOM audit',
-            status: 'completed',
-            timestamp: new Date().toLocaleTimeString(),
-            durationMs: 450,
-            args: { action: 'navigate', url: 'http://localhost:5173' },
-            output: 'Target loaded (200 OK). Captured DOM tree snapshot.',
-          },
-        ],
-      };
-      setMessages((prev) => [...prev, userMsg, assistantMsg]);
     }
   };
 
@@ -294,16 +149,16 @@ export const StudioWorkspace: React.FC<StudioWorkspaceProps> = ({ onNavigateHome
     );
   };
 
-  // Resize handler for Inspector
+  // Drag Resizer for Auxiliary Pane
   const handleMouseDownResize = (e: React.MouseEvent) => {
     setIsResizing(true);
     const startX = e.clientX;
-    const startWidth = inspectorWidth;
+    const startWidth = auxiliaryWidth;
 
     const handleMouseMove = (moveEvent: MouseEvent) => {
       const delta = startX - moveEvent.clientX;
-      const newWidth = Math.min(Math.max(startWidth + delta, 360), 800);
-      setInspectorWidth(newWidth);
+      const newWidth = Math.min(Math.max(startWidth + delta, 320), 860);
+      setAuxiliaryWidth(newWidth);
     };
 
     const handleMouseUp = () => {
@@ -317,143 +172,73 @@ export const StudioWorkspace: React.FC<StudioWorkspaceProps> = ({ onNavigateHome
   };
 
   return (
-    <div className="flex h-screen w-screen overflow-hidden bg-[#131314] text-[#e3e3e3] select-none font-sans">
+    <div className="flex flex-col h-screen w-screen overflow-hidden bg-[#131314] text-[#c4c7c5] select-none font-sans">
       
-      {/* COLUMN 1: LEFT RAIL (Exact width 48px) */}
-      <ActivityBar
-        activeTab={railTab}
-        setActiveTab={setRailTab}
-        openSettings={() => setSettingsOpen(true)}
+      {/* WINDOW TOP BAR - Authentic Google Antigravity Spec */}
+      <AntigravityTopBar
+        projectTitle={activeConversation.project}
+        conversationTitle={activeConversation.title}
+        onOpenIde={() => {
+          setAuxiliaryTab('diff');
+          setAuxiliaryOpen(true);
+        }}
+        onToggleAuxiliary={() => setAuxiliaryOpen(!auxiliaryOpen)}
+        auxiliaryOpen={auxiliaryOpen}
         onNavigateHome={onNavigateHome}
-        cronCount={cronJobs.filter((j) => j.enabled).length}
-        mcpCount={mcpSkills.filter((s) => s.enabled).length}
       />
 
-      {/* DRAWER SLIDE-OUT PANEL (Exact width 280px) */}
-      <div className="w-[280px] flex flex-col border-r border-[#444746] bg-[#1e1f20] flex-shrink-0">
-        <ProjectSwitcher currentProject="free-gravity" />
-
-        {(railTab === 'chat' || railTab === 'files') && (
-          <SessionList
-            sessions={sessions}
-            activeSessionId={activeSessionId}
-            onSelectSession={setActiveSessionId}
-            onNewSession={handleNewSession}
-          />
-        )}
-
-        {railTab === 'scheduler' && (
-          <CronScheduler
-            jobs={cronJobs}
-            onToggleJob={handleToggleCronJob}
-            onTriggerJob={handleTriggerCronJob}
-            onAddJob={() => {}}
-          />
-        )}
-
-        {railTab === 'mcp' && (
-          <McpSkillsManager
-            skills={mcpSkills}
-            onToggleSkill={handleToggleMcpSkill}
-          />
-        )}
-      </div>
-
-      {/* COLUMN 2: CENTER CANVAS (Agent Reasoning Stream & Input Tray) */}
-      <main className="flex-1 flex flex-col min-w-0 h-full relative bg-[#131314]">
-        <MessageStream
-          session={activeSession}
-          messages={messages}
-          onSendMessage={handleSendMessage}
-          onOpenBrowserTab={() => {
-            setInspectorTab('browser');
-            setInspectorOpen(true);
-          }}
-          onAcceptDiff={() => {}}
-          onRevertDiff={() => {}}
+      {/* MAIN BODY AREA: Sidebar + Stream Canvas + Auxiliary Pane */}
+      <div className="flex-1 flex overflow-hidden min-h-0 relative">
+        
+        {/* LEFT SIDEBAR - 1:1 Antigravity Desktop Left Nav */}
+        <AntigravitySidebar
+          conversations={conversations}
+          activeId={activeSessionId}
+          onSelect={(id) => setActiveSessionId(id)}
+          onNewConversation={handleNewSession}
+          onOpenSettings={() => setSettingsOpen(true)}
+          onOpenAutomations={() => setAutomationsOpen(true)}
+          onOpenCustomizations={() => setCustomizationsOpen(true)}
         />
 
-        {/* Floating toggle button for Inspector if collapsed */}
-        {!inspectorOpen && (
-          <button
-            type="button"
-            onClick={() => setInspectorOpen(true)}
-            className="absolute right-4 top-3 z-30 p-1.5 rounded-full bg-[#1e1f20] hover:bg-[#282a2c] border border-[#444746] text-[#c4c7c5] hover:text-[#e3e3e3] transition-colors cursor-pointer shadow-lg"
-            title="Expand Auxiliary Inspector"
-          >
-            <svg viewBox="0 -960 960 960" className="w-4 h-4" fill="currentColor">
-              <path d="M120-120v-720h720v720H120Zm80-80h560v-560H200v560Zm400-80v-400h80v400h-80Z"/>
-            </svg>
-          </button>
-        )}
-      </main>
-
-      {/* COLUMN 3: RIGHT AUXILIARY INSPECTOR (Browser, Monaco, Terminal, Artifacts) */}
-      {inspectorOpen && (
-        <aside
-          style={{ width: `${inspectorWidth}px` }}
-          className="relative flex flex-col h-full border-l border-[#444746] bg-[#1e1f20] flex-shrink-0 z-20"
-        >
-          {/* Drag Resizer Handle */}
-          <div
-            onMouseDown={handleMouseDownResize}
-            className={`absolute -left-1 top-0 bottom-0 w-2 cursor-col-resize hover:bg-[#a8c7fa]/20 transition-colors z-30 ${
-              isResizing ? 'bg-[#a8c7fa]/40' : 'bg-transparent'
-            }`}
+        {/* CENTER REASONING STREAM & FLOATING INPUT TRAY */}
+        <main className="flex-1 flex flex-col min-w-0 h-full relative bg-[#131314]">
+          <MessageStream
+            sessionTitle={activeConversation.title}
+            onSendMessage={handleSendMessage}
+            onOpenIde={() => {
+              setAuxiliaryTab('diff');
+              setAuxiliaryOpen(true);
+            }}
           />
 
-          {/* Inspector Tabs Header - Exact Material 3 Antigravity Tokens */}
-          <div className="h-11 bg-[#1e1f20] border-b border-[#444746] px-2 flex items-center justify-between select-none">
-            <div className="flex items-center gap-1">
-              {[
-                { id: 'browser', label: 'Browser', icon: <IconBrowser className="w-3.5 h-3.5" /> },
-                { id: 'code', label: 'Diff / Code', icon: <IconDiff className="w-3.5 h-3.5" /> },
-                { id: 'term', label: 'Terminal', icon: <IconTerminal className="w-3.5 h-3.5" /> },
-                { id: 'artifacts', label: 'Artifacts', icon: <IconFolder className="w-3.5 h-3.5" /> },
-              ].map((tab) => (
-                <button
-                  key={tab.id}
-                  type="button"
-                  onClick={() => setInspectorTab(tab.id as TabType)}
-                  className={`flex items-center gap-1.5 px-3 py-1 rounded-full text-xs transition-colors cursor-pointer ${
-                    inspectorTab === tab.id
-                      ? 'bg-[#004a77] text-[#c2e7ff] font-medium border border-[#004a77]'
-                      : 'text-[#c4c7c5] hover:text-[#e3e3e3] hover:bg-[#282a2c]'
-                  }`}
-                >
-                  {tab.icon}
-                  <span>{tab.label}</span>
-                </button>
-              ))}
-            </div>
-
-            {/* Collapse Inspector Button */}
+          {/* Collapsed Auxiliary Pane Toggle Button */}
+          {!auxiliaryOpen && (
             <button
               type="button"
-              onClick={() => setInspectorOpen(false)}
-              className="p-1 rounded-full hover:bg-[#282a2c] text-[#8e918f] hover:text-[#e3e3e3] transition-colors cursor-pointer"
-              title="Collapse Inspector"
+              onClick={() => setAuxiliaryOpen(true)}
+              className="absolute right-3 top-3 z-30 p-1.5 rounded-lg bg-[#1e1f20] hover:bg-[#282a2c] border border-[#282a2c] text-[#8e918f] hover:text-[#e3e3e3] transition-colors cursor-pointer shadow-lg"
+              title="Expand Auxiliary Inspector (Ctrl+Shift+B)"
             >
               <svg viewBox="0 -960 960 960" className="w-4 h-4" fill="currentColor">
-                <path d="m256-200-56-56 224-224-224-224 56-56 280 280-280 280Zm288 0-56-56 224-224-224-224 56-56 280 280-280 280Z"/>
+                <path d="M120-120v-720h720v720H120Zm80-80h560v-560H200v560Zm400-80v-400h80v400h-80Z"/>
               </svg>
             </button>
-          </div>
+          )}
+        </main>
 
-          {/* Inspector Active Pane */}
-          <div className="flex-1 overflow-hidden bg-[#131314]">
-            {inspectorTab === 'browser' && (
-              <BrowserViewport
-                isHeadful={browserHeadful}
-                onToggleHeadful={() => setBrowserHeadful(!browserHeadful)}
-              />
-            )}
-            {inspectorTab === 'code' && <MonacoDiffEditor />}
-            {inspectorTab === 'term' && <XtermConsole />}
-            {inspectorTab === 'artifacts' && <ArtifactsRenderer />}
-          </div>
-        </aside>
-      )}
+        {/* RIGHT AUXILIARY PANE (Review, Files, Browser, Terminal, Artifacts) */}
+        {auxiliaryOpen && (
+          <AntigravityAuxiliaryPane
+            width={auxiliaryWidth}
+            onResizeMouseDown={handleMouseDownResize}
+            onClose={() => setAuxiliaryOpen(false)}
+            activeTab={auxiliaryTab}
+            onTabChange={setAuxiliaryTab}
+          />
+        )}
+
+      </div>
 
       {/* Settings Modal */}
       <SettingsModal
@@ -462,6 +247,66 @@ export const StudioWorkspace: React.FC<StudioWorkspaceProps> = ({ onNavigateHome
         settings={settings}
         onSave={setSettings}
       />
+
+      {/* Automations Modal */}
+      {automationsOpen && (
+        <div className="fixed inset-0 z-50 bg-black/60 backdrop-blur-xs flex items-center justify-center p-4">
+          <div className="w-full max-w-xl bg-[#1e1f20] border border-[#444746] rounded-2xl shadow-2xl p-6 text-xs text-[#c4c7c5]">
+            <div className="flex items-center justify-between pb-4 border-b border-[#282a2c]">
+              <div className="flex items-center gap-2">
+                <svg viewBox="0 -960 960 960" className="w-5 h-5 text-[#a8c7fa]" fill="currentColor">
+                  <path d="m612-292 56-56-148-148v-184h-80v216l172 172ZM480-80q-83 0-156-31.5T197-197q-54-54-85.5-127T80-480q0-83 31.5-156T197-763q54-54 127-85.5T480-880q83 0 156 31.5T763-763q54 54 85.5 127T880-480q0 83-31.5 156T763-197q-54 54-127 85.5T480-80Zm0-80q134 0 227-93t93-227q0-134-93-227t-227-93q-134 0-227 93t-93 227q0 134 93 227t227 93Zm0-320Z"/>
+                </svg>
+                <h2 className="text-sm font-semibold text-[#e3e3e3]">Scheduled Automations & Cron Tasks</h2>
+              </div>
+              <button
+                type="button"
+                onClick={() => setAutomationsOpen(false)}
+                className="text-[#8e918f] hover:text-white cursor-pointer"
+              >
+                ✕
+              </button>
+            </div>
+            <div className="py-4">
+              <CronScheduler
+                jobs={cronJobs}
+                onToggleJob={handleToggleCronJob}
+                onTriggerJob={handleTriggerCronJob}
+                onAddJob={() => {}}
+              />
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Customizations / MCP Skills Modal */}
+      {customizationsOpen && (
+        <div className="fixed inset-0 z-50 bg-black/60 backdrop-blur-xs flex items-center justify-center p-4">
+          <div className="w-full max-w-xl bg-[#1e1f20] border border-[#444746] rounded-2xl shadow-2xl p-6 text-xs text-[#c4c7c5]">
+            <div className="flex items-center justify-between pb-4 border-b border-[#282a2c]">
+              <div className="flex items-center gap-2">
+                <svg viewBox="0 -960 960 960" className="w-5 h-5 text-[#a8c7fa]" fill="currentColor">
+                  <path d="m380-300 280-180-280-180v360ZM480-80q-83 0-156-31.5T197-197q-54-54-85.5-127T80-480q0-83 31.5-156T197-763q54-54 127-85.5T480-880q83 0 156 31.5T763-763q54 54 85.5 127T880-480q0 83-31.5 156T763-197q-54 54-127 85.5T480-80Zm0-80q134 0 227-93t93-227q0-134-93-227t-227-93q-134 0-227 93t-93 227q0 134 93 227t227 93Zm0-320Z"/>
+                </svg>
+                <h2 className="text-sm font-semibold text-[#e3e3e3]">Customizations, MCP Servers & Skills</h2>
+              </div>
+              <button
+                type="button"
+                onClick={() => setCustomizationsOpen(false)}
+                className="text-[#8e918f] hover:text-white cursor-pointer"
+              >
+                ✕
+              </button>
+            </div>
+            <div className="py-4">
+              <McpSkillsManager
+                skills={mcpSkills}
+                onToggleSkill={handleToggleMcpSkill}
+              />
+            </div>
+          </div>
+        </div>
+      )}
 
     </div>
   );

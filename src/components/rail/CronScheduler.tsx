@@ -23,15 +23,15 @@ export const CronScheduler: React.FC<CronSchedulerProps> = ({
   };
 
   return (
-    <div className="flex-1 flex flex-col min-h-0 bg-[#1e1f20] font-sans select-none">
+    <div className="flex-1 flex flex-col min-h-0 bg-[#101116] font-sans select-none tracking-tight">
       {/* Header */}
-      <div className="p-3 border-b border-[#444746] flex items-center justify-between">
+      <div className="p-3 border-b border-white/[0.04] flex items-center justify-between">
         <div>
-          <div className="text-xs font-medium text-[#e3e3e3] flex items-center gap-1.5">
-            <IconSchedule className="w-3.5 h-3.5 text-[#a8c7fa]" />
+          <div className="text-xs font-medium text-zinc-200 flex items-center gap-1.5">
+            <IconSchedule className="w-3.5 h-3.5 text-zinc-400" />
             <span>Automations & Cron</span>
           </div>
-          <div className="text-[10px] text-[#8e918f] mt-0.5">
+          <div className="text-[10px] text-zinc-500 mt-0.5">
             Recurring background agents & watchers
           </div>
         </div>
@@ -44,16 +44,16 @@ export const CronScheduler: React.FC<CronSchedulerProps> = ({
             key={job.id}
             className={`p-2.5 rounded-lg border transition-colors ${
               job.enabled
-                ? 'bg-[#282a2c] border-[#444746]'
-                : 'bg-[#282a2c]/50 border-[#444746]/40 opacity-60'
+                ? 'bg-[#14151d] border-white/[0.04]'
+                : 'bg-[#14151d]/40 border-white/[0.02] opacity-60'
             }`}
           >
             <div className="flex items-start justify-between gap-2">
               <div className="space-y-1 min-w-0">
-                <div className="text-xs font-medium text-[#e3e3e3] truncate">
+                <div className="text-xs font-medium text-zinc-200 truncate">
                   {job.name}
                 </div>
-                <div className="inline-block px-1.5 py-0.5 rounded bg-[#1e1f20] border border-[#444746] text-[10px] font-mono text-[#fcbd00]">
+                <div className="inline-block px-1.5 py-0.2 rounded bg-white/[0.04] border border-white/[0.04] text-[10px] font-mono text-zinc-400">
                   {job.schedule}
                 </div>
               </div>
@@ -67,8 +67,8 @@ export const CronScheduler: React.FC<CronSchedulerProps> = ({
                   title="Trigger Immediately"
                   className={`p-1 rounded text-xs transition-colors cursor-pointer ${
                     triggeringId === job.id
-                      ? 'bg-[#333537] text-[#a8c7fa] animate-spin'
-                      : 'bg-[#1e1f20] hover:bg-[#333537] text-[#c4c7c5] hover:text-white border border-[#444746]'
+                      ? 'bg-white/[0.08] text-zinc-200 animate-spin'
+                      : 'bg-white/[0.04] hover:bg-white/[0.08] text-zinc-400 hover:text-zinc-200 border border-white/[0.04]'
                   }`}
                 >
                   ▶
@@ -79,8 +79,8 @@ export const CronScheduler: React.FC<CronSchedulerProps> = ({
                   title={job.enabled ? 'Pause schedule' : 'Enable schedule'}
                   className={`px-2 py-0.5 rounded text-[10px] font-medium transition-colors cursor-pointer border ${
                     job.enabled
-                      ? 'bg-[#0f5223]/30 text-[#80da88] border-[#80da88]/40'
-                      : 'bg-[#1e1f20] text-[#8e918f] border-[#444746]'
+                      ? 'bg-emerald-950/20 text-emerald-300 border-emerald-900/30'
+                      : 'bg-white/[0.03] text-zinc-500 border-white/[0.04]'
                   }`}
                 >
                   {job.enabled ? 'Active' : 'Paused'}
@@ -88,11 +88,11 @@ export const CronScheduler: React.FC<CronSchedulerProps> = ({
               </div>
             </div>
 
-            <p className="text-[11px] text-[#c4c7c5] mt-2 line-clamp-2 leading-relaxed">
+            <p className="text-[11px] text-zinc-400 mt-2 line-clamp-2 leading-relaxed">
               "{job.prompt}"
             </p>
 
-            <div className="flex items-center justify-between mt-2.5 pt-1.5 border-t border-[#444746]/60 text-[10px] text-[#8e918f] font-mono">
+            <div className="flex items-center justify-between mt-2.5 pt-1.5 border-t border-white/[0.04] text-[10px] text-zinc-500 font-mono">
               <span>Next: {job.nextRun}</span>
               {job.lastRun && <span>Last: {job.lastRun}</span>}
             </div>
